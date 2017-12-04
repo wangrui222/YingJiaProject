@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<#include '../common/base.html'>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
+        <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
+        <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
+        <script type="text/javascript" src="${base}/resources/sys/js/jquery.js"></script>
+        <link rel="stylesheet" href="${base}/resources/date/bootstrap-datetimepicker.min.css">
+		<script type="text/javascript" src="${base}/resources/date/bootstrap-datetimepicker.js"></script>
+		<script type="text/javascript" src="${base}/resources/date/bootstrap-datetimepicker.zh-CN.js"></script>
+        <title>后台首页</title>
+    </head>
+<body>
+
+                     <div class="box-right-main">
+                        <h2><span class="glyphicon glyphicon-play" style="margin-right:5px"></span>理财师管理</h2>
+
+                      <div class="tablelist">
+                      	<form action="${base}/sysmember/financia" method="post" id="form1">
+                        <table class="table tabletop">
+                        <tr>
+                        <td style="width:110px;padding-left:30px">手机号：</td>
+                        <td style="width:180px"><input type="text"  name="mobilePhone" class="form-control" placeholder="手机号" value="${(planner.mobilePhone)!!}"></td>
+                        <td style="width:110px;padding-left:30px">真实姓名：</td>
+                        <td style="width:180px"><input type="text" class="form-control" name="name" placeholder="用户名" value="${(planner.name)!!}"></td>
+                        <td style="width:110px;padding-left:30px">状态：</td>
+                        <td style="width:180px">
+                        	<select name="status" class="form-control" style="width:130px;height:32px" id="status">
+		                   		<option value="">全部</option>
+		                        <option value="0">待审核</option>
+		                        <option value="1">认证成功</option>
+		                        <option value="2">认证失败</option>
+		                    </select>
+                        </td>
+                         <td style="width:110px;padding-left:30px">注册时间：</td>
+                        <td style="width:180px"><input type="text"  name="createDate" class="form-control time" placeholder="注册时间" readonly="readonly" value="${(planner.createDate?string('yyyy-MM-dd'))!!}"></td>
+                         <td class="pull-right" style="padding-right:30px">
+                         <button type="submit" class="btn btn-primary btn-sm">查询</button></td>
+                         <td><button type="button" class="btn btn-primary btn-sm" onclick="$('#form1').find(':input').not(':button, :submit, :reset').val('').removeAttr('checked').removeAttr('selected');">重置</button></td>
+                        </tr>     
+                        </table>
+                        </form>
+                        <table class="table table-bordered tablebox">
+                          <tr class="text-center" bgcolor="#f7f7f7">
+                          <td>序号</td>
+                          <td>手机号</td>
+                          <td>真实姓名</td>
+                          <td>机构名称</td>
+                          <td>我的名片</td>
+                          <td>邮寄地址</td>
+                          <td>状态</td>
+                          <td>注册时间</td>
+                          <td>操作</td>
+                          </tr>
+                          <#list pageInfo.list as m>
+                          <tr class="text-center">
+                            <td>${m_index+1}</td>
+                            <td>${(m.mobilePhone)!!}</td>
+                            <td>${(m.name)!!}</td>
+                            <td>${(m.orgname)!!}</td>
+                            <td><a href="${base}/${(m.mycard)!!}" target="_black">查看</a></td>
+                            <td>${(m.address)!!}</td>
+                            <td>
+                            <#if m.status!=1>
+                            	<span style="color: red;">${(m.statusDesc)!!}</span>
+                            <#else>
+                            	<span style="color:blue;">${(m.statusDesc)!!}</span>
+                            </#if>	
+                            </td>
+                            <td>${(m.createDate?string('yyyy-MM-dd HH:mm:ss'))!!}</td>
+                            <td>
+                            	<#if m.status!=1>
+                            		<a class="btn btn-primary btn-sm" href="${base}/sysmember/financiaAudit?id=${m.id}">审核</a>
+                            	<#else>
+                            		已认证
+                            	</#if>
+                            </td>
+                          </tr>
+                          </#list>
+                        </table>
+		<#include "paginate.html" />
+<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/sysmember/financia" 
+	urlParas="&mobilePhone=${(planner.mobilePhone)!!}&name=${(planner.name)!!}&status=${(planner.status)!!}&createDate=${(planner.createDate?string('yyyy-MM-dd'))!!}"/>
+
+         </div>
+
+         <!-- 内容结束 -->
+<script type="text/javascript">
+	$(function(){
+		$("#status").val("${(planner.status)!!}");
+	});
+
+		$('.time').datetimepicker({
+			format : 'yyyy-mm-dd',
+			language: 'zh-CN',
+			minView: 2,
+		    todayBtn: 1
+		}).on('changeDate', function(ev) {
+			$('.time').datetimepicker('hide');
+		});
+		
+		</script> 
+	</div>
+<!-- 容器结束 -->
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,maximum-scale=1.0,user-scalable=yes">
+	<meta name="Keywords" content="股指体验交易，股指单手交易，股指多手交易">
+	<meta name="description" content="申请实盘交易账户，直接进行实盘交易。">
+	<title>登录 - 盈+</title>
+    <style type="text/css">
+       .error{
+           color: #d43f3a;
+        }
+    </style>
+	<#include 'common/resources.html'>
+</head>
+<body>
+    <#include "common/top.html">
+    <div class="proMain">
+    	<div class="container">
+            <div class="row login">
+                <div class="loginPic">
+                    <img src="${base}/resources/web/images/loginImg.png" />
+                </div>
+                <div class="loginBlock">
+                    <img class="cornerImg" src="${base}/resources/web/images/loginCorner.png" />
+                    <div class="item item1">
+                        <div class="lLabel">
+                            手机号 
+                        </div>
+                        <div class="lInput">
+                            <img src="${base}/resources/web/images/userIcon.png" /><input type="text" placeholder="手机号" id="phone" name="phone" class="form-control phone" /><span class="errorInfo">用户名不能为空</span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="lLabel">
+                            登录密码
+                        </div>
+                        <div class="lInput">
+                            <img src="${base}/resources/web/images/passwordIcon.png" /><input type="password" placeholder="密码" id="password" name="password" class="form-control password" /><span class="errorInfo"></span>
+                        </div>
+                    </div>
+                    <div class="rest">
+                        <p class="error"></p>
+                        <span id="loginError"></span><a class="forgetLink" href="${base}/web/forget">忘记密码？</a>
+                    </div>
+                    <div class="rest">
+                        <button class="btn loginBtn submit">立即登录</button>
+                    </div>
+                    <div class="rest">
+                        <span class="registUrl">没有账号？<a href="${base}/web/regis">免费注册</a></span>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="${base}/resources/web/js/login.js"></script>
+<script type="text/javascript">
+$(function(){
+	var b = "${base}";
+	login(b);
+});
+</script>
+   
+  <#include "common/footer.html">
+</body>
+</html>

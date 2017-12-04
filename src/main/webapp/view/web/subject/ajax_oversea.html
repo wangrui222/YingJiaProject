@@ -1,0 +1,25 @@
+<#include "../common/base.html">
+<div class="ajaxContainer">
+	<!-- 异步内容开始 -->
+	<#list pageInfo.list as ca>
+		<li>
+				<a href="${base}/oversea/overseaView/${(ca.id)!!}">
+				<span style="width: 40px;height: 40px;" class="iconfont"><img src="${base}/${(ca.overseaIcon)!!}" width="40" height="40"/></span>
+
+				<h2>${(ca.title)!!}<p>${(ca.childTitle)!!}</p></h2>
+				<h3>${(ca.description)!!}<p><i style="color: #aaa; font-style: normal;">用户群体：</i>${(ca.userType)!!}</p></h3>
+			</a>
+		</li>
+	</#list>
+	<!-- 异步内容结束 -->
+<#include "ajax_paginate.html" /> 
+<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/oversea/overseaAjax" urlParas=""/>
+</div>
+<script type="text/javascript">
+	function getJsonInfo(url) {
+		$.get(url, 'json', function(data) {
+			$(".ajaxContainer").empty();
+			$(".ajaxContainer").append(data);
+		});
+	}
+    </script>

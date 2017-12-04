@@ -1,0 +1,159 @@
+<#include "../common/base.html">
+<div class="ajaxContainer">
+	<!-- 异步内容开始 -->
+		<#list pageInfo.list as s>
+					<ul class="tbList">
+						<li class="first">
+							<#if s.type == "GU_SHOU">
+									<span class="ico zq"></span>
+								<#elseif s.type == "P2P_CHE">
+									<span class="ico cd"></span>
+								<#else>
+									<span class="ico fd"></span>
+							</#if>
+							<h2><em>投</em>${s.name!!}</h2>
+							<i></i>
+						</li>
+						<li class="second">					
+							<#if s.type != "GU_SHOU">
+							<div class="txt1">
+								<h2>${(s.amount)!!}</h2>
+								<p>标的总额(万)</p>
+							</div>
+							</#if>
+							
+							<#if s.type == "GU_SHOU">
+							<div class="txt1">
+							<#else>
+							<div class="txt2">
+							</#if>
+								<h2>${(s.yearRate-1)?string('0.0')!!}<span style="font-size:18px;">+1.0%</span></h2>
+								<p>年化收益</p>
+							</div>
+							
+							<#if s.type == "GU_SHOU">
+							<div class="txt2">
+								<h2>${(s.floorAmount?string.currency)!!}</h2>
+								<p>起购金额(元)</p>
+							</div>
+							</#if>
+							
+							<div class="txt2">
+								<h2>${s.period!!}天</h2>
+								<p>投资期限</p>
+							</div>
+						</li>
+						<li class="three">
+							<#if s.type == "GU_SHOU">
+								<a href="#1">${(s.safeguardWay.getDescription())!!}</a><span>中国人保财险承保</span>
+								<p>计息日期：当天投资，立即计息<br>已购人数：${(s.bought)+(s.hasBought)!!}人</p>
+							<#else>
+								<a href="#1">${(s.safeguardWay.getDescription())!!}</a><span>中国人保财险承保</span>
+								<p>计息日期：募集满后第二天<br>已购人数：
+									${s.hasBought}人</p>
+							</#if>
+						</li>
+						<li class="four">
+							<#if s.type == "GU_SHOU">
+								
+							<#else>
+								<div data-num="${((s.hasSold/s.amount)*100)?string(0.00)}" class="yuan"></div>
+							</#if>
+						</li>
+						<li class="five">
+							<#if s.status.description=='募集中'>
+							<a class="abtn" href="${base}/subject/subjectContent/${s.id}">购买</a>
+							<#elseif s.status.description=='回款中'>
+								<a class="abtn" style="background-color: #8393A1;" href="${base}/subject/subjectContent/${s.id}">还款中</a>
+							<#elseif s.status.description=='还款完成'>
+							 	<a class="abtn" style="background-color: #8393A1;" href="${base}/subject/subjectContent/${s.id}">已结束</a>
+							</#if>
+						</li>
+					</ul>
+		</#list>
+	<!-- 异步内容结束 -->
+<#include "ajax_paginate.html" /> 
+<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/subject/subjectJson" urlParas="&type=${type}&yearRate=${yearRate}&period=${period}&status=${status}"/>
+</div>
+<script type="text/javascript">
+	function getJsonInfo(url) {
+		$.get(url, 'json', function(data) {
+			$(".ajaxContainer").empty();
+			$(".ajaxContainer").append(data);
+		});
+	}
+		require.config({
+            paths: {
+                echarts: '${base}/resources/web/echart/dist/'
+            }
+        });
+		require(
+			[
+				'echarts',
+				'echarts/chart/pie'
+			],
+			function (ec) {
+				var labelTop = {
+						normal : {
+							color:'#ff503f',
+							label : {
+								show : false,
+								position : 'center',
+								formatter : '{b}',
+								textStyle: {
+									baseline : 'bottom'
+								}
+							},
+							labelLine : {
+								show : false
+							}
+						}
+					};
+				var labelFromatter = {
+					normal : {
+						label : {
+							formatter : function (params){
+								return 100 - params.value + '%'
+							},
+							textStyle: {
+								color:'#666',
+								baseline : 'middle'
+							}
+						}
+					},
+				};
+				var labelBottom = {
+					normal : {
+						color: '#f8f8f8',
+						label : {
+							show : true,
+							position : 'center'
+						},
+						labelLine : {
+							show : false
+						}
+					}
+				};
+				var radius = [30,35];
+				var myChart1 =document.getElementsByClassName('yuan');
+				for(i=0;i<myChart1.length;i++){
+					var num = myChart1[i].getAttribute('data-num');
+					ec.init(myChart1[i]).setOption({
+						series : [
+							{
+								type : 'pie',
+								center : ['50%', '50%'],
+								radius : radius,
+								x: '0%', // for funnel
+								itemStyle : labelFromatter,
+								data : [
+									{name:'other', value:100-num, itemStyle : labelBottom},
+									{name:'占比', value:num,itemStyle : labelTop}
+								]
+							},
+						]
+					});
+				}
+			}
+		);
+    </script>

@@ -1,0 +1,87 @@
+
+<div class="logo container">
+    <div class="row">
+        <div class="logoImg">
+            <a href="http://www.ying158.com/home"><img src="${base}/resources/web/images/logo2.png" onmouseover="this.src = '${base}/resources/web/images/logo1.png'" onmouseout="this.src = '${base}/resources/web/images/logo2.png'"></a>
+        </div>
+        <div class="telInfo">
+            <img src="${base}/resources/web/images/400Icon.png" onmousemove="this.src = '${base}/resources/web/images/400IconActive.png'" onmouseout="	this.src = '${base}/resources/web/images/400Icon.png'">
+            <div class="detail">
+
+                <#if memberInfo??>
+                    	<div style="font-size:16px;float:right;margin-top:5px;color:#917739;">  欢迎${(memberInfo.name)!!},<a href="${base}/account/touZiList">[会员中心]</a>,<a href="${base}/web/logout">[退出]</a></div>
+                <#else>
+                        <a style="font-size:18px;float:right;margin-top:5px;color:#917739;" href="${base}/web/login">登录</a>
+                        <a style="font-size:18px;float:right;margin-right:15px;margin-top:5px;color:#917739;" href="${base}/web/regis">注册</a>
+                </#if>
+                <br>4000-999-158
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jwNav">
+    <div class="container">
+        <div class="row">
+            <ul class="topNav">
+                <li>
+                    <a class="item first" href="http://www.ying158.com/home">
+                        首页
+                    </a>
+                </li>
+                <li>
+                    <a class="item" href="http://www.ying158.com/home/kcenter">
+                        网上体验中心
+                    </a>
+                </li>
+                <li  class="item">
+                    <a class="item" href="${base}/subject">
+                        产品中心
+                    </a>
+                </li>
+                <li>
+                    <a class="item" href="http://www.ying158.com/Home/NewsCenter">
+                        新闻中心
+                    </a>
+                </li>
+                <li>
+                    <a class="item" href="${base}/mobileappdownload">
+                      下载中心
+                    </a>
+                </li>
+                <li>
+                    <a class="item " href="http://www.ying158.com/Home/Help">
+                        盈+商学院
+                    </a>
+                </li>
+                <li>
+                    <a class="item" href="http://ying158.com/UserGuide/TradingSoftware">
+                        投研中心
+                    </a>
+                </li>
+                <li>
+                    <a class="item last" href="http://pro.ying158.com/account/trades/profit/records">
+                        我的加法库
+                    </a>
+                </li>
+
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        function showIn(url){
+            var info="<div class='mydig'><div class='bg'></div><div class='imgbox'><a href="+url+"></a></div></div>";
+            $('body').append(info);
+        }
+        <#if memberInfo??>
+            if (${(isbbin)!!}!=null&&${(isbbin)!!}==0){
+                showIn("${base}/account/bbinInfo/getBbinInfo");
+            }
+        </#if>
+
+    });
+
+</script>
