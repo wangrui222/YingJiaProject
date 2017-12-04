@@ -1,27 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
-<#include '../common/base.html'>
 <meta charset="UTF-8" />
 <title>盈+</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
-<link rel="stylesheet" href="${base}/resources/activity/css/base.css">
-<link rel="stylesheet" href="${base}/resources/activity/css/pintuer.css">
-<link rel="stylesheet" href="${base}/resources/activity/css/style.css">
-<script src="${base}/resources/activity/js/jquery.js"></script>
-<script src="${base}/resources/activity/js/pintuer.js"></script>
-<script src="${base}/resources/activity/js/respond.js"></script>
-<link href="${base}/resources/mobileapi/css/base.css" type="text/css"
+<link rel="stylesheet" href="<%=basePath%>resources/activity/css/base.css">
+<link rel="stylesheet" href="<%=basePath%>resources/activity/css/pintuer.css">
+<link rel="stylesheet" href="<%=basePath%>resources/activity/css/style.css">
+<script src="<%=basePath%>resources/activity/js/jquery.js"></script>
+<script src="<%=basePath%>resources/activity/js/pintuer.js"></script>
+<script src="<%=basePath%>resources/activity/js/respond.js"></script>
+<link href="<%=basePath%>resources/mobileapi/css/base.css" type="text/css"
 	rel="stylesheet">
 
-<link href="${base}/resources/mobileapi/css/css.css" type="text/css"
+<link href="<%=basePath%>resources/mobileapi/css/css.css" type="text/css"
 	rel="stylesheet">
-<link href="${base}/resources/mobileapi/font/iconfont.css"
+<link href="<%=basePath%>resources/mobileapi/font/iconfont.css"
 	type="text/css" rel="stylesheet">
 
 <script type="text/javascript">
@@ -43,7 +46,7 @@ $(function(){
             	alert("请在浏览器中打开");
             }
             else {
-                window.location.href = "${base}/download/app/ios";
+                window.location.href = "<%=basePath%>download/app/ios";
             }
         }
         else if (/android/.test(ua)) {
@@ -51,7 +54,7 @@ $(function(){
             	alert("请在浏览器中打开");
             }
             else {
-                window.location.href = "${base}/resources/app/YingJia.apk";
+                window.location.href = "<%=basePath%>resources/app/YingJia.apk";
             }
         }
 
@@ -69,7 +72,7 @@ $(function(){
 <body>
 
 	<div class="bg">
-		<img src="${base}/resources/activity/img/bg.gif" />
+		<img src="<%=basePath%>resources/activity/img/bg.gif" />
 		<div class="add">
 			<a href="">立即参与</a>
 		</div>
@@ -82,7 +85,7 @@ $(function(){
 			</div>
 			<div class="inpt">
 				<input type="text" class="imgcode yzwcode" placeholder="图形验证码" /> <img
-					src="${base}/authImage" id="captcha"
+					src="<%=basePath%>authImage" id="captcha"
 					style="width: 31%; float: right;" onclick="updcaptcha('${base}')"
 					title="看不清楚,点击换一张" alt="看不清楚,点击换一张" class="picCodeImg">
 			</div>
@@ -98,7 +101,7 @@ $(function(){
 			<div class="inpt">
 				<input type="checkbox" checked="checked" id="checkbox_a1"
 					class="chk_1" /> <label for="checkbox_a1"></label> <a
-					class="dialogs" href="${base}/h5/v1/protocal/regis_protocal"
+					class="dialogs" href="<%=basePath%>h5/v1/protocal/regis_protocal"
 					target="_black" data-toggle="click" data-target="#mydialog"
 					data-mask="1" data-width="80%">我已阅读并同意《盈+网站用户协议》</a>
 			</div>
@@ -110,22 +113,22 @@ $(function(){
 
 		<div class="down">
 			<a href="javascript:" class="aTxt" target="_black"><img
-				src="${base}/resources/activity/img/ios.gif" /></a> <a
+				src="<%=basePath%>resources/activity/img/ios.gif" /></a> <a
 				href="javascript:" class="aTxt" target="_black"><img
-				src="${base}/resources/activity/img/android.gif" /></a>
+				src="<%=basePath%>resources/activity/img/android.gif" /></a>
 		</div>
 
 	</div>
 
 	<script type="text/javascript"
-		src="${base}/resources/activity/js/activityRegis.js"></script>
+		src="<%=basePath%>resources/activity/js/activityRegis.js"></script>
 	<script type="text/javascript">
 $(function(){
 	var b = "${base}";
 	regis(b);
 });
 function updcaptcha(){
-	document.getElementById("captcha").src="${base}/authImage?"+new Date().getTime();
+	document.getElementById("captcha").src="<%=basePath%>authImage?"+new Date().getTime();
 }
 </script>
 </body>

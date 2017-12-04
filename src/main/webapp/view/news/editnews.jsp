@@ -17,12 +17,9 @@
     <script src="${base }/resources/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="${base }/resources/uploadify/uploadify.css">
 
-    <script type="text/javascript" charset="utf-8"
-            src="${base}/resources/ueditor1_4_3_1/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8"
-            src="${base}/resources/ueditor1_4_3_1/ueditor.all.min.js"></script>
-    <script type="text/javascript" charset="utf-8"
-            src="${base}/resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
     <title>后台首页</title>
 </head>
 <body>
@@ -32,7 +29,8 @@
         <span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>添加资讯
     </h2>
 
-    <form action="${base}/news/addNews" method="post" id="valForm">
+    <form action="${base}/news/editNews" method="post" id="valForm">
+        <input type="hidden" name="id" value="${(news.id)!!}">
         <div class="tablelist">
             <!-- 表单 -->
             <div class="row bdlist">
@@ -41,7 +39,7 @@
                         <label class="col-sm-3 control-label">所属类别<b style="color: red;">*</b>：</label>
 
                         <div class="col-sm-9">
-                            <select name="typeid" id="typeid" class="selectpicker form-control">
+                            <select name="typeid" id="typeid" disabled="disabled" class="selectpicker form-control">
                             <#list newsTypes as nt>
                                 <option value="${nt.id}">${nt.name}</option>
                             </#list>
@@ -53,7 +51,8 @@
                         <label class="col-sm-3 control-label">标题<b style="color: red;">*</b>：</label>
 
                         <div class="col-sm-9">
-                            <input class="form-control" type="text" name="title"/>
+                            <input class="form-control" type="text" name="title" id="textfield"
+                                   value="${(news.title)!!}"/>
                             <span style="visibility: hidden">验证提示预留位置</span>
                         </div>
                     </div>
@@ -61,18 +60,12 @@
                         <label class="col-sm-3 control-label">排序：<b style="color: red;">*</b>：</label>
 
                         <div class="col-sm-9">
-                            <input class="form-control" type="text" name="sort"/>
+                            <input class="form-control" type="text" name="sort" id="textfield2"
+                                   value="${(news.sort)!!}"/>
                             <span style="visibility: hidden">验证提示预留位置</span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">简介：</label>
 
-                        <div class="col-sm-9">
-                            <textarea class="form-control" name="info" id="textarea" cols="45" rows="2"></textarea>
-                            <span style="visibility: hidden">验证提示预留位置</span>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">显示属性：</label>
 
@@ -81,11 +74,21 @@
                             <span style="visibility: hidden">验证提示预留位置</span>
                         </div>
                     </div>
-                    <div class="form-group link" style="display: none;">
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">简介：</label>
+
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="info" id="textarea" cols="45"
+                                      rows="2">${(news.info)!!}</textarea>
+                            <span style="visibility: hidden">验证提示预留位置</span>
+                        </div>
+                    </div>
+                    <div class="form-group link">
                         <label class="col-sm-3 control-label">链接地址：<b style="color: red;">*</b>：</label>
 
                         <div class="col-sm-9">
-                            <input class="form-control" type="text" name="link" placeholder="h5/v1/finance/product/detail?type=GUSHOU&productId=1"/>
+                            <input class="form-control" type="text" name="link" value="${(news.link)!!}" placeholder="h5/v1/finance/product/detail?type=GUSHOU&productId=1"/>
                             <span >固收类:GUSHOU</span><br>
                             <span >私募类:SIMU</span><br>
                             <span >股权类:GUQUAN</span><br>
@@ -93,8 +96,7 @@
                             <span >ID:查看列表ID字段</span>
                         </div>
                     </div>
-
-                    <div class="form-group cphoto" style="display: none;">
+                    <div class="form-group cphoto">
                         <label class="col-sm-3 control-label">封面图片：</label>
 
                         <div class="col-sm-9">
@@ -105,7 +107,7 @@
                             <span style="visibility: hidden">验证提示预留位置</span>
                         </div>
                     </div>
-                    <div class="form-group filelink" style="display: none;">
+                    <div class="form-group filelink">
                         <label class="col-sm-3 control-label">视频/音频：</label>
 
                         <div class="col-sm-9">
@@ -117,7 +119,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -127,7 +128,8 @@
                     <span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>内容
                 </h2>
                 <div>
-                    <div><textarea name="text" id="editor" style="width: 100%;height: 200px;"></textarea></div>
+                    <div><textarea name="text" id="editor"
+                                   style="width: 100%;height: 200px;">${(news.text)!!}</textarea></div>
                     <script type="text/javascript"> var ue = UE.getEditor('editor');</script>
                 </div>
             </div>
@@ -145,8 +147,22 @@
 <script src="${base}/resources/dist/js/bootstrapValidator.min.js"></script>
 <!-- 容器结束 -->
 <script type="text/javascript">
-    $("#typeid").change(function () {
-        var type = $(this).val();
+    $(function () {
+        $("#typeid").val("${(news.typeid)!!}");
+        $("input:checkbox[value='${(news.plactop)!!}']").attr('checked', 'checked');
+        if ("${(news.cphoto)!!}" != null && "${(news.cphoto)!!}" != "") {
+            $('#url').append("<div id='${(news.cphoto)!!}' class='uploadimg'> <img width=50 height=50 src='${base}/${(news.cphoto)!!}' /> " +
+                    "<a href=javascript:delimg('${(news.cphoto)!!}')>删除</a> </div>");
+            $("#cphoto").val("${(news.cphoto)!!}");
+        }
+        if ("${(news.filelink)!!}" != null && "${(news.filelink)!!}" != "") {
+            $('#urlfilelink').append("<div id='${(news.filelink)!!}' class='uploadvedio'> <a href='${base}/${(news.filelink)!!}' target='_black'>${(news.filelink)!!}</a> " +
+                    "<a href=javascript:delimg('${(news.filelink)!!}','filelink')>删除</a> </div>");
+            $("#filelink").val("${(news.filelink)!!}");
+        }
+
+
+        var type = $("#typeid").val();
         if ((type == '2')||(type == '16')||(type == '17')) {
             $(".link").hide();
             $(".cphoto").show();
@@ -184,10 +200,6 @@
             $("input[name='filelink']").attr("disabled", true);
             $("input[name='text']").attr("disabled", false);
         }
-
-    });
-
-    $(function () {
 
         $('#valForm').bootstrapValidator({
             message: 'This value is not valid',

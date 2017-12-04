@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<#include '../common/base.html'>
+<%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
@@ -8,18 +11,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-    <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-    <link rel="stylesheet" href="${base}/resources/sys/webupload/webuploader.css">
-    <link rel="stylesheet" href="${base}/resources/sys/webupload/demo.css">
-    <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-    <link rel="stylesheet" type="text/css" href="${base}/resources/uploadify/uploadify.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/webupload/webuploader.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/webupload/demo.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>resources/uploadify/uploadify.css">
 
-    <link href="${base}/resources/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="${base}/resources/date/bootstrap-datetimepicker.min.css">
-    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/ueditor.all.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
+    <link href="<%=basePath%>resources/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="<%=basePath%>resources/date/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" charset="utf-8" src="<%=basePath%>resources/ueditor1_4_3_1/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%=basePath%>resources/ueditor1_4_3_1/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%=basePath%>resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
     <title>后台首页</title>
 </head>
 <body>
@@ -29,7 +32,7 @@
         <span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>私募/股权类编辑
     </h2>
 
-    <form action="${base}/financeProductFunds/addFinanceProductFunds" method="post" id="valForm">
+    <form action="<%=basePath%>financeProductFunds/addFinanceProductFunds" method="post" id="valForm">
     	<input type="hidden" name="id" value="${(financeProductFunds.id)!!}">
         <div class="tablelist">
             <!-- 表单 -->
@@ -199,7 +202,7 @@
                             <input type="file" name="avatar_link" id="avatar_link">
                             <input type="hidden" name="productManagerPic" id="productManagerPic" value="${(financeProductFunds.productManagerPic)!!}"/>
                             <div id="${(financeProductFunds.productManagerPic)!!}" class='uploadvedio'>
-                             	<a href="${base}/${(financeProductFunds.productManagerPic)!!}" target='_black'>${(financeProductFunds.productManagerPic)!!}</a> 
+                             	<a href="<%=basePath%>${(financeProductFunds.productManagerPic)!!}" target='_black'>${(financeProductFunds.productManagerPic)!!}</a> 
                             	<a href=javascript:delimg('${(financeProductFunds.productManagerPic)!!}','filelink')>删除</a> 
                             </div>
                         </div>
@@ -313,19 +316,19 @@
 </div>
 <!-- 容器结束 -->
 </body>
-<script src='${base}/resources/dist/js/jquery.min.js'></script>
-<script src='${base}/resources/js/jquery.form.js'></script>
-<script src="${base}/resources/dist/js/bootstrapValidator.min.js"></script>
-<script src="${base}/resources/bootstrap-fileinput/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="${base}/resources/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
-<script src="${base}/resources/bootstrap-fileinput/js/fileinput.min.js" type="text/javascript"></script>
-<script src="${base}/resources/bootstrap-fileinput/js/fileinput_locale_LANG.js" type="text/javascript"></script>
-<script src="${base}/resources/bootstrap-fileinput/js/fileinput_locale_zh.js" type="text/javascript"></script>
+<script src='<%=basePath%>resources/dist/js/jquery.min.js'></script>
+<script src='<%=basePath%>resources/js/jquery.form.js'></script>
+<script src="<%=basePath%>resources/dist/js/bootstrapValidator.min.js"></script>
+<script src="<%=basePath%>resources/bootstrap-fileinput/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<%=basePath%>resources/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
+<script src="<%=basePath%>resources/bootstrap-fileinput/js/fileinput.min.js" type="text/javascript"></script>
+<script src="<%=basePath%>resources/bootstrap-fileinput/js/fileinput_locale_LANG.js" type="text/javascript"></script>
+<script src="<%=basePath%>resources/bootstrap-fileinput/js/fileinput_locale_zh.js" type="text/javascript"></script>
 
-<script src="${base}/resources/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+<script src="<%=basePath%>resources/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
 
-<script type="text/javascript" src="${base}/resources/date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="${base}/resources/date/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript" src="<%=basePath%>resources/date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="<%=basePath%>resources/date/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 
 <script type="text/javascript">
 
@@ -591,7 +594,7 @@
             var bv = $form.data('bootstrapValidator');
             $.post($form.attr('action'), $form.serialize(), function (result) {
                 alert(result.msg);
-                window.location.href = "${base}/financeProductFunds/list";
+                window.location.href = "<%=basePath%>financeProductFunds/list";
             }, 'json');
         });
         $('#avatar_link').uploadify({
@@ -608,7 +611,7 @@
             'onUploadSuccess': function (file, data,response) {//每成功完成一次文件上传时触发一次
                 var image = eval("[" + data + ']')[0];
                 $(".uploadvedio").remove();
-                $('#avatar').append("<div id=" + image.msg + " class='uploadvedio'> <a href=${base}/" + image.msg + " target='_black'>" + image.msg + "</a> " +
+                $('#avatar').append("<div id=" + image.msg + " class='uploadvedio'> <a href=<%=basePath%>" + image.msg + " target='_black'>" + image.msg + "</a> " +
                         "<a href=javascript:delimg('" + image.msg + "','productManagerPic')>删除</a> </div>");
                 $("#productManagerPic").val(image.msg);
             },
@@ -621,7 +624,7 @@
 
     <!--删除图片-->
     function delimg(obj, tval) {
-        var url = "${base}/upload/delimg";
+        var url = "<%=basePath%>upload/delimg";
         $.post(url, {'imgpath': obj}, function (data) {
             if (data.code == 0) {
                 document.getElementById(obj).remove();

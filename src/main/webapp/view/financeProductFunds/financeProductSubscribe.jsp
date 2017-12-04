@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
-<#include '../common/base.html'>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-        <script type="text/javascript" src="${base}/resources/sys/js/jquery.js"></script>
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+        <script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
         <title>后台首页</title>
     </head>
     <body>
@@ -46,13 +50,13 @@
                             <#if s.status=0>
                                 ——
                             <#else>
-                                <a href="${base}/${(s.signedPhotos)!!}" target="_black">查看</a>
+                                <a href="<%=basePath%>${(s.signedPhotos)!!}" target="_black">查看</a>
                             </#if>
                         </td>
                         <td><#if s.status=1>
-                               <a href="${base}/${(s.comment)!!}" target="_black">私募合同</a>
+                               <a href="<%=basePath%>${(s.comment)!!}" target="_black">私募合同</a>
                                 |
-                               <a href="${base}/${(s.riskReveal)!!}" target="_black">风险揭示书</a>
+                               <a href="<%=basePath%>${(s.riskReveal)!!}" target="_black">风险揭示书</a>
                             <#else>
                                 ——
                             </#if>
@@ -60,9 +64,9 @@
                         <td>${s.createDate?string('yyyy/MM/dd HH:mm:ss')}</td>
                         <td><#if s.status=2>
                             <a class="btn btn-primary btn-sm"
-                               href="${base}/financeProductFunds/addContractView/${s.id}">签署</a>
+                               href="<%=basePath%>financeProductFunds/addContractView/${s.id}">签署</a>
                             <a class="btn btn-primary btn-sm"
-                               href="${base}/financeProductFunds/signedError/${s.id}" onclick="return confirm('你确定要签署失败?')">签署失败</a>
+                               href="<%=basePath%>financeProductFunds/signedError/${s.id}" onclick="return confirm('你确定要签署失败?')">签署失败</a>
                             <#else>
                                	 <a class="btn btn-primary btn-sm"
                                href="javascript:" disabled="disabled">${s.statusDesc!!}</a>
@@ -73,7 +77,7 @@
             </table>
         </div>
         <#include "../common/paginate.html" />
-        <@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/financeProductFunds/financeProductSubscribe" urlParas="&financeProductFundsId=${financeProductFundsId}"/>
+        <@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>financeProductFunds/financeProductSubscribe" urlParas="&financeProductFundsId=${financeProductFundsId}"/>
         <!-- 内容结束 -->
     </div>
     <!-- 容器结束 -->
