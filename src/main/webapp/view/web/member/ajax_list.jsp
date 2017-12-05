@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- <#include "../common/base.html"> -->
+<div class="ajaxContainer">
+	<!-- 异步内容开始 -->
+	<table class="tzlist" width="100%" border="1" bordercolor="#e9e9e9" cellspacing="0" cellpadding="0">
+		<tr>
+			<th>订单编号</th>
+			<th>标的名称</th>
+			<th>金额</th>
+			<th>预期收益</th>
+			<th>状态</th>
+			<th>购买时间</th>
+		</tr>
+		<#list pageInfo.list as r>
+			<tr>
+				<td>${r.serialNumber!!}</td>
+				<td><font color="#a58b48">${r.subject.name}</font></td>
+				<td><font color="#ff503f">${r.amount?string.currency}</font></td>
+				<td>111111111</td>
+				<td>${r.ispayment.description}</td>
+				<td>${r.createDate?string("yyyy-MM-dd")}</td>
+			</tr>
+		</#list>
+	</table>
+	<div class="listCount">总计<font color="#ff503f">${pageInfo.total}</font>笔</div>
+	<#include "ajax_paginate.html" /> 
+	<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/account/touZiListJson"/>
+</div>
+<script type="text/javascript">
+	function getJsonInfo(url) {
+		$.get(url, 'json', function(data) {
+			$(".ajaxContainer").empty();
+			$(".ajaxContainer").append(data);
+		});
+	}
+</script>
+</body>
+</html>
