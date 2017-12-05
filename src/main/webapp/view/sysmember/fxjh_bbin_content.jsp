@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
@@ -8,10 +12,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-        <script type="text/javascript" src="${base}/resources/sys/js/jquery.js"></script>
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+        <script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
   <title>后台首页</title>
 </head>
 <body>
@@ -61,7 +65,7 @@
                         </td>
                         <td>
                         	<#if s.ispayment==0>
-                        	<a href="${base}/sysmember/paymentBbin?id=${s.id}" class="btn btn-primary btn-sm">立即还款</a>
+                        	<a href="<%=basePath%>sysmember/paymentBbin?id=${s.id}" class="btn btn-primary btn-sm">立即还款</a>
                         	<#else>
                         	<a href="javascript:" class="btn btn-primary btn-sm" style="background-color: #8393A1;">已还款</a>
                         	</#if>
@@ -70,7 +74,7 @@
                 </#list>
             </table>
         <#include "paginate.html" />
-        <@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/sysmember/paymentBbinContent" urlParas="&id=${(subject.id)!!}"/>
+        <@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>sysmember/paymentBbinContent" urlParas="&id=${(subject.id)!!}"/>
          </div>
 
          <!-- 内容结束 -->

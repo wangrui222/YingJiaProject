@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
     <head>
@@ -7,10 +11,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-        <script type="text/javascript" src="${base}/resources/sys/js/jquery.js"></script>
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+        <script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
         <title>后台首页</title>
     </head>
 <body>
@@ -19,7 +23,7 @@
                         <h2><span class="glyphicon glyphicon-play" style="margin-right:5px"></span>邀请奖励</h2>
 
                       <div class="tablelist">
-                      	<form action="${base}/sysmember/inviteRewards" method="post" id="form1">
+                      	<form action="<%=basePath%>sysmember/inviteRewards" method="post" id="form1">
                         <table class="table tabletop">
                         <tr>
                          <td style="width:90px;padding-left:20px">姓名：</td>
@@ -91,13 +95,13 @@
                             	<#else>
 									<span>不能奖励  |</span>                    	
                             	</#if>
-                            	<a class="btn btn-primary btn-sm" href="${base}/sysmember/inviteRewardsRecord?id=${m.id}">奖励记录</a>
+                            	<a class="btn btn-primary btn-sm" href="<%=basePath%>sysmember/inviteRewardsRecord?id=${m.id}">奖励记录</a>
                             </td>
                           </tr>
                           </#list>
                         </table>
 		<#include "paginate.html" />
-<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/sysmember/inviteRewards" 
+<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>sysmember/inviteRewards" 
 	urlParas="&name=${(member.name)!!}&mobilePhone=${(member.mobilePhone)!!}&invitedcode=${(member.invitedcode)!!}&status=${(member.status)!!}&delFlag=${(member.delFlag)!!}"/>
 
          </div>
@@ -120,14 +124,14 @@ $(function(){
 			$.ajax({
                 type: "POST", // 用POST方式传输
                 dataType: "json", // 数据格式:JSON
-                url: '${base}/sysmember/awards', // 目标地址
+                url: '<%=basePath%>sysmember/awards', // 目标地址
                 data: {
                     id: tid,
                     type:type
                 },
                 success: function (msg) {
                 	 if (msg.code == 0) {
-                         window.location.href = "${base}/sysmember/inviteRewards";
+                         window.location.href = "<%=basePath%>sysmember/inviteRewards";
                      } else {
                         alert(msg.msg);
                      }

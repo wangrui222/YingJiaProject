@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +11,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<#include "../common/base.html">
 <div class="ajaxContainer3">
 	<!-- 异步内容开始 -->
 	 <table class="table table-bordered tablebox">
@@ -38,7 +41,7 @@
 		</#list>
 	</table>
 	<#include "ajax_paginate3.html" />
-	<@paginate currentPage=(pageInfoDeposit.pageNum)!0 totalPage=(pageInfoDeposit.pages)!0 actionUrl="${base}/sysmember/ajaxDeposit" urlParas="&id=${(memberId)!!}"/>
+	<@paginate currentPage=(pageInfoDeposit.pageNum)!0 totalPage=(pageInfoDeposit.pages)!0 actionUrl="<%=basePath%>sysmember/ajaxDeposit" urlParas="&id=${(memberId)!!}"/>
 </div>
 <script type="text/javascript">
 	function getJsonInfo3(url) {

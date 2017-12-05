@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
-<#include '../common/base.html'>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-        <script type="text/javascript" src="${base}/resources/sys/js/jquery.js"></script>
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+        <script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
         <title>后台首页</title>
     </head>
     <body>
@@ -19,7 +22,7 @@
         <h2><span class="glyphicon glyphicon-play" style="margin-right:5px"></span>付息计划</h2>
 
         <div class="tablelist">
-        <form action="${base}/sysmember/payment" method="post" id="form1">
+        <form action="<%=basePath%>sysmember/payment" method="post" id="form1">
             <table class="table tabletop">
                 <tr>
                     <td style="width:110px;padding-left:30px">名称：</td>
@@ -75,16 +78,16 @@
                         <td>${(s.experStatus==0)?string('否','是')}</td>
                         <td>
                           <#if (s.type=='GU_SHOU') && (s.experStatus==1)>
-                        	<a href="${base}/sysmember/paymentBbinContent?id=${s.id}" class="btn btn-primary btn-sm">体验金付息</a>
+                        	<a href="<%=basePath%>sysmember/paymentBbinContent?id=${s.id}" class="btn btn-primary btn-sm">体验金付息</a>
                           </#if>
-                        	<a href="${base}/sysmember/paymentContent?id=${s.id}" class="btn btn-primary btn-sm">付息列表</a>	
+                        	<a href="<%=basePath%>sysmember/paymentContent?id=${s.id}" class="btn btn-primary btn-sm">付息列表</a>	
                         </td>
                     </tr>
                 </#list>
             </table>
       
         <#include "paginate.html" />
-        <@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/sysmember/payment" 
+        <@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>sysmember/payment" 
         	urlParas="&name=${(subject.name)!!}&status=${(subject.status)!!}&type=${(subject.type)!!}"/>
         </div>
         <!-- 内容结束 -->

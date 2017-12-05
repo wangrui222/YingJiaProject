@@ -1,22 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
-<#include '../common/base.html'>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-        <script type="text/javascript" src="${base}/resources/sys/js/jquery.js"></script>
-        <script type="text/javascript" src="${base}/resources/sys/js/bootstrap.js"></script>
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+        <script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
+        <script type="text/javascript" src="<%=basePath%>resources/sys/js/bootstrap.js"></script>
         
-        <link rel="stylesheet" href="${base}/resources/date/bootstrap-datetimepicker.min.css">
-        <script type="text/javascript" src="${base}/resources/date/bootstrap-datetimepicker.js"></script>
-        <script type="text/javascript" src="${base}/resources/date/bootstrap-datetimepicker.zh-CN.js"></script>
+        <link rel="stylesheet" href="<%=basePath%>resources/date/bootstrap-datetimepicker.min.css">
+        <script type="text/javascript" src="<%=basePath%>resources/date/bootstrap-datetimepicker.js"></script>
+        <script type="text/javascript" src="<%=basePath%>resources/date/bootstrap-datetimepicker.zh-CN.js"></script>
         <title>后台首页</title>
     </head>
 <body>
@@ -25,7 +28,7 @@
                         <h2><span class="glyphicon glyphicon-play" style="margin-right:5px"></span>提现管理</h2>
 
                       <div class="tablelist">
-                      	<form action="${base}/sysmember/WithdrawManage" method="post" id="form1">
+                      	<form action="<%=basePath%>sysmember/WithdrawManage" method="post" id="form1">
                         <table class="table tabletop">
                         <tr>
                         <td style="width:110px;padding-left:30px">姓名：</td>
@@ -84,7 +87,7 @@
                             	</#if>
                             </td>
                             <td></td>
-                            <td><a class="btn btn-primary btn-sm" href="${base}/sysmember/memberInfo?id=${m.memberId}">账号详细</a></td>
+                            <td><a class="btn btn-primary btn-sm" href="<%=basePath%>sysmember/memberInfo?id=${m.memberId}">账号详细</a></td>
                             <td>
                             	
                             	<#if m.status==1>
@@ -94,20 +97,20 @@
 								<#elseif m.status==4>
 									已解冻
 								<#elseif m.status==3>
-									<a class="btn btn-primary btn-sm" href="${base}/sysmember/withdrawAudit?serialNumber=${m.serialNumber}" data-toggle="modal" data-target="#myModal" onclick="return confirm('你确定要审核通过吗')">审核</a>
-									<a class="btn btn-primary btn-sm" href="${base}/sysmember/WithdrawUnfreeze?serialNumber=${m.serialNumber}" onclick="return confirm('你确定要解冻吗')">解冻</a>
+									<a class="btn btn-primary btn-sm" href="<%=basePath%>sysmember/withdrawAudit?serialNumber=${m.serialNumber}" data-toggle="modal" data-target="#myModal" onclick="return confirm('你确定要审核通过吗')">审核</a>
+									<a class="btn btn-primary btn-sm" href="<%=basePath%>sysmember/WithdrawUnfreeze?serialNumber=${m.serialNumber}" onclick="return confirm('你确定要解冻吗')">解冻</a>
 								<#else>
                             		<a class="btn btn-primary btn-sm" data-toggle="modal" onclick="audit('${m.serialNumber}')">审核</a>
-									<a class="btn btn-primary btn-sm" href="${base}/sysmember/withdrawPayment?serialNumber=${m.serialNumber}&channelName=BEIFU" onclick="return confirm('你确定要审核通过吗')">贝付打款</a>
-									<a class="btn btn-primary btn-sm" href="${base}/sysmember/WithdrawUnfreeze?serialNumber=${m.serialNumber}" onclick="return confirm('你确定要解冻吗')">解冻</a>
-									<!-- <a class="btn btn-primary btn-sm" href="${base}/sysmember/WithdrawPayFuIou?serialNumber=${m.serialNumber}" onclick="return confirm('你确定要审核通过吗')">富友打款</a> --> 
+									<a class="btn btn-primary btn-sm" href="<%=basePath%>sysmember/withdrawPayment?serialNumber=${m.serialNumber}&channelName=BEIFU" onclick="return confirm('你确定要审核通过吗')">贝付打款</a>
+									<a class="btn btn-primary btn-sm" href="<%=basePath%>sysmember/WithdrawUnfreeze?serialNumber=${m.serialNumber}" onclick="return confirm('你确定要解冻吗')">解冻</a>
+									<!-- <a class="btn btn-primary btn-sm" href="<%=basePath%>sysmember/WithdrawPayFuIou?serialNumber=${m.serialNumber}" onclick="return confirm('你确定要审核通过吗')">富友打款</a> --> 
                             	</#if> 
                             </td>
                           	</tr>
                           </#list>
                         </table>
 		<#include "paginate.html" />
-<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/sysmember/WithdrawManage" 
+<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>sysmember/WithdrawManage" 
 	urlParas="&memberName=${(memberWithdrawRecord.memberName)!!}&mobilePhone=${(memberWithdrawRecord.mobilePhone)!!}&bankCard=${(memberWithdrawRecord.bankCard)!!}&status=${(memberWithdrawRecord.status)!!}&createDate=${(memberWithdrawRecord.createDate?string('yyyy-MM-dd'))!!}"/>
 
          </div>
@@ -127,7 +130,7 @@
             </button>
             <h4 class="modal-title" id="myModalLabel">选择打款方式</h4>
          </div>
-         <form action="${base}/sysmember/withdrawAudit" method="get">
+         <form action="<%=basePath%>sysmember/withdrawAudit" method="get">
          <div class="modal-body">
          	<input type="hidden" name="serialNumber" value="" id="serialNumber">
             <select class="form-control" name="channelName" style="width: 200px;">
