@@ -39,8 +39,7 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
 	<tx:annotation-driven />
-	<jpa:repositories base-package="com.demo.dao"
-		entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
+	<jpa:repositories base-package="com.demo.dao" entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
 
 
 </beans>
