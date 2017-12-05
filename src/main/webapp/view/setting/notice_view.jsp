@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <html lang="zh-cn">
     <head>
@@ -7,19 +11,19 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      	<link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-        <link rel="stylesheet" href="${base}/resources/sys/webupload/webuploader.css">
-        <link rel="stylesheet" href="${base}/resources/sys/webupload/demo.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
+      	<link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/webupload/webuploader.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/webupload/demo.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
         
         <script type="text/javascript" src="${base }/resources/uploadify/jquery.min.js"></script>
         <script src="${base }/resources/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="${base }/resources/uploadify/uploadify.css">
 		
-		<script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/ueditor.config.js"></script>
-	    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/ueditor.all.min.js"> </script>
-	    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
+		<script type="text/javascript" charset="utf-8" src="<%=basePath%>resources/ueditor1_4_3_1/ueditor.config.js"></script>
+	    <script type="text/javascript" charset="utf-8" src="<%=basePath%>resources/ueditor1_4_3_1/ueditor.all.min.js"> </script>
+	    <script type="text/javascript" charset="utf-8" src="<%=basePath%>resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
         <title>后台首页</title>
     </head>
     <body>
@@ -54,7 +58,7 @@
         </div>
         <!-- 内容结束 -->
     </div>
-   <script src="${base}/resources/dist/js/bootstrapValidator.min.js"></script>
+   <script src="<%=basePath%>resources/dist/js/bootstrapValidator.min.js"></script>
    <!-- 容器结束 -->
 	</body>
 	</html>
