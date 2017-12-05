@@ -7,10 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="finance_product_subscribe")
+@Entity(name="finance_product_subscribe")
 /**
  * 理财类基金产品预约记录表
  * @author admin

@@ -7,9 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-@Entity
-@Table(name="subject_order_record")
+@Entity(name="subject_order_record")
+
 /**
  * ±êµÄ¶©µ¥
  * @author thinkpad

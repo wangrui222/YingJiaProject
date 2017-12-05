@@ -7,15 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * --意见反馈
  * @author admin
  *
  */
 
-@Entity
-@Table(name="feedback")
+@Entity(name="feedback")
 public class FeedBack {
 
 	private Integer   feedbackId ;//主键

@@ -10,10 +10,10 @@ import javax.persistence.SequenceGenerator;
 /*
  * 理财类基金产品
  */
-import javax.persistence.Table;
 
-@Entity
-@Table(name="finance_product_funds")
+
+@Entity(name="finance_product_funds")
+
 public class FinanceProductFunds {
 	private Integer  financeProductFundsId ;//主键
 	private String financeProductFundsType ;//产品类型

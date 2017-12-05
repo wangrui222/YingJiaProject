@@ -7,15 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 /**
  * ½ÇÉ«±í
  * @author thinkpad
  *
  */
-@Entity
-@Table(name="user_role")
+@Entity(name="user_role")
+
 public class UserRole {
 	/**
 	 * Ö÷¼ü

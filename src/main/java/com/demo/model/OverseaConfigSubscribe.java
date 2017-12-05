@@ -7,14 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * 
  * @author admin
  *
  */
-@Entity
-@Table(name="oversea_config_subscribe")
+@Entity(name="oversea_config_subscribe")
 public class OverseaConfigSubscribe {
 	private Integer ocsId  ;//Ö÷¼ü
 	private Integer memberId  ;//»áÔ±id',

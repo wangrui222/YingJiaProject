@@ -6,14 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * 
  * @author admin
  *
  */
-@Entity
-@Table(name="member_profit_record ")
+@Entity(name="member_profit_record ")
 public class MemberProfitRecord {
 	private Integer	mprId ;//Ö÷¼ü
 	private	  String serialNumber ;//Á÷Ë®ºÅ

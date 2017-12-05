@@ -7,14 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * 
  * @author admin
  *--缴费家庭
  */
-@Entity
-@Table(name="member_puc_charge_home")
+@Entity(name="member_puc_charge_home")
 public class MemberPucChargeHome {
 	private  Integer mpchId ;//主键
 	private Integer memberId ;//用户id',

@@ -7,14 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+
 /**
  * -- 提现记录表 
  * @author admin
  *
  */
-@Entity
-@Table(name="member_withdraw_record")
+@Entity(name="member_withdraw_record")
+
 public class MemberWithdrawRecord {
 	private Integer mwrId ;//主键
 	private  String serialNumber ;//流水号',
