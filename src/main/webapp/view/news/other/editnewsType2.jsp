@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
@@ -7,12 +11,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-<link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
 <link rel="stylesheet"
-	href="${base}/resources/sys/webupload/webuploader.css">
-<link rel="stylesheet" href="${base}/resources/sys/webupload/demo.css">
-<link rel="stylesheet" href="${base}/resources/sys/style/style.css">
+	href="<%=basePath%>resources/sys/webupload/webuploader.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/webupload/demo.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
 
 <script type="text/javascript"
 	src="${base }/resources/uploadify/jquery.min.js"></script>
@@ -29,7 +33,7 @@
 			<span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>编辑资讯分类
 		</h2>
 
-		<form action="${base}/newsType/editNewsType" method="post"
+		<form action="<%=basePath%>newsType/editNewsType" method="post"
 			id="valForm">
 			<input type="hidden" name="id" value="${(newstype.id)!!}">
 			<div class="tablelist">
@@ -174,14 +178,14 @@
 		</form>
 		<!-- 内容结束 -->
 	</div>
-	<script src="${base}/resources/dist/js/bootstrapValidator.min.js"></script>
+	<script src="<%=basePath%>resources/dist/js/bootstrapValidator.min.js"></script>
 	<!-- 容器结束 -->
 	<script type="text/javascript">
 		$(function() {
 			$("#suptype").val("${(newstype.suptype)!!}");
 			$("input:radio[value='${(newstype.pagetype)!!}']").attr('checked','checked');
 			if("${newstype.cphoto}"!=null&&"${newstype.cphoto}"!=""){
-				$('#url').append("<div id='${newstype.cphoto}' class='uploadimg'> <img width=50 height=50 src='${base}/${newstype.cphoto}' /> "+
+				$('#url').append("<div id='${newstype.cphoto}' class='uploadimg'> <img width=50 height=50 src='<%=basePath%>${newstype.cphoto}' /> "+
 						"<a href=javascript:delimg('${newstype.cphoto}')>删除</a> </div>");
 				$("#cphoto").val("${newstype.cphoto}");
 			}
@@ -240,7 +244,7 @@
 					response) {//每成功完成一次文件上传时触发一次
 				var image=eval("["+data+']')[0];
 				$(".uploadimg").remove();
-				$('#url').append("<div id="+image.msg+" class='uploadimg'> <img width=50 height=50 src=${base}/"+image.msg+" /> "+
+				$('#url').append("<div id="+image.msg+" class='uploadimg'> <img width=50 height=50 src=<%=basePath%>"+image.msg+" /> "+
 						"<a href=javascript:delimg('"+image.msg+"')>删除</a> </div>");
 				$("#cphoto").val(image.msg);
 			},
@@ -253,7 +257,7 @@
 		});
 		<!--删除图片-->
 		function delimg(obj){
-			var url="${base}/upload/delimg";		
+			var url="<%=basePath%>upload/delimg";		
 			$.post(url,{'imgpath':obj},function(data){
 					if(data.code==0){
 						document.getElementById(obj).remove();	

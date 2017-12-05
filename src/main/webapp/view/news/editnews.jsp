@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
@@ -7,19 +12,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-    <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-    <link rel="stylesheet" href="${base}/resources/sys/webupload/webuploader.css">
-    <link rel="stylesheet" href="${base}/resources/sys/webupload/demo.css">
-    <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/webupload/webuploader.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/webupload/demo.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
 
     <script type="text/javascript" src="${base }/resources/uploadify/jquery.min.js"></script>
     <script src="${base }/resources/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="${base }/resources/uploadify/uploadify.css">
 
-    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/ueditor.all.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="${base}/resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%=basePath%>resources/ueditor1_4_3_1/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%=basePath%>resources/ueditor1_4_3_1/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<%=basePath%>resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
     <title>后台首页</title>
 </head>
 <body>
@@ -29,7 +34,7 @@
         <span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>添加资讯
     </h2>
 
-    <form action="${base}/news/editNews" method="post" id="valForm">
+    <form action="<%=basePath%>news/editNews" method="post" id="valForm">
         <input type="hidden" name="id" value="${(news.id)!!}">
         <div class="tablelist">
             <!-- 表单 -->
@@ -144,19 +149,19 @@
     </form>
     <!-- 内容结束 -->
 </div>
-<script src="${base}/resources/dist/js/bootstrapValidator.min.js"></script>
+<script src="<%=basePath%>resources/dist/js/bootstrapValidator.min.js"></script>
 <!-- 容器结束 -->
 <script type="text/javascript">
     $(function () {
         $("#typeid").val("${(news.typeid)!!}");
         $("input:checkbox[value='${(news.plactop)!!}']").attr('checked', 'checked');
         if ("${(news.cphoto)!!}" != null && "${(news.cphoto)!!}" != "") {
-            $('#url').append("<div id='${(news.cphoto)!!}' class='uploadimg'> <img width=50 height=50 src='${base}/${(news.cphoto)!!}' /> " +
+            $('#url').append("<div id='${(news.cphoto)!!}' class='uploadimg'> <img width=50 height=50 src='<%=basePath%>${(news.cphoto)!!}' /> " +
                     "<a href=javascript:delimg('${(news.cphoto)!!}')>删除</a> </div>");
             $("#cphoto").val("${(news.cphoto)!!}");
         }
         if ("${(news.filelink)!!}" != null && "${(news.filelink)!!}" != "") {
-            $('#urlfilelink').append("<div id='${(news.filelink)!!}' class='uploadvedio'> <a href='${base}/${(news.filelink)!!}' target='_black'>${(news.filelink)!!}</a> " +
+            $('#urlfilelink').append("<div id='${(news.filelink)!!}' class='uploadvedio'> <a href='<%=basePath%>${(news.filelink)!!}' target='_black'>${(news.filelink)!!}</a> " +
                     "<a href=javascript:delimg('${(news.filelink)!!}','filelink')>删除</a> </div>");
             $("#filelink").val("${(news.filelink)!!}");
         }
@@ -296,7 +301,7 @@
                                          response) {//每成功完成一次文件上传时触发一次
                 var image = eval("[" + data + ']')[0];
                 $(".uploadimg").remove();
-                $('#url').append("<div id=" + image.msg + " class='uploadimg'> <img width=50 height=50 src=${base}/" + image.msg + " /> " +
+                $('#url').append("<div id=" + image.msg + " class='uploadimg'> <img width=50 height=50 src=<%=basePath%>" + image.msg + " /> " +
                         "<a href=javascript:delimg('" + image.msg + "','cphoto')>删除</a> </div>");
                 $("#cphoto").val(image.msg);
             },
@@ -321,7 +326,7 @@
                                          response) {//每成功完成一次文件上传时触发一次
                 var image = eval("[" + data + ']')[0];
                 $(".uploadvedio").remove();
-                $('#urlfilelink').append("<div id=" + image.msg + " class='uploadvedio'> <a href=${base}/" + image.msg + " target='_black'>" + image.msg + "</a> " +
+                $('#urlfilelink').append("<div id=" + image.msg + " class='uploadvedio'> <a href=<%=basePath%>" + image.msg + " target='_black'>" + image.msg + "</a> " +
                         "<a href=javascript:delimg('" + image.msg + "','filelink')>删除</a> </div>");
                 $("#filelink").val(image.msg);
             },
@@ -334,7 +339,7 @@
     });
     <!--删除图片-->
     function delimg(obj, tval) {
-        var url = "${base}/upload/delimg";
+        var url = "<%=basePath%>upload/delimg";
         $.post(url, {'imgpath': obj}, function (data) {
             if (data.code == 0) {
                 document.getElementById(obj).remove();
