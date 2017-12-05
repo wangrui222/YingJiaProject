@@ -6,9 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-@Entity
-@Table(name="sms_interface")
+@Entity(name="sms_interface")
+
 /**
  * 短信接口模板
  * @author thinkpad

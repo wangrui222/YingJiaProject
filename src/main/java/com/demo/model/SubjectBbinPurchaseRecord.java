@@ -7,9 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-@Entity
-@Table(name="subject_bbin_purchase_record")
+@Entity(name="subject_bbin_purchase_record")
+
 /**
  * 体验金购买标的
  * @author thinkpad
@@ -53,7 +52,7 @@ public class SubjectBbinPurchaseRecord {
 	  */
 	 private Integer  lastProfitDay;
 	 @Id
-	 @SequenceGenerator(name="subject_bbin_purchase_record",sequenceName="sql_subject_bbin_purchase_record",allocationSize=1)
+	 @SequenceGenerator(name="subject_bbin_purchase_record",sequenceName="sql_subject_bbin",allocationSize=1)
 	 @GeneratedValue(generator="subject_bbin_purchase_record",strategy=GenerationType.SEQUENCE)
 	public Integer getSbprId() {
 		return sbprId;

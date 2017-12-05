@@ -7,9 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-@Entity
-@Table(name="subject_file")
+@Entity(name="subject_file")
+
 /**
  * ¸½¼þ±í
  * @author thinkpad

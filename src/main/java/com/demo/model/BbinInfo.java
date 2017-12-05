@@ -15,8 +15,7 @@ import javax.persistence.Table;
  * @author admin
  *
  */
-@Entity
-@Table(name="bbin_info")
+@Entity(name="bbin_info")
 public class BbinInfo {
 	private Integer bbinInfoId;//Ö÷¼ü
 	private Integer memberId;//»áÔ±id

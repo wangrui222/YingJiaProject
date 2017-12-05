@@ -7,12 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 
 
-@Entity
-@Table(name="associated_account")
+
+@Entity(name="associated_account")
 /**
  * 关联账号表（第三方登录信息表）
  * @author admin

@@ -6,14 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * 
  * @author admin
  *
  */
-@Entity
-@Table(name="push_notice")
+@Entity(name="push_notice")
 public class PushNotice {
 	private  Integer pnID ;//Ö÷¼ü
 	private String title  ;

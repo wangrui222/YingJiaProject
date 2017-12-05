@@ -5,15 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 /**
  * '缴费项目
  * @author admin
  *
  */
-@Entity
-@Table(name="member_puc_charge_item")
+@Entity(name="member_puc_charge_item")
 public class MemberPucChargeItem {
 	private	 Integer mpciId  ;//主键
 	private	 Integer  memberId ;//-用户id',

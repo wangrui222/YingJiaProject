@@ -6,9 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-@Entity
-@Table(name="user_message")
+@Entity(name="user_message")
 /**
  * 用户消息表
  * @author thinkpad

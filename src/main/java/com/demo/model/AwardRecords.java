@@ -7,16 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 /**
  * 
  * @author admin
  *--½±Àø¼ÇÂ¼±í
  */
-@Entity
-@Table(name="award_records")
-
+@Entity(name="award_records")
 public class AwardRecords {
 	
 	private  Integer  awardRecordsId;//Ö÷¼ü

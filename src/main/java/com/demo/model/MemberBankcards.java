@@ -13,8 +13,7 @@ import javax.persistence.Table;
  * @author admin
  *
  */
-@Entity
-@Table(name="member_bankcards")
+@Entity(name="member_bankcards")
 public class MemberBankcards {
 	private	Integer memberBankcardsId  ;//主键
 	private String	memberBankcardsType  ;//银行卡类型

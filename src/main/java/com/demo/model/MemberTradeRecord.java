@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * 交易记录表
  * @author admin
@@ -16,8 +15,7 @@ import javax.persistence.Table;
  */
 
 
-@Entity
-@Table(name=" member_trade_record ")
+@Entity(name=" member_trade_record ")
 public class MemberTradeRecord {
 	private Integer mtrId;//主键
 	private Integer  memberId ;//'用户id',

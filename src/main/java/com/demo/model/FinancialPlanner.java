@@ -14,8 +14,7 @@ import javax.persistence.Table;
  *'理财师表
  */
 
-@Entity
-@Table(name="financial_planner")
+@Entity(name="financial_planner")
 public class FinancialPlanner {
 	private Integer financialPlannerId ;//主键
 	private  Integer  memberId;//会员id

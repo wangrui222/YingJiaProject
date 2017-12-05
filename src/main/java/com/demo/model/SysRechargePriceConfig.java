@@ -6,9 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-@Entity
-@Table(name="sys_recharge_price_config")
+@Entity(name="sys_recharge_price_config")
 /**
  * 充值面额管理
  * @author thinkpad

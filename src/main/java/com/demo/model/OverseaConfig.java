@@ -6,14 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * 
  * @author admin
  *
  */
-@Entity
-@Table(name="oversea_config ")
+@Entity(name="oversea_config ")
 public class OverseaConfig {
 	
 private	Integer ocId ;//Ö÷¼ü

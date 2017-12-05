@@ -7,9 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-@Entity
-@Table(name="role_permission_relation")
+@Entity(name="role_permission_relation")
+
 /**
  * 角色权限表
  * @author thinkpad

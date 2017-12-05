@@ -7,15 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 /**
- * 
  * @author admin
  *
  */
-@Entity
-@Table(name="fp_subscribe_record")
+@Entity(name="fp_subscribe_record")
 public class FpSubscribeRecord {
 private Integer	 fpsrId ;//Ö÷¼ü
 private	 Integer  memberId ;//»áÔ±id

@@ -7,14 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * -  新闻类别列表
  * @author admin
  *
  */
-@Entity
-@Table(name="news_type ")
+@Entity(name="news_type ")
 public class NewsType {
 	private Integer newsTypeId ;//主键
 	private String newsTypeName;//名称',

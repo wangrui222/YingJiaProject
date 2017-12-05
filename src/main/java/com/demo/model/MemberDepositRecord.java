@@ -7,14 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * 充值记录表
  * @author admin
  *
  */
-@Entity
-@Table(name="member_deposit_record")
+@Entity(name="member_deposit_record")
 public class MemberDepositRecord {
 	private	Integer memberDepositRecordId ;//主键
 	private	 String  serialNumber ;//流水号

@@ -7,15 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * -记账
  * @author admin
  *
  */
 
-@Entity
-@Table(name=" member_tally")
+@Entity(name=" member_tally")
 public class MemberTally {
 	private  Integer memberTallyId  ;//主键
 	private Integer  memberId  ;//用户id',
@@ -24,13 +22,13 @@ public class MemberTally {
 	private  Float amount ;//,--T '金额',
 	private Date  payDate ;
 	private  Date createDate;
-	
+
 	@Id
 	@SequenceGenerator(name="MemberTally _seq",sequenceName="sql_member_tally",allocationSize=1)
 	@GeneratedValue(generator="MemberTally _seq",strategy=GenerationType.SEQUENCE)
-	
-	
-	
+
+
+
 	public Integer getMemberTallyId() {
 		return memberTallyId;
 	}
@@ -73,6 +71,6 @@ public class MemberTally {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
+
 
 }

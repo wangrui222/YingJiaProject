@@ -6,9 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
-import javax.persistence.Table;
-@Entity
-@Table(name="sms_record")
+@Entity(name="sms_record")
+
 
 /**
  * ¶ÌÐÅ¼ÇÂ¼±í

@@ -7,15 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 /**
  * 
  * @author admin
  *用户基本表
  */
 
-@Entity
-@Table(name="members")
+@Entity(name="members")
 public class Members {
 	private	Integer memberId ;//用户id
 	private	 String memberName ;//真实姓名
