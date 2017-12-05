@@ -54,8 +54,8 @@
                       <ul class="nav nav-pills nav-stacked">
                        <li><a href="javascript:;" class="titlea"><span class="iconfont">&#xe609;</span>理财产品</a></li>
 		               <ul class="list-group">
-			               <li class="list-group-item"><a href="<%=basePath%>subject/sys/gushouList" target="rightkj">固收类</a></li>
-			               <li class="list-group-item"><a href="<%=basePath%>financeProductFunds/list" target="rightkj">私募/股权类</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>view/subject/gu_shou.jsp" target="rightkj">固收类</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>view/financeProductFunds/financeProductFunds_list.jsp" target="rightkj">私募/股权类</a></li>
 			               <li class="list-group-item"><a href="<%=basePath%>overseaSys/overseaConfig" target="rightkj">海外配置</a></li>
 		               </ul>
  					  <li><a href="javascript:;" class="titlea"><span class="iconfont">&#xe60c;</span>钱包管理</a></li>
