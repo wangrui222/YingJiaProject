@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="utf-8">
 <title>盈加邀请好友获利</title>
-<link href="${base}/resources/mobileapi/css/base.css" type="text/css" rel="stylesheet">
-<link href="${base}/resources/mobileapi/css/css.css" type="text/css" rel="stylesheet">
+<link href="<%=basePath%>resources/mobileapi/css/base.css" type="text/css" rel="stylesheet">
+<link href="<%=basePath%>resources/mobileapi/css/css.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<div class="firendPic"><img width="100%" src="${base}/resources/mobileapi/images/hyPic.jpg"></div>
+<div class="firendPic"><img width="100%" src="<%=basePath%>resources/mobileapi/images/hyPic.jpg"></div>
 <ul class="firendCount">
 	<li><p>邀请人数</p><span>${(headCount)!!}</span></li>
     <li><p>已返金额</p><span>${(headAmount)!!}</span></li>
