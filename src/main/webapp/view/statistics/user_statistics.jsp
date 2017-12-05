@@ -1,27 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
-<#include '../common/base.html'>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-    <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-    <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-    <script type="text/javascript" src="${base}/resources/sys/js/jquery.js"></script>
-    <link rel="stylesheet" href="${base}/resources/date/bootstrap-datetimepicker.min.css">
-    <script type="text/javascript" src="${base}/resources/date/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript" src="${base}/resources/date/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+    <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+    <script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
+    <link rel="stylesheet" href="<%=basePath%>resources/date/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="<%=basePath%>resources/date/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="<%=basePath%>resources/date/bootstrap-datetimepicker.zh-CN.js"></script>
 <title>用户综合查询</title>
 </head>
 <body>
 <div class="box-right-main">
   <h2><span class="glyphicon glyphicon-play" style="margin-right:5px"></span>用户综合统计</h2>
   <div class="tablelist">
-  <form action="${base}/statistics/userStatistics" method="post" id="form1">
+  <form action="<%=basePath%>statistics/userStatistics" method="post" id="form1">
     <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
     	<td class="pad0" width="70">手机号码：</td>
@@ -157,7 +161,7 @@
         </#if>
     </table>
       <#include "paginate.html" />
-      <@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/statistics/userStatistics"
+      <@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>statistics/userStatistics"
       urlParas="&mobilePhone=${(mobilePhone)!!}&type=${(type)!!}&dealway=${(dealway)!!}&startDate=${(startDate)!!}&endDate=${(endDate)!!}"/>
 
 

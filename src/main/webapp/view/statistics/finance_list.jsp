@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
@@ -8,13 +12,13 @@
 <meta name="renderer" content="webkit">
 <#include '../common/base.html'>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-<link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-<link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-<script type="text/javascript" src="${base}/resources/sys/js/jquery.js"></script>
-<link rel="stylesheet" href="${base}/resources/date/bootstrap-datetimepicker.min.css">
-<script type="text/javascript" src="${base}/resources/date/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="${base}/resources/date/bootstrap-datetimepicker.zh-CN.js"></script>
+<link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+<script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
+<link rel="stylesheet" href="<%=basePath%>resources/date/bootstrap-datetimepicker.min.css">
+<script type="text/javascript" src="<%=basePath%>resources/date/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="<%=basePath%>resources/date/bootstrap-datetimepicker.zh-CN.js"></script>
 <title>财务首页</title>
 </head>
 <body>
@@ -23,7 +27,7 @@
   <div class="tablelist">
   <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-      	<form action="${base}/statistics/financeList" method="post" id="form1">
+      	<form action="<%=basePath%>statistics/financeList" method="post" id="form1">
         <td class="pad0" width="70">开始时间：</td>
         <td width="200"><input class="form-control time" name="startDate" type="text" readonly="readonly" value="${(startDate)!!}"></td>
         <td class="pad0" width="70">结束时间：</td>
@@ -33,9 +37,9 @@
         <button type="button" class="btn btn-primary btn-sm" onclick="finan()">重置</button>
         </td>
          </form>
-      	<td width="80"><a class="btn btn-primary btn-sm" href="${base}/statistics/financeList/nowMonth">当月</a></td>
-      	<td width="100"><a class="btn btn-primary btn-sm" href="${base}/statistics/financeList/lastMonth">上一个月</a></td>
-      	<td width="100"><a class="btn btn-primary btn-sm" href="${base}/statistics/financeList/lastThreeMonth">最近三个月</a></td>
+      	<td width="80"><a class="btn btn-primary btn-sm" href="<%=basePath%>statistics/financeList/nowMonth">当月</a></td>
+      	<td width="100"><a class="btn btn-primary btn-sm" href="<%=basePath%>statistics/financeList/lastMonth">上一个月</a></td>
+      	<td width="100"><a class="btn btn-primary btn-sm" href="<%=basePath%>statistics/financeList/lastThreeMonth">最近三个月</a></td>
       	<td></td>
       </tr>
     </table>
@@ -43,21 +47,21 @@
     <div class="row rin">
     	<div class="col-md-4 inBox">
         	<div class="in">
-            	<p class="first"><img src="${base}/resources/sys/images/ico1.jpg">${((depositFuiou.amount+depositBeifu.amount)+((gushouAmount.interest)+(awardRegch.amount+awardInvest.amount)))!!}<span>元</span></p>
+            	<p class="first"><img src="<%=basePath%>resources/sys/images/ico1.jpg">${((depositFuiou.amount+depositBeifu.amount)+((gushouAmount.interest)+(awardRegch.amount+awardInvest.amount)))!!}<span>元</span></p>
                 <p class="txt">平台总资产</p>
                 <p class="txt">(户历史充值总额+用户总收益)</p>
             </div>
         </div>
         <div class="col-md-4 inBox">
         	<div class="in">
-            	<p class="first"><img src="${base}/resources/sys/images/ico2.jpg">${((depositFuiou.amount+depositBeifu.amount)+((gushouAmount.interest)+(awardRegch.amount+awardInvest.amount)))-((gushouAmount.amount)+(memberTradeMobile.amount+memberTradeSinopec.amount+memberTradePuc.amount)+(withdrawFuiou.amount+withdrawBeifu.amount))!!}<span>元</span></p>
+            	<p class="first"><img src="<%=basePath%>resources/sys/images/ico2.jpg">${((depositFuiou.amount+depositBeifu.amount)+((gushouAmount.interest)+(awardRegch.amount+awardInvest.amount)))-((gushouAmount.amount)+(memberTradeMobile.amount+memberTradeSinopec.amount+memberTradePuc.amount)+(withdrawFuiou.amount+withdrawBeifu.amount))!!}<span>元</span></p>
                 <p class="txt">平台余额</p>
                 <p class="txt">(总资产-总支出)</p>
             </div>
         </div>
         <div class="col-md-4 inBox">
         	<div class="in">
-            	<p class="first"><img src="${base}/resources/sys/images/ico2.jpg">${(depositFuiou.amount+depositBeifu.amount)-(withdrawFuiou.amount+withdrawBeifu.amount)!!}<span>元</span></p>
+            	<p class="first"><img src="<%=basePath%>resources/sys/images/ico2.jpg">${(depositFuiou.amount+depositBeifu.amount)-(withdrawFuiou.amount+withdrawBeifu.amount)!!}<span>元</span></p>
                 <p class="txt">平台总净值/第三方账户总余额</p>
                 <p class="txt">(历史充值-总提现)</p>
             </div>
