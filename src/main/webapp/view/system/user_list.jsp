@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
@@ -7,10 +12,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-<link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-<link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-<script type="text/javascript" src="${base}/resources/sys/js/jquery.js"></script>
+<link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+<script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
 <title>后台首页</title>
 </head>
 <body>
@@ -43,7 +48,7 @@
 					<td>${(user.name)!!}</td>
 					<td>${(user.mobilePhone)!!}</td>
 					<td>${user.createDate?string('yyyy/MM/dd HH:mm:ss')}</td>
-					<td><a href="${base}/sys/eidtUserView/${user.id}"
+					<td><a href="<%=basePath%>sys/eidtUserView/${user.id}"
 						class="btn btn-primary btn-sm">编辑</a> <a href="javascript:;"
 						uid="${user.id}" class="btn btn-primary btn-sm delUser">删除</a></td>
 				</tr>
@@ -51,7 +56,7 @@
 			</table>
 			<#include "/common/paginate.html" /> <@paginate
 			currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0
-			actionUrl="${base}/setting/feedbackList"/>
+			actionUrl="<%=basePath%>setting/feedbackList"/>
 		</div>
 		<!-- 内容结束 -->
 
@@ -64,13 +69,13 @@ pagelist.results as user> </#list> </#if>
 <script type="text/javascript">
 	$(function() {
 		$(".add").click(function() {
-			window.location.href = "${base}/sys/addAccountPage";
+			window.location.href = "<%=basePath%>sys/addAccountPage";
 		});
 
 		$(".delUser").click(function() {
 			if(confirm("你确定要删除吗？")){
 				var uid = $(this).attr("uid");
-				$.post("${base}/sys/delUser/" + uid, function(result) {
+				$.post("<%=basePath%>sys/delUser/" + uid, function(result) {
 					if (result.code == 0) {
 						location.reload();
 						;

@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
- <#include '../common/base.html'>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
-        <link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-        <script type="text/javascript" src="${base}/resources/sys/js/jquery.js"></script>
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+        <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+        <script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
 	<title>后台首页</title>
 </head>
 <body>
@@ -19,7 +23,7 @@
  <div class="box-right-main">
      <h2><span class="glyphicon glyphicon-play" style="margin-right:5px"></span>修改密码</h2>
 	
-<form id="savePassword" method="post" class="form-horizontal" action="${base}/sys/savePasswd">
+<form id="savePassword" method="post" class="form-horizontal" action="<%=basePath%>sys/savePasswd">
 	<div class="tablelist">
 	  <div class="row bdlist">
                <div class="col-md-5">
@@ -53,7 +57,7 @@
  </form>
 
 </div>
-<script src="${base}/resources/dist/js/bootstrapValidator.min.js"></script>
+<script src="<%=basePath%>resources/dist/js/bootstrapValidator.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#savePassword').bootstrapValidator({
