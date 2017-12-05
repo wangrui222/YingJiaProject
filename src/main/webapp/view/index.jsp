@@ -54,8 +54,8 @@
                       <ul class="nav nav-pills nav-stacked">
                        <li><a href="javascript:;" class="titlea"><span class="iconfont">&#xe609;</span>理财产品</a></li>
 		               <ul class="list-group">
-			               <li class="list-group-item"><a href="<%=basePath%>subject/sys/gushouList" target="rightkj">固收类</a></li>
-			               <li class="list-group-item"><a href="<%=basePath%>financeProductFunds/list" target="rightkj">私募/股权类</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>view/subject/gu_shou.jsp" target="rightkj">固收类</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>view/financeProductFunds/financeProductFunds_list.jsp" target="rightkj">私募/股权类</a></li>
 			               <li class="list-group-item"><a href="<%=basePath%>overseaSys/overseaConfig" target="rightkj">海外配置</a></li>
 		               </ul>
  					  <li><a href="javascript:;" class="titlea"><span class="iconfont">&#xe60c;</span>钱包管理</a></li>
@@ -71,10 +71,10 @@
 		              <li><a href="javascript:;" class="titlea"><span class="iconfont">&#xe608;</span>会员管理</a>
 		              </li>
 		              <ul class="list-group">
-			               <li class="list-group-item"><a href="<%=basePath%>sysmember/index" target="rightkj"></span>账号管理</a></li>
-			               <li class="list-group-item"><a href="<%=basePath%>sysmember/financia" target="rightkj">理财师审核</a></li>
-			               <li class="list-group-item"><a href="<%=basePath%>sysmember/dahua" target="rightkj">绑卡管理</a></li>
-			               <li class="list-group-item"><a href="<%=basePath%>sysmember/payment" target="rightkj">付息计划</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>ldd/sysmember/index" target="rightkj"></span>账号管理</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>ldd/sysmember/financia" target="rightkj">理财师审核</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>ldd/sysmember/dahua" target="rightkj">绑卡管理</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>ldd/sysmember/payment" target="rightkj">付息计划</a></li>
 			               <li class="list-group-item"><a href="<%=basePath%>sysmember/rechargeManage" target="rightkj">充值管理</a></li>
 			               <li class="list-group-item"><a href="<%=basePath%>sysmember/WithdrawManage" target="rightkj">提现管理</a></li>
 			               <li class="list-group-item"><a href="<%=basePath%>sysmember/inviteRewards" target="rightkj">邀请奖励</a></li>
