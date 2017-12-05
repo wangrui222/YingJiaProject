@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+    
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
@@ -7,20 +13,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-<link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
 <link rel="stylesheet"
-	href="${base}/resources/sys/webupload/webuploader.css">
-<link rel="stylesheet" href="${base}/resources/sys/webupload/demo.css">
-<link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-<link href="${base}/resources/bootstrap-fileinput/css/fileinput.css"
+	href="<%=basePath%>resources/sys/webupload/webuploader.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/webupload/demo.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+<link href="<%=basePath%>resources/bootstrap-fileinput/css/fileinput.css"
 	media="all" rel="stylesheet" type="text/css" />
 <script type="text/javascript" charset="utf-8"
-	src="${base}/resources/ueditor1_4_3_1/ueditor.config.js"></script>
+	src="<%=basePath%>resources/ueditor1_4_3_1/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8"
-	src="${base}/resources/ueditor1_4_3_1/ueditor.all.min.js"> </script>
+	src="<%=basePath%>resources/ueditor1_4_3_1/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8"
-	src="${base}/resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
+	src="<%=basePath%>resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
 <title>后台首页</title>
 </head>
 <body>
@@ -30,7 +36,7 @@
 			<span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>产品信息详细页
 		</h2>
 
-		<form action="${base}/subject/sys/edit" method="post" id="valForm">
+		<form action="<%=basePath%>subject/sys/edit" method="post" id="valForm">
 			<input type="hidden" name="folderId" value="${(subject.folderId)!!}">
 			<input type="hidden" name="id" value="${id}">
 			<div class="tablelist">
@@ -484,7 +490,7 @@ var ue = UE.getEditor('editor2');
                 var bv = $form.data('bootstrapValidator');
                 $.post($form.attr('action'), $form.serialize(), function (result) {
                 	alert("编辑成功");
-                	window.location.href="${base}/subject/sys/gushouList";
+                	window.location.href="<%=basePath%>subject/sys/gushouList";
                 }, 'json');
             });
         });

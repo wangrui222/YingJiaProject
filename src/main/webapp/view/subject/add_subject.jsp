@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>	
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
@@ -7,20 +12,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="${base}/resources/sys/ying/iconfont.css">
-<link rel="stylesheet" href="${base}/resources/sys/style/bootstrap.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
 <link rel="stylesheet"
-	href="${base}/resources/sys/webupload/webuploader.css">
-<link rel="stylesheet" href="${base}/resources/sys/webupload/demo.css">
-<link rel="stylesheet" href="${base}/resources/sys/style/style.css">
-<link href="${base}/resources/bootstrap-fileinput/css/fileinput.css"
+	href="<%=basePath%>resources/sys/webupload/webuploader.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/webupload/demo.css">
+<link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
+<link href="<%=basePath%>resources/bootstrap-fileinput/css/fileinput.css"
 	media="all" rel="stylesheet" type="text/css" />
 <script type="text/javascript" charset="utf-8"
-	src="${base}/resources/ueditor1_4_3_1/ueditor.config.js"></script>
+	src="<%=basePath%>resources/ueditor1_4_3_1/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8"
-	src="${base}/resources/ueditor1_4_3_1/ueditor.all.min.js"> </script>
+	src="<%=basePath%>resources/ueditor1_4_3_1/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8"
-	src="${base}/resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
+	src="<%=basePath%>resources/ueditor1_4_3_1/lang/zh-cn/zh-cn.js"></script>
 <title>后台首页</title>
 </head>
 <body>
@@ -30,7 +35,7 @@
 			<span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>产品信息详细页
 		</h2>
 
-		<form action="${base}/subject/sys/add" method="post" id="valForm">
+		<form action="<%=basePath%>subject/sys/add" method="post" id="valForm">
 			<input type="hidden" name="folderId">
 			<div class="tablelist">
 				<!-- 表单 -->
@@ -246,7 +251,7 @@
 					<span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>标的附件
 				</h2>
 
-				<form action="${base}/subject/sys/attchment"
+				<form action="<%=basePath%>subject/sys/attchment"
 					enctype="multipart/form-data" method="post" class="attachmentForm">
 					<label class="control-label col-sm-3 ">图片预览</label> <input
 						id="input-24" type="file" multiple class="file-loading"
@@ -258,30 +263,30 @@
 	</div>
 	<!-- 容器结束 -->
 </body>
-<script src='${base}/resources/dist/js/jquery.min.js'></script>
-<script src='${base}/resources/js/jquery.form.js'></script>
-<script src="${base}/resources/dist/js/bootstrapValidator.min.js"></script>
-<script src="${base}/resources/bootstrap-fileinput/js/bootstrap.min.js"
+<script src='<%=basePath%>resources/dist/js/jquery.min.js'></script>
+<script src='<%=basePath%>resources/js/jquery.form.js'></script>
+<script src="<%=basePath%>resources/dist/js/bootstrapValidator.min.js"></script>
+<script src="<%=basePath%>resources/bootstrap-fileinput/js/bootstrap.min.js"
 	type="text/javascript"></script>
 <script
-	src="${base}/resources/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js"
+	src="<%=basePath%>resources/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js"
 	type="text/javascript"></script>
-<script src="${base}/resources/bootstrap-fileinput/js/fileinput.min.js"
-	type="text/javascript"></script>
-<script
-	src="${base}/resources/bootstrap-fileinput/js/fileinput_locale_LANG.js"
+<script src="<%=basePath%>resources/bootstrap-fileinput/js/fileinput.min.js"
 	type="text/javascript"></script>
 <script
-	src="${base}/resources/bootstrap-fileinput/js/fileinput_locale_zh.js"
+	src="<%=basePath%>resources/bootstrap-fileinput/js/fileinput_locale_LANG.js"
+	type="text/javascript"></script>
+<script
+	src="<%=basePath%>resources/bootstrap-fileinput/js/fileinput_locale_zh.js"
 	type="text/javascript"></script>
 
 <link rel="stylesheet"
-	href="${base}/resources/date/bootstrap-datetimepicker.min.css">
+	href="<%=basePath%>resources/date/bootstrap-datetimepicker.min.css">
 <script type="text/javascript"
-	src="${base}/resources/date/bootstrap-datetimepicker.js"
+	src="<%=basePath%>resources/date/bootstrap-datetimepicker.js"
 	charset="UTF-8"></script>
 <script type="text/javascript"
-	src="${base}/resources/date/bootstrap-datetimepicker.zh-CN.js"
+	src="<%=basePath%>resources/date/bootstrap-datetimepicker.zh-CN.js"
 	charset="UTF-8"></script>
 
 <script type="text/javascript">
@@ -469,7 +474,7 @@
                 var bv = $form.data('bootstrapValidator');
                 $.post($form.attr('action'), $form.serialize(), function (result) {
                     alert("提交成功");
-                    window.location.href="${base}/subject/sys/gushouList";
+                    window.location.href="<%=basePath%>subject/sys/gushouList";
                 }, 'json');
             });
 
@@ -506,7 +511,7 @@
                 	$("input[name='endDate']").attr("disabled",false);
                 	$("input[name='experStatus']").attr("disabled",true);
                 }
-                $.get("${base}/subject/sys/subjectFields/" + type,function(page){
+                $.get("<%=basePath%>subject/sys/subjectFields/" + type,function(page){
                     $(".typicalPanel").prev().remove();
                     $(".typicalPanel").remove();
                     $(".tablebaocun").before(page);
