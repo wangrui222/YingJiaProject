@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html><head>
@@ -12,9 +16,9 @@
 	<meta name="description" content="申请实盘交易账户，直接进行实盘交易。">
 	<title>订单详情 - 盈+</title>
 	<link href="http://www.ying158.com/images/icon.ico" type="image/x-icon" rel="shortcut icon">
-	<link href="${base}/resources/web/css/common.css" rel="stylesheet">
-    <link href="${base}/resources/web/font/iconfont.css" rel="stylesheet">
-	<link href="${base}/resources/web/css/jw.css" rel="stylesheet">
+	<link href="<%=basePath%>resources/web/css/common.css" rel="stylesheet">
+    <link href="<%=basePath%>resources/web/font/iconfont.css" rel="stylesheet">
+	<link href="<%=basePath%>resources/web/css/jw.css" rel="stylesheet">
 </head>
 <body>
 <#include "../common/top.html">
@@ -23,7 +27,7 @@
     	<div class="orderBox">
         	<div class="title"><h2><span class="iconfont">&#xe606;</span>订单详情</h2></div>
             <div class="order">
-            	<img src="${base}/resources/web/images/orderPic.jpg">
+            	<img src="<%=basePath%>resources/web/images/orderPic.jpg">
             	<table width="100%" border="0" cellspacing="0" cellpadding="0">
                   
                    <tr>
@@ -55,7 +59,7 @@
                     </div>
                     </td>
                   <td width="150px">
-					<form action="${base}/subjectPur/orderEnsure/${tradeNo}" method="post" class="hiddenForm">
+					<form action="<%=basePath%>subjectPur/orderEnsure/${tradeNo}" method="post" class="hiddenForm">
                         <input type="hidden" name="bbinStatus" value="${(bbinStatus)!!}">
                 		<button class="tybutton">立即付款</button>
 					</form>
@@ -66,14 +70,14 @@
     </div>
 	<#include "../common/footer.html">
 </body>
-<script src='${base}/resources/dist/js/jquery.min.js'></script>
-<script src='${base}/resources/js/jquery.form.js'></script>
+<script src='<%=basePath%>resources/dist/js/jquery.min.js'></script>
+<script src='<%=basePath%>resources/js/jquery.form.js'></script>
 <script type="text/javascript">
     $(function () {
         $(".hiddenForm").ajaxForm(function (url) {
             if(url.code==0){
                alert(url.msg);
-               location="${base}/subject/subjectContent/${subjectId}?showTab=list"
+               location="<%=basePath%>subject/subjectContent/${subjectId}?showTab=list"
             }else{
             	alert(url.msg);	
             }

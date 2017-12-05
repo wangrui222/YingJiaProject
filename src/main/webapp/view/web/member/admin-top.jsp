@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,8 +14,8 @@
 <table height="160" class="peopleInfo" width="970" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td align="left" valign="middle" class="info">
-            <a href="${base}/account/security">
-                <div class="img"><img src="${base}/resources/web/images/userPic.jpg"></div>
+            <a href="<%=basePath%>account/security">
+                <div class="img"><img src="<%=basePath%>resources/web/images/userPic.jpg"></div>
                 <h2>${(memberInfo.name)!!}，<span>您好!</span></h2>
             </a>
             <div class="safe">账户安全&nbsp;&nbsp;<span class="scroll"><em style="width:${memberInfo.securityProgress.progressVal}%"></em></span></div>
@@ -24,7 +28,7 @@
             </ul>
         </td>
         <td align="right">
-            <a href="${base}/web/logout" class="loginOut"><span class="iconfont">&#xe618;</span>安全退出</a>
+            <a href="<%=basePath%>web/logout" class="loginOut"><span class="iconfont">&#xe618;</span>安全退出</a>
         </td>
     </tr>
 </table>
@@ -36,8 +40,8 @@
         <li><h2 style="color:#9d8440">${(memberAccount.totalProfit)!(memberInfo.account.totalProfit)}</h2><p>累计收益(元)<a href="javascript:;" class="iconfont">&#xe619;<span>累计收益</span><i></i></a></p></li>
         <li><h2 style="color:#9d8440">${(memberAccount.imusealeBalance)!(memberInfo.account.imusealeBalance)}</h2><p>冻结金额(元)<a href="javascript:;" class="iconfont">&#xe619;<span>提现冻结金额</span><i></i></a></p></li>
     </ul>
-    <a href="${base}/account/deposit" class="cz">充值</a>
-    <a href="${base}/account/withdraw" class="tk">提款</a>
+    <a href="<%=basePath%>account/deposit" class="cz">充值</a>
+    <a href="<%=basePath%>account/withdraw" class="tk">提款</a>
 </div>
 </body>
 </html>

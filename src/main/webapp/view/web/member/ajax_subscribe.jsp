@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,13 +30,13 @@
 				<td>1111111111111</td>
 				<td>${r.statusDesc}</td>
 				<td>${r.createDate?string("yyyy-MM-dd")}</td>
-				<td><a href="${base}/${r.comment}" target="_black">查看下载</a></td>
+				<td><a href="<%=basePath%>${r.comment}" target="_black">查看下载</a></td>
 			</tr>
 		</#list>
 	</table>
 	<div class="listCount">总计<font color="#ff503f">${pageInfo2.total}</font>笔</div>
 	<#include "ajax_paginate2.html" /> 
-	<@paginate currentPage=(pageInfo2.pageNum)!0 totalPage=(pageInfo2.pages)!0 actionUrl="${base}/account/toSubscribeJson"/>
+	<@paginate currentPage=(pageInfo2.pageNum)!0 totalPage=(pageInfo2.pages)!0 actionUrl="<%=basePath%>account/toSubscribeJson"/>
 </div>
 <script type="text/javascript">
 	function getJsonInfo2(url) {

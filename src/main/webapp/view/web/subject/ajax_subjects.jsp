@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -71,18 +75,18 @@
 						</li>
 						<li class="five">
 							<#if s.status.description=='募集中'>
-							<a class="abtn" href="${base}/subject/subjectContent/${s.id}">购买</a>
+							<a class="abtn" href="<%=basePath%>subject/subjectContent/${s.id}">购买</a>
 							<#elseif s.status.description=='回款中'>
-								<a class="abtn" style="background-color: #8393A1;" href="${base}/subject/subjectContent/${s.id}">还款中</a>
+								<a class="abtn" style="background-color: #8393A1;" href="<%=basePath%>subject/subjectContent/${s.id}">还款中</a>
 							<#elseif s.status.description=='还款完成'>
-							 	<a class="abtn" style="background-color: #8393A1;" href="${base}/subject/subjectContent/${s.id}">已结束</a>
+							 	<a class="abtn" style="background-color: #8393A1;" href="<%=basePath%>subject/subjectContent/${s.id}">已结束</a>
 							</#if>
 						</li>
 					</ul>
 		</#list>
 	<!-- 异步内容结束 -->
 <#include "ajax_paginate.html" /> 
-<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="${base}/subject/subjectJson" urlParas="&type=${type}&yearRate=${yearRate}&period=${period}&status=${status}"/>
+<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>subject/subjectJson" urlParas="&type=${type}&yearRate=${yearRate}&period=${period}&status=${status}"/>
 </div>
 <script type="text/javascript">
 	function getJsonInfo(url) {
@@ -93,7 +97,7 @@
 	}
 		require.config({
             paths: {
-                echarts: '${base}/resources/web/echart/dist/'
+                echarts: '<%=basePath%>resources/web/echart/dist/'
             }
         });
 		require(

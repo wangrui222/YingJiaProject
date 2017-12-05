@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html><head>
@@ -11,8 +15,8 @@
 	<meta name="description" content="申请实盘交易账户，直接进行实盘交易。">
 	<title>我的加法库 - 盈+</title>
 	<#include '../common/resources.html'>
-    <script type="text/javascript" src="${base}/resources/web/location/area.js"></script>
-	<script type="text/javascript" src="${base}/resources/web/location/location.js"></script>
+    <script type="text/javascript" src="<%=basePath%>resources/web/location/area.js"></script>
+	<script type="text/javascript" src="<%=basePath%>resources/web/location/location.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		showLocation();
@@ -24,7 +28,7 @@
     <div class="sdbanner probanner"></div>
     <div class="proMain">
     	<div class="conTit">
-        	<span><a style="color:#9d8440;" href="${base}/finance">其他标的</a></span>
+        	<span><a style="color:#9d8440;" href="<%=basePath%>finance">其他标的</a></span>
         	<h2><em>￥</em>${(product.name)!!}</h2>
         </div>
         <table class="conTable" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -46,7 +50,7 @@
             <td width="360" align="center"; valign="middle" height="320">
             	<div class="tbBox">
             	<div class="li4" style=""><span id="checkmoney" style="color: red;"></span></div>
-            	<#if !(memberInfo??)><a href="${base}/web/login">登录</a>后可见</#if>
+            	<#if !(memberInfo??)><a href="<%=basePath%>web/login">登录</a>后可见</#if>
                     <p><input class="txt" name="name" type="text" value="" placeholder="请输入姓名"></p>
                     <p><input class="txt" name="phone" type="text" value="" placeholder="请输入电话号码"></p>
                     <p class="pSelect">
@@ -81,7 +85,7 @@
                 </div>
                 <div class="box">
                 	<table width="70%" class="lcrInfo" border="0" cellspacing="0" cellpadding="0">
-						<tr><td><img class="rwImg" width="150" height="150" src="${base}/${(product.productManagerPic)!!}"></td></tr>
+						<tr><td><img class="rwImg" width="150" height="150" src="<%=basePath%>${(product.productManagerPic)!!}"></td></tr>
 						<tr><td><h2>${(product.productManagerName)!!}</h2></td></tr>
 						<tr><td><h4>${(product.productManagerTitle)!!}</h4></td></tr>
 						<tr><td><h3>${(product.productManagerDesc)!!}</h3></td></tr>
@@ -131,7 +135,7 @@
                      return false;
                  }
                  if(authBankCard==false){
-                 	$("#checkmoney").html("请先绑定银行卡，<a href='${base}/account/security/memberBankcardView'>绑卡</a>");
+                 	$("#checkmoney").html("请先绑定银行卡，<a href='<%=basePath%>account/security/memberBankcardView'>绑卡</a>");
                      $(".li4").show(100);
                  	return false;
                  }
@@ -163,7 +167,7 @@
 		                type: "POST", // 用POST方式传输
 		                dataType: "json", // 数据格式:JSON
 		                async: true,
-		                url: '${base}/finance/addfinance', // 目标地址
+		                url: '<%=basePath%>finance/addfinance', // 目标地址
 		                data: {
 		                	productId: ${product.id},
 		                	name: $("input[name='name']").val(),
@@ -178,8 +182,8 @@
                                     skin: '',
                                     area: ['406px', '466px'],
                                     content: '<div class="dialogs">' +
-                                    '<img src="${base}/resources/web/images/dialog_ico.png"/><h1>预约申请成功</h1>'+
-                                    '<a type="button" href="${base}/h5/v1/financeContract/${product.id}" target="_black">合同建档成功，等待签署</a><div class="hrs"><font>银行账户</font></div><p>招商银行杭州湖墅支行</p>'+
+                                    '<img src="<%=basePath%>resources/web/images/dialog_ico.png"/><h1>预约申请成功</h1>'+
+                                    '<a type="button" href="<%=basePath%>h5/v1/financeContract/${product.id}" target="_black">合同建档成功，等待签署</a><div class="hrs"><font>银行账户</font></div><p>招商银行杭州湖墅支行</p>'+
                                     '<p>5719 0815 9410 801</p><p style="margin-top:20px">户名：杭州吉威投资管理有限公司</p></div>'
                                 });
 		                    } else {

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,7 +42,7 @@
                             投资方向：${(pr.investPoints)!!}
                         </p>
                     </li>
-                    <li class="five"><a class="abtn" href="${base}/finance/financeView/${pr.id}">购买</a></li>
+                    <li class="five"><a class="abtn" href="<%=basePath%>finance/financeView/${pr.id}">购买</a></li>
                 </ul>
                 <#elseif pr.type=='SIMU'>
                     <ul class="tbList">
@@ -66,14 +70,14 @@
                             </div>
 
                         </li>
-                        <li class="five"><a class="abtn" href="${base}/finance/financeView/${pr.id}">购买</a></li>
+                        <li class="five"><a class="abtn" href="<%=basePath%>finance/financeView/${pr.id}">购买</a></li>
                     </ul>
             </#if>
         </#list>
         <!-- 异步内容结束 -->
         <#include "ajax_paginate.html" />
         <@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0
-        actionUrl="${base}/finance/financeAjax"/>
+        actionUrl="<%=basePath%>finance/financeAjax"/>
     </div>
     <script type="text/javascript">
         function getJsonInfo(url) {

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -13,11 +17,11 @@
         <meta name="description" content="申请实盘交易账户，直接进行实盘交易。">
         <title>我是理财师-会员中心-盈+</title>
         <link href="http://www.ying158.com/images/icon.ico" type="image/x-icon" rel="shortcut icon">
-        <link href="${base}/resources/web/css/common.css" rel="stylesheet">
-        <link href="${base}/resources/web/css/jw.css" rel="stylesheet">
-        <link href="${base}/resources/web/font/iconfont.css" rel="stylesheet">
-        <script src="${base}/resources/web/js/jquery.js"></script>
-        <script src="${base}/resources/web/js/bootstrap.js"></script>
+        <link href="<%=basePath%>resources/web/css/common.css" rel="stylesheet">
+        <link href="<%=basePath%>resources/web/css/jw.css" rel="stylesheet">
+        <link href="<%=basePath%>resources/web/font/iconfont.css" rel="stylesheet">
+        <script src="<%=basePath%>resources/web/js/jquery.js"></script>
+        <script src="<%=basePath%>resources/web/js/bootstrap.js"></script>
 
         <script src="${base }/resources/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="${base }/resources/uploadify/uploadify.css">
@@ -78,7 +82,7 @@
                         <div id="conBox">
                             <div class="box" style="display:block">
                                 <div class="remind"><strong>理财师身份认证</strong></div>
-                                <form action="${base}/account/financial/add" method="post" id="form1">
+                                <form action="<%=basePath%>account/financial/add" method="post" id="form1">
                                     <table class="txTable" width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
                                             <td width="140" align="right">真实姓名：</td>
@@ -93,7 +97,7 @@
                                         <tr>
                                             <td align="right">我的名片：</td>
                                             <td><#if financialPlanner??>
-                                                <img width=50 height=50 src="${base}/${(financialPlanner.mycard)!!}">
+                                                <img width=50 height=50 src="<%=basePath%>${(financialPlanner.mycard)!!}">
                                                 <#else>
                                                     <div id="url">
                                                         <input type="file"  id="file_upload">
@@ -194,7 +198,7 @@
                                                      response) {//每成功完成一次文件上传时触发一次
                             var image = eval("[" + data + ']')[0];
                             $(".uploadimg").remove();
-                            $('#url').append("<div id=" + image.msg + " class='uploadimg'> <img width=50 height=50 src=${base}/" + image.msg + " /> " +
+                            $('#url').append("<div id=" + image.msg + " class='uploadimg'> <img width=50 height=50 src=<%=basePath%>" + image.msg + " /> " +
                                     "<a href=javascript:delimg('" + image.msg + "','cphoto')>删除</a> </div>");
                             $("#cphoto").val(image.msg);
                         },
@@ -208,7 +212,7 @@
                 });
 
                 function delimg(obj, tval) {
-                    var url = "${base}/upload/delimg";
+                    var url = "<%=basePath%>upload/delimg";
                     $.post(url, {'imgpath': obj}, function (data) {
                         if (data.code == 0) {
                             document.getElementById(obj).remove();
