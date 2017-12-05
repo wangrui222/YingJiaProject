@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -10,8 +14,8 @@
 	<meta name="description" content="申请实盘交易账户，直接进行实盘交易。">
 	<title>我的加法库 - 盈+</title>
 	<#include '../common/resources.html'>
-	<script type="text/javascript" src="${base}/resources/web/location/area.js"></script>
-	<script type="text/javascript" src="${base}/resources/web/location/location.js"></script>
+	<script type="text/javascript" src="<%=basePath%>resources/web/location/area.js"></script>
+	<script type="text/javascript" src="<%=basePath%>resources/web/location/location.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		showLocation();
@@ -23,7 +27,7 @@
     <div class="sdbanner probanner"></div>
     <div class="proMain">
     	<div class="conTit">
-        	<span><a style="color:#9d8440;" href="${base}/oversea">其他保险</a></span>
+        	<span><a style="color:#9d8440;" href="<%=basePath%>oversea">其他保险</a></span>
         	<h2><em>￥</em>${(overseaConfig.title)!!}</h2>
         </div>
         <table class="conTable" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -40,7 +44,7 @@
                 <td width="360" align="center"; valign="middle" height="320">
                     <div class="tbBox">
                         <div class="li4" style=""><span id="checkmoney" style="color: red;"></span></div>
-					<#if !(memberInfo??)><a href="${base}/web/login">登录</a>后可见</#if>
+					<#if !(memberInfo??)><a href="<%=basePath%>web/login">登录</a>后可见</#if>
                         <p><input class="txt" name="name" type="text" value="" placeholder="请输入姓名"></p>
                         <p><input class="txt" name="phone" type="text" value="" placeholder="请输入电话号码"></p>
                         <p class="pSelect">
@@ -90,7 +94,7 @@
                 return false;
             }
             if(authBankCard==false){
-            	$("#checkmoney").html("请先绑定银行卡，<a href='${base}/account/security/memberBankcardView'>绑卡</a>");
+            	$("#checkmoney").html("请先绑定银行卡，<a href='<%=basePath%>account/security/memberBankcardView'>绑卡</a>");
                 $(".li4").show(100);
             	return false;
             }
@@ -122,7 +126,7 @@
                 type: "POST", // 用POST方式传输
                 dataType: "json", // 数据格式:JSON
                 async: true,
-                url: '${base}/oversea/addOversea', // 目标地址
+                url: '<%=basePath%>oversea/addOversea', // 目标地址
                 data: {
                     overseaId: 1111111111111,
                     name: $("input[name='name']").val(),

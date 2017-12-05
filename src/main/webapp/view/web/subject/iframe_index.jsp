@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html><head>
@@ -18,7 +22,7 @@
         	<#list pageInfo.list as s>
             	<#if s.type=='SIMU'>
                     <li>
-                        <a class="all"  target="_blank" href="${base}/finance/financeView/${s.id}">
+                        <a class="all"  target="_blank" href="<%=basePath%>finance/financeView/${s.id}">
                             <h2 class="tit"><span>募</span>${(s.name)!!}</h2>
                             <span class="fenl">私募</span>
                             <div class="count">
@@ -42,7 +46,7 @@
                     </li>
 				<#else>
                     <li>
-                        <a class="all"  target="_blank" href="${base}/finance/financeView/${s.id}">
+                        <a class="all"  target="_blank" href="<%=basePath%>finance/financeView/${s.id}">
                             <h2 class="tit"><span>募</span>${(s.name)!!}</h2>
                             <span class="fenl">股权</span>
                             <div class="count">

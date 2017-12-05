@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html><head>
@@ -18,10 +22,10 @@
     <div class="proMain">
     	<div class="hwpzNav">
     		<ul>
-    			<li class="first"><a class="active" href="${base}/subject">固收类理财</a></li>
-    			<li class="second"><a href="${base}/finance">私募基金</a></li>
-    			<li class="three"><a href="${base}/oversea">海外配置</a></li>
-    			<li class="four"><a href="${base}/finance">股权基金</a></li>
+    			<li class="first"><a class="active" href="<%=basePath%>subject">固收类理财</a></li>
+    			<li class="second"><a href="<%=basePath%>finance">私募基金</a></li>
+    			<li class="three"><a href="<%=basePath%>oversea">海外配置</a></li>
+    			<li class="four"><a href="<%=basePath%>finance">股权基金</a></li>
     		</ul>
     	</div>
         <div class="sdShaix">
@@ -29,7 +33,7 @@
         	<ul>
             	<li class="first">${p.name}：</li>
                <#list p.pchild as ch>
-               		<li><a href="${base}/subject?cid=${ch.id}&type=${type}&yearRate=${yearRate}&period=${period}&status=${status}" id="${ch.id}">${ch.name}</a></li>
+               		<li><a href="<%=basePath%>subject?cid=${ch.id}&type=${type}&yearRate=${yearRate}&period=${period}&status=${status}" id="${ch.id}">${ch.name}</a></li>
                </#list>
             </ul>
           </#list>

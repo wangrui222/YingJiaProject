@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html><head>
@@ -50,7 +54,7 @@
             </div>
             <div class="rInput">
                 <input type="text" placeholder="图片验证码" id="picCode" class="form-control textInput imgcode" />
-                <img src="${base}/authImage" id="captcha" onclick="updcaptcha('${base}')" title="看不清楚,点击换一张" alt="看不清楚,点击换一张" class="picCodeImg">
+                <img src="<%=basePath%>authImage" id="captcha" onclick="updcaptcha('${base}')" title="看不清楚,点击换一张" alt="看不清楚,点击换一张" class="picCodeImg">
                 <span class="errorInfo">请输入图形验证码</span>
             </div>
         </div>
@@ -126,12 +130,12 @@
 				&nbsp;
 			</div>
 			<div class="rInput loginChoose">
-				我已经注册，现在就<a href="${base}/web/login">登录</a>
+				我已经注册，现在就<a href="<%=basePath%>web/login">登录</a>
 			</div>
 		</div>
 	</div>
 	
-<script type="text/javascript" src="${base}/resources/web/js/regis.js"></script>
+<script type="text/javascript" src="<%=basePath%>resources/web/js/regis.js"></script>
 <script type="text/javascript">
 $(function(){
 	var b = "${base}";
@@ -139,11 +143,11 @@ $(function(){
 });
 
 function updcaptcha(){
-	document.getElementById("captcha").src="${base}/authImage?"+new Date().getTime();
+	document.getElementById("captcha").src="<%=basePath%>authImage?"+new Date().getTime();
 }
 
 function showAgreement(){
-	window.open("${base}/web/zcxy","注册协议","height=800,width=1000,scrollbars=yes, resizable=no,location=no, status=no,screenX=100") 
+	window.open("<%=basePath%>web/zcxy","注册协议","height=800,width=1000,scrollbars=yes, resizable=no,location=no, status=no,screenX=100") 
 }
 </script>
   <#include "common/footer.html">

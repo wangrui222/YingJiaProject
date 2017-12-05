@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	String path = request.getContextPath();
+ 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -12,8 +16,8 @@
     <meta name="description" content="申请实盘交易账户，直接进行实盘交易。">
     <title>我的加法库 - 盈+</title>
     <#include '../common/resources.html'>
-        <link href="${base}/resources/web/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet">
-        <script src="${base}/resources/web/fancybox/jquery.fancybox-1.3.4.js"></script>
+        <link href="<%=basePath%>resources/web/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet">
+        <script src="<%=basePath%>resources/web/fancybox/jquery.fancybox-1.3.4.js"></script>
         <script>
             $(function () {
                 $(".picList a").fancybox({
@@ -48,7 +52,7 @@
     <div class="sdbanner probanner"></div>
     <div class="proMain">
         <div class="conTit">
-            <span><a style="color:#9d8440;" href="${base}/subject">其他标的</a></span>
+            <span><a style="color:#9d8440;" href="<%=basePath%>subject">其他标的</a></span>
             <h2><em>￥</em>${(subject.name)!!}</h2>
         </div>
         <table class="conTable" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -76,9 +80,9 @@
                         <div class="tit">
                     	<span class="fr">
 							<#if memberInfo??>
-                                ${memberInfo.account.useableBalance}元&nbsp;&nbsp;<a href="${base}/account/deposit">充值&nbsp;&nbsp;&nbsp;</a>
+                                ${memberInfo.account.useableBalance}元&nbsp;&nbsp;<a href="<%=basePath%>account/deposit">充值&nbsp;&nbsp;&nbsp;</a>
                                 <#else>
-                                    <a style="color:#2695d5" class="unlogin" href="${base}/web/login">登录</a>后可见
+                                    <a style="color:#2695d5" class="unlogin" href="<%=basePath%>web/login">登录</a>后可见
                             </#if>
 						</span>
                             <h2>账户余额</h2>
@@ -92,7 +96,7 @@
                         <span style="float: right;margin-top: -40px;position: relative; line-height: 40px; padding: 0 10px;color: #f00;" id="addMoney"></span>
                         <p class="preBox">
                             <input type="checkbox" id="registerRule" class="registerRule" checked="checked"><span
-                                class="fl">同意<a href="${base}/web/syxy" target="_black">《产品协议》</a></span>
+                                class="fl">同意<a href="<%=basePath%>web/syxy" target="_black">《产品协议》</a></span>
                             <#if memberInfo??>
                                 <button id="redPacket">使用红包</button>
                             </#if>
@@ -157,8 +161,8 @@
                     认证文件展示
                     <ul>
                         <#list subjectFiles as file>
-                            <li><a href="${base}/${file.path}/${file.fileName}"><img
-                                    src="${base}/${file.path}/${file.fileName}"/></a></li>
+                            <li><a href="<%=basePath%>${file.path}/${file.fileName}"><img
+                                    src="<%=basePath%>${file.path}/${file.fileName}"/></a></li>
                         </#list>
                     </ul>
                 </div>
@@ -181,8 +185,8 @@
     </div>
     <#include "../common/footer.html">
 </body>
-<script src='${base}/resources/dist/js/jquery.min.js'></script>
-<script src='${base}/resources/js/jquery.form.js'></script>
+<script src='<%=basePath%>resources/dist/js/jquery.min.js'></script>
+<script src='<%=basePath%>resources/js/jquery.form.js'></script>
 <script type="text/javascript">
     $(function () {
         $(".tbConBox .tab a").click(function () {
@@ -228,7 +232,7 @@
                     return false;
                 }
                 if(authBankCard==false){
-                 	$("#checkmoney").html("请先绑定银行卡，<a href='${base}/account/security/memberBankcardView'>绑卡</a>");
+                 	$("#checkmoney").html("请先绑定银行卡，<a href='<%=basePath%>account/security/memberBankcardView'>绑卡</a>");
                      $(".li4").show(100);
                  	return false;
                 }
@@ -265,7 +269,7 @@
                     type: "POST", // 用POST方式传输
                     dataType: "json", // 数据格式:JSON
                     async: true,
-                    url: '${base}/subjectPur/order', // 目标地址
+                    url: '<%=basePath%>subjectPur/order', // 目标地址
                     data: {
                         subjectId:${(subject.id)!!},
                         totalFee: value,
@@ -274,7 +278,7 @@
                     },
                     success: function (msg) {
                         if (msg.code == 0) {
-                            window.location.href = "${base}/subjectPur/orderView?tradeNo=" + msg.msg + "&bbinStatus=" + bbinStatus;
+                            window.location.href = "<%=basePath%>subjectPur/orderView?tradeNo=" + msg.msg + "&bbinStatus=" + bbinStatus;
                         } else {
                             $("#checkmoney").html(msg.msg);
                             $(".li4").show(100);
@@ -302,7 +306,7 @@
 
     require.config({
         paths: {
-            echarts: '${base}/resources/web/echart/dist/'
+            echarts: '<%=basePath%>resources/web/echart/dist/'
         }
     });
     require(
