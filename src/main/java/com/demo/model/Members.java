@@ -26,8 +26,8 @@ public class Members {
 	private	String memberIdentity  ;//身份
 	private	  Date createDate ;//创建时间
 	private	Date updateDate;// 修改时间
-	private String weiBoAccount  ;//微博账号关联
-	private	String weixinAccount ;//微信账号关联
+	private String weiboaccount  ;//微博账号关联
+	private	String weixinaccount ;//微信账号关联
 	private	 Integer headid  ;//头像图片id
 	private	 String invitationCode  ;//邀请码
 	private String	withdrawPassword  ;//提款密码
@@ -107,17 +107,19 @@ public class Members {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-	public String getWeiBoAccount() {
-		return weiBoAccount;
+
+	public String getWeiboaccount() {
+		return weiboaccount;
 	}
-	public void setWeiBoAccount(String weiBoAccount) {
-		this.weiBoAccount = weiBoAccount;
+	public void setWeiboaccount(String weiboaccount) {
+		this.weiboaccount = weiboaccount;
 	}
-	public String getWeixinAccount() {
-		return weixinAccount;
+	
+	public String getWeixinaccount() {
+		return weixinaccount;
 	}
-	public void setWeixinAccount(String weixinAccount) {
-		this.weixinAccount = weixinAccount;
+	public void setWeixinaccount(String weixinaccount) {
+		this.weixinaccount = weixinaccount;
 	}
 	public Integer getHeadid() {
 		return headid;
