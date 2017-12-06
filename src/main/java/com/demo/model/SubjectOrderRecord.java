@@ -1,11 +1,14 @@
 package com.demo.model;
 
+import java.lang.reflect.Member;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -41,7 +44,7 @@ public class SubjectOrderRecord {
 	/**
 	 * ÓÃ»§id
 	 */
-	private Integer memberId;
+	private Members members;
 	/**
 	 * ÊÇ·ñÉ¾³ý
 	 */
@@ -93,12 +96,7 @@ public class SubjectOrderRecord {
 	public void setSubjectId(Integer subjectId) {
 		this.subjectId = subjectId;
 	}
-	public Integer getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
-	}
+
 	public Integer getDelflag() {
 		return delflag;
 	}
@@ -116,6 +114,14 @@ public class SubjectOrderRecord {
 	}
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+	}
+	@ManyToOne
+	@JoinColumn(name="member_id")
+	public Members getMembers() {
+		return members;
+	}
+	public void setMembers(Members members) {
+		this.members = members;
 	}
 
 

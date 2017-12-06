@@ -26,14 +26,14 @@ public class Members {
 	private	String memberIdentity  ;//身份
 	private	  Date createDate ;//创建时间
 	private	Date updateDate;// 修改时间
-	private String weiBoAccount  ;//微博账号关联
-	private	String weixinAccount ;//微信账号关联
+	private String weiboaccount  ;//微博账号关联
+	private	String weixinaccount ;//微信账号关联
 	private	 Integer headid  ;//头像图片id
-	private	 String invitationCode  ;//邀请码
+	private	 String invitationcode  ;//邀请码
 	private String	withdrawPassword  ;//提款密码
-	private	 String qqAccount  ;//QQ账号关联
-	private	 String invitedCode  ;//被邀请码
-	private	 String qqNumber ;//QQ号码
+	private	 String qqaccount  ;//QQ账号关联
+	private	 String invitedcode  ;//被邀请码
+	private	 String qqnumber ;//QQ号码
 	
 	
 	
@@ -107,17 +107,19 @@ public class Members {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-	public String getWeiBoAccount() {
-		return weiBoAccount;
+
+	public String getWeiboaccount() {
+		return weiboaccount;
 	}
-	public void setWeiBoAccount(String weiBoAccount) {
-		this.weiBoAccount = weiBoAccount;
+	public void setWeiboaccount(String weiboaccount) {
+		this.weiboaccount = weiboaccount;
 	}
-	public String getWeixinAccount() {
-		return weixinAccount;
+	
+	public String getWeixinaccount() {
+		return weixinaccount;
 	}
-	public void setWeixinAccount(String weixinAccount) {
-		this.weixinAccount = weixinAccount;
+	public void setWeixinaccount(String weixinaccount) {
+		this.weixinaccount = weixinaccount;
 	}
 	public Integer getHeadid() {
 		return headid;
@@ -125,36 +127,40 @@ public class Members {
 	public void setHeadid(Integer headid) {
 		this.headid = headid;
 	}
-	public String getInvitationCode() {
-		return invitationCode;
-	}
-	public void setInvitationCode(String invitationCode) {
-		this.invitationCode = invitationCode;
-	}
+	
 	public String getWithdrawPassword() {
 		return withdrawPassword;
 	}
 	public void setWithdrawPassword(String withdrawPassword) {
 		this.withdrawPassword = withdrawPassword;
 	}
-	public String getQqAccount() {
-		return qqAccount;
+
+	public String getQqaccount() {
+		return qqaccount;
 	}
-	public void setQqAccount(String qqAccount) {
-		this.qqAccount = qqAccount;
+	public void setQqaccount(String qqaccount) {
+		this.qqaccount = qqaccount;
 	}
-	public String getInvitedCode() {
-		return invitedCode;
+	
+	public String getInvitationcode() {
+		return invitationcode;
 	}
-	public void setInvitedCode(String invitedCode) {
-		this.invitedCode = invitedCode;
+	public void setInvitationcode(String invitationcode) {
+		this.invitationcode = invitationcode;
 	}
-	public String getQqNumber() {
-		return qqNumber;
+	public String getInvitedcode() {
+		return invitedcode;
 	}
-	public void setQqNumber(String qqNumber) {
-		this.qqNumber = qqNumber;
+	public void setInvitedcode(String invitedcode) {
+		this.invitedcode = invitedcode;
 	}
+	public String getQqnumber() {
+		return qqnumber;
+	}
+	public void setQqnumber(String qqnumber) {
+		this.qqnumber = qqnumber;
+	}
+	
 	
 	
 	
