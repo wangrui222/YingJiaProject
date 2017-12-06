@@ -7,14 +7,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-@Entity(name="subject_order_record")
 
 /**
  * 标的订单
  * @author thinkpad
  *
  */
+@Entity(name="subject_order_record")
 public class SubjectOrderRecord {
+	
 	private Integer sorId;
 	/**
 	 * 流水号
