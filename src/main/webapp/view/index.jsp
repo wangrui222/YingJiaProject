@@ -38,7 +38,7 @@
            	  <div class="top-right">
            	    <ul class="nav nav-pills">
                <li><p><span class="iconfont">&#xe605;</span></p><p>admin，系统管理员</p></li>
-               <li style="width:100px"><p><a href="<%=basePath%>manage/logout"><span class="iconfont">&#xe606;</span></a></p><p>退出</p></li>
+               <li style="width:100px"><p><a href="<%=basePath%>wangrui/logout"><span class="iconfont">&#xe606;</span></a></p><p>退出</p></li>
                 </ul>
            	     </div>
           </div>
