@@ -7,13 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-@Entity(name="users")
 
 /**
  * 用户基本表
  * @author thinkpad
  *
  */
+@Entity(name="users")
 public class Users {
 	/**
 	 * 用户id
