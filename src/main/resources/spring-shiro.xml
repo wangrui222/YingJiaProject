@@ -5,6 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
 <!--启用shiro注解 -->
 	
 
@@ -118,5 +119,7 @@
 		<property name="securityManager" ref="securityManager" />
 	</bean>
 	
+
 </beans>
+
 
