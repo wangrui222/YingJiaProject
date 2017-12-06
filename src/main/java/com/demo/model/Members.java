@@ -29,11 +29,11 @@ public class Members {
 	private String weiboaccount  ;//Î¢²©ÕËºÅ¹ØÁª
 	private	String weixinaccount ;//Î¢ĞÅÕËºÅ¹ØÁª
 	private	 Integer headid  ;//Í·ÏñÍ¼Æ¬id
-	private	 String invitationCode  ;//ÑûÇëÂë
+	private	 String invitationcode  ;//ÑûÇëÂë
 	private String	withdrawPassword  ;//Ìá¿îÃÜÂë
-	private	 String qqAccount  ;//QQÕËºÅ¹ØÁª
-	private	 String invitedCode  ;//±»ÑûÇëÂë
-	private	 String qqNumber ;//QQºÅÂë
+	private	 String qqaccount  ;//QQÕËºÅ¹ØÁª
+	private	 String invitedcode  ;//±»ÑûÇëÂë
+	private	 String qqnumber ;//QQºÅÂë
 	
 	
 	
@@ -127,36 +127,40 @@ public class Members {
 	public void setHeadid(Integer headid) {
 		this.headid = headid;
 	}
-	public String getInvitationCode() {
-		return invitationCode;
-	}
-	public void setInvitationCode(String invitationCode) {
-		this.invitationCode = invitationCode;
-	}
+	
 	public String getWithdrawPassword() {
 		return withdrawPassword;
 	}
 	public void setWithdrawPassword(String withdrawPassword) {
 		this.withdrawPassword = withdrawPassword;
 	}
-	public String getQqAccount() {
-		return qqAccount;
+
+	public String getQqaccount() {
+		return qqaccount;
 	}
-	public void setQqAccount(String qqAccount) {
-		this.qqAccount = qqAccount;
+	public void setQqaccount(String qqaccount) {
+		this.qqaccount = qqaccount;
 	}
-	public String getInvitedCode() {
-		return invitedCode;
+	
+	public String getInvitationcode() {
+		return invitationcode;
 	}
-	public void setInvitedCode(String invitedCode) {
-		this.invitedCode = invitedCode;
+	public void setInvitationcode(String invitationcode) {
+		this.invitationcode = invitationcode;
 	}
-	public String getQqNumber() {
-		return qqNumber;
+	public String getInvitedcode() {
+		return invitedcode;
 	}
-	public void setQqNumber(String qqNumber) {
-		this.qqNumber = qqNumber;
+	public void setInvitedcode(String invitedcode) {
+		this.invitedcode = invitedcode;
 	}
+	public String getQqnumber() {
+		return qqnumber;
+	}
+	public void setQqnumber(String qqnumber) {
+		this.qqnumber = qqnumber;
+	}
+	
 	
 	
 	
