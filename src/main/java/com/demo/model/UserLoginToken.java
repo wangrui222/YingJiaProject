@@ -7,14 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-@Entity(name="user_login_token")
 
 /**
  * 
  * @author thinkpad
  *
  */
-public class UserLoginToken {
+@Entity(name="user_login_token")
+public class UserLoginToken  {
 	/**
 	 * ¡Ó≈∆∫≈
 	 */
