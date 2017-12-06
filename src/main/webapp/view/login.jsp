@@ -27,6 +27,7 @@
 	type="text/css" />
 <script type="text/javascript" src="<%=basePath%>resources/js/jquery.js"></script>
 <style type="text/css">
+
 #box_login #right_login {
 	width: 385px;
 	background-color: #FFF;
@@ -57,7 +58,7 @@
 	margin-bottom: 10px;
 }
 
-#password {
+#usersPassword {
 	width: 270px;
 	height: 30px;
 	margin-bottom: 10px;
@@ -102,15 +103,9 @@
 	position: fixed
 }
 </style>
-<script type="text/javascript" src="<%=basePath%>resources/js/jquery.js"></script>
+<script type="text/javascript" src="<%=basePath%>resources/js/bootstrap.js"></script>
 
-<script type="text/javascript"
-	src="<%=basePath%>resources/js/bootstrap.js"></script>
-<script type="text/javascript">
-	function fun(){
-		alert(456);
-	}
-</script>
+
 </head>
 <body>
 	<img
@@ -130,19 +125,19 @@
 							<div class="input-group input-group-lg">
 								<input type="text" id="userName" name="userName"
 									class="form-control txt" placeholder="用户名"
-									aria-describedby="sizing-addon1"> <span
+									aria-describedby="sizing-addon1" value="wangrui"> <span
 									class="iconfont"
 									style="color: #1fbba6; font-size: 24px; margin-left: -30px; position: absolute; z-index: 2; margin-top: 8px">&#xe61c;</span>
 							</div>
 							<div class="input-group input-group-lg">
-								<input type="password" id="password" name="password"
+								<input type="password" id="usersPassword" name="usersPassword" value="123456"
 									class="form-control txt" placeholder="密&nbsp;&nbsp;&nbsp;码"
 									aria-describedby="sizing-addon1"> <span
 									class="iconfont"
 									style="color: #1fbba6; font-size: 24px; margin-left: -30px; position: absolute; z-index: 2; margin-top: 8px">&#xe61a;</span>
 							</div>
 							<div class="input-group input-group-lg">
-								<input type="text" id="mobilePhone" name="mobilePhone"
+								<input type="text" id="mobilePhone" name="mobilePhone" value="17683900063"
 									class="form-control txt" placeholder="手机号"
 									aria-describedby="sizing-addon1"> <span
 									class="iconfont"
@@ -150,24 +145,33 @@
 							</div>
 							<div class="input-group input-group-lg bd">
 								<input type="text" id="code" name="code"
-									class="form-control txt" placeholder="验证码"
+									class="form-control txt" placeholder="验证码" value="1111"
 									aria-describedby="sizing-addon1"> <input type="button"
 									value="获取验证码" class="form-control"
 									style="width: 120px; height: 52px; background: #1fbba6;"
 									onclick="sendMessage(60)" id="btnSendCode" />
 							</div>
-							<a href="javascript:fun()" id="submit"
-								class="button button-caution button-rounded button-jumbo"
-								style="height: 50px; line-height: 50px; font-size: 18px; width: 305px; margin-bottom: 10px">登录</a><br />
+							<a id="submit" name="submit"
+								class="button button-caution button-rounded button-jumbo" 
+								style="height: 50px; line-height: 50px; font-size: 18px; width: 305px; margin-bottom: 10px" href="javascript:" >登录</a><br />
 							<p class="error"></p>
 						</form>
 					</div>
 				</div></td>
 		</tr>
 	</table>
-<%-- 
-	<script type="text/javascript"
-		src="<%=basePath%>resources/js/adminlogin.js"></script> --%>
 
+	
+	<script type="text/javascript"
+		src="<%=basePath%>resources/js/adminlogin.js"></script>
+<script type="text/javascript">
+		$(function() {
+			var b = "<%=basePath%>";
+			login(b);
+		});
+
+		if (window != top)
+			top.location.href = location.href;
+</script> 
 </body>
 </html>
