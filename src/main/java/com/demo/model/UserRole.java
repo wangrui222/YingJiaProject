@@ -1,11 +1,16 @@
 package com.demo.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -44,16 +49,31 @@ public class UserRole {
 	 * ÐÞ¸ÄÊ±¼ä
 	 */
 	private Date updateDate  ;
+	
 	private String userRoleCategory  ;
 	private Integer sourceType  ;
 	private Integer sourceId;
-	private Integer delFlag  ;
+	private Integer delFlag;
+	
+	private Set<Users> users = new HashSet<>();
 	@Id
 	@SequenceGenerator(name="user_role",sequenceName="sql_user_role",allocationSize=1)
 	@GeneratedValue(generator="user_role",strategy=GenerationType.SEQUENCE)
 	public Integer getUserRoleId() {
 		return userRoleId;
 	}
+	
+	@ManyToMany
+	@JoinTable(
+			name = "user_role_relation",
+			joinColumns =@JoinColumn(name="roleId"),
+			inverseJoinColumns = @JoinColumn(name="userId")
+			)
+	public Set<Users> getUsers() {
+		return users;
+	}
+	
+	
 	public void setUserRoleId(Integer userRoleId) {
 		this.userRoleId = userRoleId;
 	}
@@ -116,6 +136,11 @@ public class UserRole {
 	}
 	public void setDelFlag(Integer delFlag) {
 		this.delFlag = delFlag;
+	}
+	
+	
+	public void setUsers(Set<Users> users) {
+		this.users = users;
 	}
 	
 
