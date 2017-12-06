@@ -38,11 +38,11 @@ public class UserLoginController {
 	@RequestMapping(value={"/login"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
 	@ResponseBody
 	public ResponseMsg login(@Valid Users user, BindingResult errors, HttpServletRequest request) {
-		Object[] users = userLoginRepository.getUsers("admin");
-		Users userses = new Users(users[0].toString(), users[1].toString(), users[2].toString(),Integer.parseInt(users[3].toString()));
+		Object[] users = userLoginRepository.getUsers(user.getUserName());
 		
 		
-		if (user != null){
+		if (users != null){
+			Users userses = new Users(users[0].toString(), users[1].toString(), users[2].toString(),Integer.parseInt(users[3].toString()));
 			if (user.getMobilePhone().equals(userses.getMobilePhone()))
 			{
 				UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getUsersPassword());
@@ -68,20 +68,12 @@ public class UserLoginController {
 			}
 		}
 		else return new ResponseMsg(1, "用户名或手机号码错误", null);
-
+		//HttpSession session = request.getSession();
+		//session.setAttribute("Users", user.getUserName());
 		return new ResponseMsg(0, "登录成功", null); 
 	}
-
-	/*@RequestMapping(value={"/logout"}, method={org.springframework.web.bind.annotation.RequestMethod.GET})
-	public String logout(HttpServletRequest request)
-	{
-		Subject subject = SecurityUtils.getSubject();
-		Users user = (Users)subject.getSession().getAttribute("cUser");
-		this.applicationContext.publishEvent(new UserLogEvent(request.getRemoteAddr(), UserAction.login, user));
-		subject.logout();
-		return "redirect:/manage/login";
-	}
-
+	
+	/*
 	@ResponseBody
 	@RequestMapping(value={"/sendTestValSms"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
 	public ResponseMsg sendTestValSms(String phone, Integer type)
@@ -102,6 +94,18 @@ public class UserLoginController {
 		}
 		return msg;
 	}
+
+	 * @RequestMapping(value={"/logout"}, method={org.springframework.web.bind.annotation.RequestMethod.GET})
+	public String logout(HttpServletRequest request)
+	{
+		Subject subject = SecurityUtils.getSubject();
+		Users user = (Users)subject.getSession().getAttribute("cUser");
+		this.applicationContext.publishEvent(new UserLogEvent(request.getRemoteAddr(), UserAction.login, user));
+		subject.logout();
+		return "redirect:/manage/login";
+	}
+
+	
 
 	@ResponseBody
 	@RequestMapping(value={"/checkedSms"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
