@@ -27,6 +27,7 @@
 	<mvc:default-servlet-handler />
 	<!-- 启动注解驱动 SpringMVC 功能 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
-
+	<!-- 静态资源访问（不拦截此目录下的东西的访问） -->
+	<mvc:resources location="/resources/" mapping="/resources/**" />
 
 </beans>
