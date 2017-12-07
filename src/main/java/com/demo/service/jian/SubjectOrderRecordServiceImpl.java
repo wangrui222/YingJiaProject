@@ -3,8 +3,10 @@ package com.demo.service.jian;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.demo.dao.jian.SubjectOrderRecordDao;
+
+import com.demo.dao.jian.MemberWithdrawRecordRepository;
 import com.demo.dao.jian.SubjectOrderRecordRepository;
+import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.SubjectOrderRecord;
 /**
  * @author thinkpad
@@ -23,6 +25,7 @@ public class SubjectOrderRecordServiceImpl implements SubjectOrderRecordService{
 		List<SubjectOrderRecord> olist=subjectOrderRecordRepository.findAll();
 		return olist;
 	}
+
 
 }
 
