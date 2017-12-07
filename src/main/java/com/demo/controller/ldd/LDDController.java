@@ -51,6 +51,8 @@ public class LDDController {
 		return "/sysmember/member_info";
 
 	}
+	
+	
 	/*//后台会员管理-详细账号-资金查询
 	@RequestMapping(value="sysmember/memberInfo/{zid}")
 	public String HYxxzhglzj(@PathVariable("zid")Integer zid,Map<String, Object> map) {
