@@ -8,6 +8,6 @@ import com.demo.model.MemberAccount;
  * @author ldd
  *
  */
-public interface MemberaccountDao extends JpaRepository<MemberAccount, Integer> {
+public interface MemberaccountRepository extends JpaRepository<MemberAccount, Integer> {
 
 }
