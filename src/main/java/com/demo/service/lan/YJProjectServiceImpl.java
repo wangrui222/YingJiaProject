@@ -16,12 +16,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.demo.dao.ldd.FinancialplannerDao;
-import com.demo.dao.ldd.MembertraderecordDao;
-import com.demo.dao.ldd.MemberaccountDao;
-import com.demo.dao.ldd.MemberpucchargeitemDao;
-import com.demo.dao.ldd.MembersDao;
-import com.demo.dao.ldd.MemberwithdrawrecordDao;
+import com.demo.dao.ldd.FinancialplannerRepository;
+import com.demo.dao.ldd.MembertraderecordRepository;
+import com.demo.dao.ldd.MemberaccountRepository;
+import com.demo.dao.ldd.MembersRepository;
+import com.demo.dao.ldd.MemberwithdrawrecordRepository;
 import com.demo.model.FinancialPlanner;
 import com.demo.model.MemberAccount;
 import com.demo.model.MemberPucChargeItem;
@@ -33,15 +32,15 @@ import com.demo.model.Members;
 @Service
 public class YJProjectServiceImpl implements YJProjectService{
 	@Autowired
-	MembersDao memberdao;
+	MembersRepository memberrepository;
 	@Autowired
-	MemberaccountDao memberaccountdao;
+	MemberaccountRepository memberaccountrepository;
 	@Autowired
-	FinancialplannerDao financialplannerdao;
+	FinancialplannerRepository financialplannerrepository;
 	@Autowired
-	MemberwithdrawrecordDao memeberwithdrawrecorddao;
+	MemberwithdrawrecordRepository memeberwithdrawrecordrepository;
 	@Autowired
-	MembertraderecordDao membertraderecorddao;
+	MembertraderecordRepository membertraderecordrepository;
 
 
 	//后台-会员管理-全部用户查询
@@ -79,33 +78,41 @@ public class YJProjectServiceImpl implements YJProjectService{
 				return paramCriteriaBuilder.and(plist.toArray(new Predicate[plist.size()]));
 			}
 		};
-		return memberdao.findAll(specification, pageable);
+		return memberrepository.findAll(specification, pageable);
 	}
 	//后台-会员管理-一个用户信息查询
 	@Override
 	public Members selectonemember(Integer mid) {
-		return memberdao.findOne(mid);
+		return memberrepository.findOne(mid);
 	}
 	//后台-会员管理-一个用户资金查询
 	@Override
 	public MemberAccount selectmemberoneaccount(Integer mid) {
 
-		return memberaccountdao.findOne(mid);
+		return memberaccountrepository.findOne(mid);
 	}
 	//后台-会员管理-一个用户理财师查询
 	@Override
 	public FinancialPlanner selectonefinancialplanner(Integer mid) {
-		return financialplannerdao.findOne(mid);
+		return financialplannerrepository.findOne(mid);
 	}
 	//后台-会员管理-一个用户提现查询
 	@Override
 	public MemberWithdrawRecord selectoneonememberwithdrawrecord(Integer mid) {
-		return memeberwithdrawrecorddao.findOne(mid);
+		return memeberwithdrawrecordrepository.findOne(mid);
 	}
 	//后台-会员管理-一个用户钱包查询
 	@Override
 	public MemberTradeRecord selectoneonemembertraderecord(Integer mid) {		
-		return membertraderecorddao.findOne(mid);
+		return membertraderecordrepository.findOne(mid);
+	}
+	
+	
+	//后台-会员管理-理财师审核
+	@Override
+	public List<Object[]> selectfinancialplanner() {
+		
+		return null;
 	}
 
 
