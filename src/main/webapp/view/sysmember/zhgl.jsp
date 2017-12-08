@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
 	String path = request.getContextPath();
  	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -11,11 +12,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
-<link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+<link rel="stylesheet"
+	href="<%=basePath%>resources/sys/ying/iconfont.css">
+<link rel="stylesheet"
+	href="<%=basePath%>resources/sys/style/bootstrap.css">
 <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
 
-<script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>resources/sys/js/jquery.js"></script>
 <link rel="stylesheet"
 	href="<%=basePath%>resources/date/bootstrap-datetimepicker.min.css">
 <script type="text/javascript"
@@ -38,24 +42,19 @@
 					<tr>
 						<td style="width: 110px; padding-left: 30px">用户名：</td>
 						<td style="width: 180px"><input type="text"
-							class="form-control" name="name" placeholder="用户名"
-							value="${(member.name)!!}"></td>
+							class="form-control" name="name" placeholder="用户名""></td>
 						<td style="width: 110px; padding-left: 30px">手机号：</td>
 						<td style="width: 180px"><input type="text"
-							name="mobilePhone" class="form-control" placeholder="手机号"
-							value="${(member.mobilePhone)!!}"></td>
+							name="mobilePhone" class="form-control" placeholder="手机号""></td>
 						<td style="width: 110px; padding-left: 30px">姓名：</td>
 						<td style="width: 180px"><input type="text" name="memberName"
-							class="form-control" placeholder="姓名"
-							value="${(member.memberName)!!}"></td>
+							class="form-control" placeholder="姓名""></td>
 						<td style="width: 110px; padding-left: 30px">邀请码：</td>
 						<td style="width: 180px"><input type="text"
-							name="invitationcode" class="form-control" placeholder="邀请码"
-							value="${(member.invitationcode)!!}"></td>
+							name="invitationcode" class="form-control" placeholder="邀请码""></td>
 						<td style="width: 110px; padding-left: 30px">注册时间：</td>
 						<td style="width: 180px"><input type="text" name="createDate"
-							class="form-control time" placeholder="注册时间" readonly="readonly"
-							value=""></td>
+							class="form-control time" placeholder="注册时间" readonly="readonly"></td>
 						<td class="pull-right" style="padding-right: 10px"><button
 								type="submit" class="btn btn-primary btn-sm">查询</button></td>
 						<td><button type="button" class="btn btn-primary btn-sm"
@@ -74,35 +73,22 @@
 					<td>注册时间</td>
 					<td>操作</td>
 				</tr>
-				<#list pageInfo.list as m>
+				<c:forEach items="${memberslist}" var="memberslist">
 				<tr class="text-center">
-					<td>${m_index+1}</td>
-					<td>${(m.mobilePhone)!!}</td>
-					<td>${(m.name)!!}</td>
-					<td>${(m.memberName)!!}</td>
-					<td>
-						<%-- <#if (m.identity)??&&(m.identity)?length gt 0>
-                            		${(m.identity[0..5])!!}***${(m.identity[14..17])!!}
-                            	</#if> --%>
-					</td>
-					<td>${(m.invitationcode)!!}</td>
-					<td>
-						<%-- ${(m.createDate?string('yyyy-MM-dd HH:mm:ss'))!!} --%>
-					</td>
+					<td>${memberslist.memberId}</td>
+					<td>${memberslist.mobilePhone}</td>
+					<td>${memberslist.names}</td>
+					<td>${memberslist.memberName}</td>
+					<td>${memberslist.memberIdentity}</td>
+					<td>${memberslist.invitationcode}</td>
+					<td>${memberslist.createDate}</td>
 					<td><a class="btn btn-primary btn-sm"
-						href="<%=basePath%>sysmember/memberInfo?id=${m.id}">账号详情</a></td>
+						href="<%=basePath%>ldd/sysmember/memberInfo/${memberslist.memberId}">账号详情</a></td>
 				</tr>
-				</#list>
+				</c:forEach>
 			</table>
-			<#include "paginate.html" /> <@paginate
-			currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0
-			actionUrl="<%=basePath%>sysmember/index"
-			urlParas="&name=${(member.name)!!}&mobilePhone=${(member.mobilePhone)!!}&memberName=${(member.memberName)!!}&invitationcode=${(member.invitationcode)!!}&createDate=${(member.createDate?string('yyyy-MM-dd'))!!}"/>
-
 		</div>
-
 		<!-- 内容结束 -->
-
 	</div>
 	<!-- 容器结束 -->
 	<script type="text/javascript">
