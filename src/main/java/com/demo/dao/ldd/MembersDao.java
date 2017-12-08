@@ -1,13 +1,7 @@
 package com.demo.dao.ldd;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-import com.demo.model.Members;
-/**
- * ÕËºÅ¼ÇÂ¼
- * @author ldd
- *
- */
-public interface MembersDao extends JpaRepository<Members, Integer> {
-
+public interface MembersDao {
+	public List<Object[]> selectfinancialplanner();
 }

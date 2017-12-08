@@ -9,6 +9,6 @@ import com.demo.model.MemberWithdrawRecord;
  * @author ldd
  *
  */
-public interface MemberwithdrawrecordDao extends JpaRepository<MemberWithdrawRecord, Integer>{
+public interface MemberwithdrawrecordRepository extends JpaRepository<MemberWithdrawRecord, Integer>{
 
 }

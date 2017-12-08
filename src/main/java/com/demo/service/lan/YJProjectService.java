@@ -25,4 +25,8 @@ public interface YJProjectService {
 	public MemberWithdrawRecord selectoneonememberwithdrawrecord(Integer mid);
 	//后台-会员管理-一个用户钱包查询
 	public MemberTradeRecord selectoneonemembertraderecord(Integer mid);
+	
+	//后台-会员管理-理财师审核
+	public List<Object[]> selectfinancialplanner();
+	
 }

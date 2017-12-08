@@ -8,6 +8,6 @@ import com.demo.model.FinancialPlanner;
  * @author ldd
  *
  */
-public interface FinancialplannerDao extends JpaRepository<FinancialPlanner, Integer> {
+public interface FinancialplannerRepository extends JpaRepository<FinancialPlanner, Integer> {
 
 }
