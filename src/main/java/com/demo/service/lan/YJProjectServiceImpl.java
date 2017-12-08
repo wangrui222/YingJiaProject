@@ -112,7 +112,7 @@ public class YJProjectServiceImpl implements YJProjectService{
 	@Override
 	public List<Object[]> selectfinancialplanner() {
 		
-		return null;
+		return memberrepository.selectfinancialplanner();
 	}
 
 
