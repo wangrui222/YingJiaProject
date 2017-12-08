@@ -3,6 +3,7 @@ package com.demo.service.jian;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.demo.dao.jian.MemberAccountRepository;
 import com.demo.model.MemberAccount;
@@ -12,6 +13,7 @@ import com.demo.model.MemberAccount;
 *@version 创建时间：2017年12月7日
 *类说明
 */
+@Service
 public class MemberAccountServiceImpl implements MemberAccountService {
     @Autowired
     MemberAccountRepository memberAccountRepository;
