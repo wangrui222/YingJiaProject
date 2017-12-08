@@ -125,7 +125,7 @@
 							<div class="input-group input-group-lg">
 								<input type="text" id="userName" name="userName"
 									class="form-control txt" placeholder="用户名"
-									aria-describedby="sizing-addon1" value="wangrui"> <span
+									aria-describedby="sizing-addon1" value="admin"> <span
 									class="iconfont"
 									style="color: #1fbba6; font-size: 24px; margin-left: -30px; position: absolute; z-index: 2; margin-top: 8px">&#xe61c;</span>
 							</div>
@@ -137,7 +137,7 @@
 									style="color: #1fbba6; font-size: 24px; margin-left: -30px; position: absolute; z-index: 2; margin-top: 8px">&#xe61a;</span>
 							</div>
 							<div class="input-group input-group-lg">
-								<input type="text" id="mobilePhone" name="mobilePhone" value="17683900063"
+								<input type="text" id="mobilePhone" name="mobilePhone" value="18871061117"
 									class="form-control txt" placeholder="手机号"
 									aria-describedby="sizing-addon1"> <span
 									class="iconfont"
