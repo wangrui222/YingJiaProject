@@ -24,6 +24,7 @@
                   <!-- anon表示此地址不需要任何权限即可访问 -->
                  /view/login.jsp=anon  
                  /wangrui/login=anon
+                /wangrui/duanxin=anon
                  /resources/** = anon 
                  /wangrui/logout=logout  
                  <!--所有的请求(除去配置的静态资源请求或请求地址为anon的请求)都要通过登录验证,如果未登录则跳到/login -->  
