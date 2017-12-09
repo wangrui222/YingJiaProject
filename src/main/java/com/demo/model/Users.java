@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -65,19 +64,16 @@ public class Users {
 	 * ÐÞ¸ÄÊ±¼ä
 	 */
 	private Date updateDate  ;
-	
-<<<<<<< HEAD
-=======
+
 	private Set<UserRole> userRole = new HashSet<>();
-	
->>>>>>> branch 'master' of https://github.com/wangrui222/YingJiaProject.git
+
 	@Id
 	@SequenceGenerator(name="users",sequenceName="sql_users",allocationSize=1)
 	@GeneratedValue(generator="users",strategy=GenerationType.SEQUENCE)
 	public Integer getUsersId() {
 		return usersId;
 	}
-	
+
 	@ManyToMany
 	@JoinTable(
 			name = "user_role_relation",
@@ -89,16 +85,16 @@ public class Users {
 	}
 
 
-	
-	
+
+
 	public Users(String userName, String usersPassword, String mobilePhone, Integer status) {
 		this.userName = userName;
 		this.usersPassword = usersPassword;
 		this.mobilePhone = mobilePhone;
 		this.status = status;
 	}
-	
-	
+
+
 
 	public Users() {
 	}
@@ -171,25 +167,11 @@ public class Users {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
-	public Users(String userName, String usersPassword, String mobilePhone, Integer status) {
-		this.userName = userName;
-		this.usersPassword = usersPassword;
-		this.mobilePhone = mobilePhone;
-		this.status = status;
-	}
-	public Users() {
-	}
-
-<<<<<<< HEAD
-	
-	
-=======
 	@Override
 	public String toString() {
 		return "Users [userName=" + userName + ", usersPassword=" + usersPassword + ", mobilePhone=" + mobilePhone
 				+ ", status=" + status + "]";
 	}
 
->>>>>>> branch 'master' of https://github.com/wangrui222/YingJiaProject.git
 
 }
