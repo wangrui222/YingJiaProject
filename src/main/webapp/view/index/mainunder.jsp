@@ -12,7 +12,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<meta charset="UTF-8">
     <div class="security">
         <div class="item">
             <img src="<%=basePath%>resources/web/images/indexSecurity1.png">
