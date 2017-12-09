@@ -2,6 +2,7 @@ package com.demo.controller.ldd;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.demo.model.FinancialPlanner;
 import com.demo.model.MemberAccount;
+import com.demo.model.MemberBankcards;
 import com.demo.model.MemberPucChargeItem;
 import com.demo.model.MemberTally;
 import com.demo.model.MemberTradeRecord;
@@ -77,27 +79,62 @@ public class LDDController {
 	}
 
 
-	/*//后台会员管理-详细账号-资金查询
-	@RequestMapping(value="sysmember/memberInfo/{zid}")
-	public String HYxxzhglzj(@PathVariable("zid")Integer zid,Map<String, Object> map) {
-		System.out.println("==="+zid);
-		List<Members> memberslist=yjprojectservice.selectonemember(zid);
-		map.put("memberslist", memberslist);
-		return "/sysmember/member_info";
 
-	}*/
-	//后台会员管理-理财师审核
+	//后台会员管理-理财师查询sysmember/financiaAudit
 	@RequestMapping(value="sysmember/financia")
-	public String HYlcssh(Map<String, Object> map) {
-		List<Object[]> list=yjprojectservice.selectfinancialplanner();
-		System.out.println(list);
+	public String HYlcscx(String iphone,FinancialPlanner financialplanner,Integer page,Map<String, Object> map) {
+		Map<String, Object> maps=new HashMap<>();
+		maps.put("iphone", iphone);
+		maps.put("name", financialplanner.getFinancialPlannerName());
+		maps.put("status", financialplanner.getStatus());
+		maps.put("time", financialplanner.getCreateDate());
+		//当前第几页
+		if (page==null) {
+			page=1;
+		}
+		map.put("page", page);
+		Integer rowsize=1;
+		//总条数
+		Integer counts=yjprojectservice.getfinacialplannercount(maps);
+		System.out.println("========"+counts);
+		//总页数
+		Integer allpage=counts%rowsize==0?counts/rowsize:counts/rowsize+1;
+		map.put("allpage", allpage);
+		List<Object[]> list=yjprojectservice.selectfinancialplanner(maps, page, rowsize);
 		map.put("list", list);
+
 		return "/sysmember/financia";
+
+	}
+	//后台会员管理-理财师审核
+	@RequestMapping(value="sysmember/financiaAudit/{id}")
+	public String HYlcssh(@PathVariable(value="id")Integer id,Map<String, Object> map) {
+
+		return "";
 
 	}
 	//后台会员管理-绑卡管理
 	@RequestMapping(value="sysmember/dahua")
-	public String HYbkgl() {
+	public String HYbkgl(String iphone,String name,MemberBankcards memberbankcards,Integer page,Map<String, Object> map) {
+		Map<String, Object> maps=new HashMap<>();
+		maps.put("iphone", iphone);
+		maps.put("name", name);
+		maps.put("status", memberbankcards.getCardNo());
+		maps.put("time", memberbankcards.getCreateDate());
+		//当前第几页
+		if (page==null) {
+			page=1;
+		}
+		map.put("page", page);
+		Integer rowsize=1;
+		//总条数
+		Integer counts=yjprojectservice.getselectmemberbankcardsrcount(maps);
+		System.out.println("========"+counts);
+		//总页数
+		Integer allpage=counts%rowsize==0?counts/rowsize:counts/rowsize+1;
+		map.put("allpage", allpage);
+		List<Object[]> list=yjprojectservice.selectmemberbankcards(maps, page, rowsize);
+		map.put("list", list);
 
 		return "/sysmember/bkgl";
 
@@ -105,7 +142,7 @@ public class LDDController {
 	//后台会员管理-付息计划
 	@RequestMapping(value="sysmember/payment")
 	public String HYfxjh() {
-
+		
 		return "/sysmember/fxjh";
 
 	}
