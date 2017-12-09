@@ -183,15 +183,13 @@
 				<th width="15%">交易时间</th>
 			</tr>
 			<tr>
-				<td>${memberpucchargeitem.mpciId}</td>
-				<td>${mpciId.tradeNo}</td>
-				<td>${mpciId.amount}</td>
-				<td>
-					
-				</td>
-				<td><font color="#a58b48">${mpciId.tradeTypeDesc}</font></td>
-				<td>${mpciId.tradeName}</td>
-				<td>${mpciId.createDate}</td>
+				<td>${membertraderecord.mtrId}</td>
+				<td>${membertraderecord.tradeNo}</td>
+				<td>${membertraderecord.amount}</td>
+				<td>${membertraderecord.tradeStatus}</td>
+				<td><font color="#a58b48">${membertraderecord.tradeType}</font></td>
+				<td>${membertraderecord.tradeName}</td>
+				<td>${membertraderecord.createDate}</td>
 			</tr>
 		</table>
 		<table class="table table-bordered tablebox">

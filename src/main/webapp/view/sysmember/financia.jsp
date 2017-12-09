@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <%
 	String path = request.getContextPath();
- 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -12,10 +16,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="<%=basePath%>resources/sys/ying/iconfont.css">
-<link rel="stylesheet" href="<%=basePath%>resources/sys/style/bootstrap.css">
+<link rel="stylesheet"
+	href="<%=basePath%>resources/sys/ying/iconfont.css">
+<link rel="stylesheet"
+	href="<%=basePath%>resources/sys/style/bootstrap.css">
 <link rel="stylesheet" href="<%=basePath%>resources/sys/style/style.css">
-<script type="text/javascript" src="<%=basePath%>resources/sys/js/jquery.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>resources/sys/js/jquery.js"></script>
 <link rel="stylesheet"
 	href="<%=basePath%>resources/date/bootstrap-datetimepicker.min.css">
 <script type="text/javascript"
@@ -32,33 +39,32 @@
 		</h2>
 
 		<div class="tablelist">
-			<form action="<%=basePath%>sysmember/financia" method="post" id="form1">
+			<form action="<%=basePath%>ldd/sysmember/financia" method="post"
+				id="form1" name="fff">
+				<input type="hidden" name="page" id="pagess">
 				<table class="table tabletop">
 					<tr>
 						<td style="width: 110px; padding-left: 30px">手机号：</td>
 						<td style="width: 180px"><input type="text"
-							name="mobilePhone" class="form-control" placeholder="手机号"
-							value="${(planner.mobilePhone)!!}"></td>
+							name="mobilePhone" class="form-control" placeholder="手机号""></td>
 						<td style="width: 110px; padding-left: 30px">真实姓名：</td>
 						<td style="width: 180px"><input type="text"
-							class="form-control" name="name" placeholder="用户名"
-							value="${(planner.name)!!}"></td>
-						<td style="width: 110px; padding-left: 30px">状态：</td>
+							name="financialPlannerName" class="form-control"
+							placeholder="真实姓名""></td>
+						<td style="width: 80px">状态：</td>
 						<td style="width: 180px"><select name="status"
 							class="form-control" style="width: 130px; height: 32px"
 							id="status">
-								<option value="">全部</option>
-								<option value="0">待审核</option>
-								<option value="1">认证成功</option>
-								<option value="2">认证失败</option>
+								<option value="0">全部</option>
+								<option value="1">待审核</option>
+								<option value="2">认证成功</option>
+								<option value="3">认证失败</option>
 						</select></td>
 						<td style="width: 110px; padding-left: 30px">注册时间：</td>
 						<td style="width: 180px"><input type="text" name="createDate"
-							class="form-control time" placeholder="注册时间" readonly="readonly"
-							value=""></td>
-						<td class="pull-right" style="padding-right: 30px">
-							<button type="submit" class="btn btn-primary btn-sm">查询</button>
-						</td>
+							class="form-control time" placeholder="注册时间" value=""></td>
+						<td class="pull-right" style="padding-right: 10px"><input
+							type="submit" class="btn btn-primary btn-sm" value="查询"></td>
 						<td><button type="button" class="btn btn-primary btn-sm"
 								onclick="$('#form1').find(':input').not(':button, :submit, :reset').val('').removeAttr('checked').removeAttr('selected');">重置</button></td>
 					</tr>
@@ -76,50 +82,51 @@
 					<td>注册时间</td>
 					<td>操作</td>
 				</tr>
-				<#list pageInfo.list as m>
-				<tr class="text-center">
-					<td>${m_index+1}</td>
-					<td>${(m.mobilePhone)!!}</td>
-					<td>${(m.name)!!}</td>
-					<td>${(m.orgname)!!}</td>
-					<td><a href="<%=basePath%>${(m.mycard)!!}" target="_black">查看</a></td>
-					<td>${(m.address)!!}</td>
-					<td><#if m.status!=1> <span style="color: red;">${(m.statusDesc)!!}</span>
-						<#else> <span style="color: blue;">${(m.statusDesc)!!}</span>
-						</#if>
-					</td>
-					<td>$</td>
-					<td><#if m.status!=1> <a class="btn btn-primary btn-sm"
-						href="<%=basePath%>sysmember/financiaAudit?id=${m.id}">审核</a> <#else>
-						已认证 </#if>
+				<c:forEach items="${list}" var="list">
+					<tr class="text-center">
+						<td>${list[0]}</td>
+						<td>${list[9]}</td>
+						<td>${list[2]}</td>
+						<td>${list[3]}</td>
+						<td><a href="<%=basePath%>${list[4]}" target="_black">查看</a></td>
+						<td>${list[5]}</td>
+						<td><c:if test="${list[6]==1}">
+								<span style="color: red;">待认证</span>
+							</c:if> <c:if test="${list[6]!=1}">
+								<span style="color: blue;">认证成功</span>
+							</c:if></td>
+						<td><f:formatDate value="${list[7]}" pattern="yyyy-MM-dd" /></td>
+						<td><c:if test="${list[6]==1}">
+								<a class="btn btn-primary btn-sm"
+									href="<%=basePath%>ldd/sysmember/financiaAudit/id=${list[0]}">审核</a>
+							</c:if> <c:if test="${list[6]!=1}">
+								<span style="color: blue;">认证成功</span>
+							</c:if></td>
+					</tr>
+
+				</c:forEach>
+				<tr>
+
+					<td colspan="8">
+						第${page}页，共${allpage}页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+						href="javascript:pagefun(1);">首页</a>&nbsp; <a
+						href="javascript:pagefun(${page>1?page-1:page});">上一页</a>&nbsp;
+						<a href="javascript:pagefun(${page<allpage?page+1:allpage});">下一页</a>&nbsp;
+						<a href="javascript:pagefun(${allpage});">尾页</a>
 					</td>
 				</tr>
-				</#list>
 			</table>
-			<#include "paginate.html" /> <@paginate
-			currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0
-			actionUrl="<%=basePath%>sysmember/financia"
-			urlParas="&mobilePhone=${(planner.mobilePhone)!!}&name=${(planner.name)!!}&status=${(planner.status)!!}&createDate=${(planner.createDate?string('yyyy-MM-dd'))!!}"/>
 
 		</div>
-
-		<!-- 内容结束 -->
 		<script type="text/javascript">
-	$(function(){
-		$("#status").val("${(planner.status)!!}");
-	});
-
-		$('.time').datetimepicker({
-			format : 'yyyy-mm-dd',
-			language: 'zh-CN',
-			minView: 2,
-		    todayBtn: 1
-		}).on('changeDate', function(ev) {
-			$('.time').datetimepicker('hide');
-		});
+		function pagefun(ye) {
 		
-		</script>
-	</div>
-	<!-- 容器结束 -->
+			document.getElementById("pagess").value=ye;
+			
+			document.fff.submit();
+			
+		}
+		
+		</script> 
 </body>
 </html>
