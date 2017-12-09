@@ -3,6 +3,7 @@ package com.demo.service.lan;
 import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -110,9 +111,23 @@ public class YJProjectServiceImpl implements YJProjectService{
 	
 	//后台-会员管理-理财师审核
 	@Override
-	public List<Object[]> selectfinancialplanner() {
-		
-		return memberrepository.selectfinancialplanner();
+	public List<Object[]> selectfinancialplanner(Map<String, Object> maps,Integer page,Integer rowsize) {		
+		return memberrepository.selectfinancialplanner(maps, page, rowsize);
+	}
+	//后台-会员管理-理财师查询总数
+	@Override
+	public Integer getfinacialplannercount(Map<String, Object> maps) {
+		 
+		return memberrepository.getcounts(maps);
+	}
+	//后台-会员管理-绑卡管理
+	@Override
+	public List<Object[]> selectmemberbankcards(Map<String, Object> maps, Integer page, Integer rowsize) {	
+		return memberrepository.selectmemberbankcards(maps, page, rowsize);
+	}
+	//后台-会员管理-绑卡查询总数
+	public Integer getselectmemberbankcardsrcount(Map<String, Object> maps) {
+		return memberrepository.getcountsbankcards(maps);
 	}
 
 

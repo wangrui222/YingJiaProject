@@ -1,6 +1,7 @@
 package com.demo.service.lan;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 
@@ -25,8 +26,19 @@ public interface YJProjectService {
 	public MemberWithdrawRecord selectoneonememberwithdrawrecord(Integer mid);
 	//后台-会员管理-一个用户钱包查询
 	public MemberTradeRecord selectoneonemembertraderecord(Integer mid);
-	
+
+
+
+
 	//后台-会员管理-理财师审核
-	public List<Object[]> selectfinancialplanner();
-	
+	public List<Object[]> selectfinancialplanner(Map<String, Object> maps,Integer page,Integer rowsize);
+	//后台-会员管理-理财师查询总数
+	public Integer getfinacialplannercount(Map<String, Object> maps);
+
+	//后台-会员管理-理财师审核
+	public List<Object[]> selectmemberbankcards(Map<String, Object> maps,Integer page,Integer rowsize);
+
+	//后台-会员管理-理财师查询总数
+	public Integer getselectmemberbankcardsrcount(Map<String, Object> maps);
+
 }
