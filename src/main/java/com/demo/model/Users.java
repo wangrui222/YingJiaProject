@@ -59,6 +59,7 @@ public class Users {
 	 * ÐÞ¸ÄÊ±¼ä
 	 */
 	private Date updateDate  ;
+	
 	@Id
 	@SequenceGenerator(name="users",sequenceName="sql_users",allocationSize=1)
 	@GeneratedValue(generator="users",strategy=GenerationType.SEQUENCE)
@@ -128,6 +129,16 @@ public class Users {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
+	public Users(String userName, String usersPassword, String mobilePhone, Integer status) {
+		this.userName = userName;
+		this.usersPassword = usersPassword;
+		this.mobilePhone = mobilePhone;
+		this.status = status;
+	}
+	public Users() {
+	}
 
+	
+	
 
 }
