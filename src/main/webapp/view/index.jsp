@@ -4,6 +4,7 @@
 	String path = request.getContextPath();
  	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 
@@ -23,6 +24,9 @@
 	<title>盈+后台管理中心</title>
 </head>
 <body>
+<shiro:hasRole name="admin">
+
+	</shiro:hasRole>
 <!-- 容器开始 -->
 	<div class="container-layout">
 	     <!-- 头部开始	 -->
@@ -37,7 +41,7 @@
            <div class="col-sm-10">
            	  <div class="top-right">
            	    <ul class="nav nav-pills">
-               <li><p><span class="iconfont">&#xe605;</span></p><p>admin，系统管理员</p></li>
+               <li><p><span class="iconfont">&#xe605;</span></p><p><shiro:principal></shiro:principal></p></li>
                <li style="width:100px"><p><a href="<%=basePath%>wangrui/logout"><span class="iconfont">&#xe606;</span></a></p><p>退出</p></li>
                 </ul>
            	     </div>
@@ -52,12 +56,15 @@
                 <div class="col-sm-2">
              	  <div class="box-left">
                       <ul class="nav nav-pills nav-stacked">
+                      <shiro:hasRole name="admin">
+
                        <li><a href="javascript:;" class="titlea"><span class="iconfont">&#xe609;</span>理财产品</a></li>
 		               <ul class="list-group">
 			               <li class="list-group-item"><a href="<%=basePath%>view/subject/gu_shou.jsp" target="rightkj">固收类</a></li>
 			               <li class="list-group-item"><a href="<%=basePath%>view/financeProductFunds/financeProductFunds_list.jsp" target="rightkj">私募/股权类</a></li>
 			               <li class="list-group-item"><a href="<%=basePath%>overseaSys/overseaConfig" target="rightkj">海外配置</a></li>
 		               </ul>
+					</shiro:hasRole>
  					  <li><a href="javascript:;" class="titlea"><span class="iconfont">&#xe60c;</span>钱包管理</a></li>
               		  <ul class="list-group">
 			               <li class="list-group-item"><a href="<%=basePath%>dailycash/list" target="rightkj">钱包缴费记录</a></li>
@@ -68,6 +75,8 @@
 			               <li class="list-group-item"><a href="<%=basePath%>news/index" target="rightkj">资讯管理</a></li>
 		               
 		              </ul>
+					
+                      <shiro:hasRole name="admin">
 		              <li><a href="javascript:;" class="titlea"><span class="iconfont">&#xe608;</span>会员管理</a>
 		              </li>
 		              <ul class="list-group">
@@ -75,9 +84,9 @@
 			               <li class="list-group-item"><a href="<%=basePath%>ldd/sysmember/financia" target="rightkj">理财师审核</a></li>
 			               <li class="list-group-item"><a href="<%=basePath%>ldd/sysmember/dahua" target="rightkj">绑卡管理</a></li>
 			               <li class="list-group-item"><a href="<%=basePath%>ldd/sysmember/payment" target="rightkj">付息计划</a></li>
-			               <li class="list-group-item"><a href="<%=basePath%>sysmember/rechargeManage" target="rightkj">充值管理</a></li>
-			               <li class="list-group-item"><a href="<%=basePath%>sysmember/WithdrawManage" target="rightkj">提现管理</a></li>
-			               <li class="list-group-item"><a href="<%=basePath%>sysmember/inviteRewards" target="rightkj">邀请奖励</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>jian/sysmember/rechargeManage" target="rightkj">充值管理</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>jian/sysmember/WithdrawManage" target="rightkj">提现管理</a></li>
+			               <li class="list-group-item"><a href="<%=basePath%>jian/sysmember/inviteRewards" target="rightkj">邀请奖励</a></li>
 		              </ul>
 		             
 		              <li><a href="javascript:;" class="titlea"><span class="iconfont">&#xe60a;</span>盈+统计</a></li>
@@ -98,6 +107,7 @@
 			               <li class="list-group-item"><a href="<%=basePath%>sys/updatePasswdPage" target="rightkj">密码设置</a></li>
                       </ul>
 		               </ul>
+		              </shiro:hasRole>
                 </div>
                 </div>
                 <div class="col-sm-10">

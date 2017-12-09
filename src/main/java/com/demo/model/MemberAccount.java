@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,7 +19,7 @@ import javax.persistence.Table;
 @Entity(name="member_account")
 public class MemberAccount {
 	private	Integer memberAccountId ;//主键
-	private	Integer   memberId ;//用户id
+	private	Members  members ;//用户id
 	private  Float useableBalance ;//可用余额
 	private Float  imusealeBalance  ;//冻结余额
 	private  Float totalProfit  ;//累计收益
@@ -41,11 +43,13 @@ public class MemberAccount {
 	public void setMemberAccountId(Integer memberAccountId) {
 		this.memberAccountId = memberAccountId;
 	}
-	public Integer getMemberId() {
-		return memberId;
+	@ManyToOne
+	@JoinColumn(name="member_id")
+	public Members getMembers() {
+		return members;
 	}
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
+	public void setMembers(Members members) {
+		this.members = members;
 	}
 	public Float getUseableBalance() {
 		return useableBalance;

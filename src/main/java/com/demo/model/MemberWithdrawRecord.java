@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -18,7 +20,7 @@ import javax.persistence.SequenceGenerator;
 public class MemberWithdrawRecord {
 	private Integer mwrId ;//主键
 	private  String serialNumber ;//流水号',
-	private  Integer memberId ;//用户id',
+	private  Members members ;//用户id',
 	private Float  amount  ;//'提现金额',
 	private String bankName  ;//'银行名称',
 	private String  bankCard  ;//卡号',
@@ -46,11 +48,13 @@ public class MemberWithdrawRecord {
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}
-	public Integer getMemberId() {
-		return memberId;
+	@ManyToOne
+	@JoinColumn(name="member_id")
+	public Members getMembers() {
+		return members;
 	}
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
+	public void setMembers(Members members) {
+		this.members = members;
 	}
 	public Float getAmount() {
 		return amount;

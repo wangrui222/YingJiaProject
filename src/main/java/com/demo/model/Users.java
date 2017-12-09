@@ -1,11 +1,17 @@
 package com.demo.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -60,12 +66,48 @@ public class Users {
 	 */
 	private Date updateDate  ;
 	
+<<<<<<< HEAD
+=======
+	private Set<UserRole> userRole = new HashSet<>();
+	
+>>>>>>> branch 'master' of https://github.com/wangrui222/YingJiaProject.git
 	@Id
 	@SequenceGenerator(name="users",sequenceName="sql_users",allocationSize=1)
 	@GeneratedValue(generator="users",strategy=GenerationType.SEQUENCE)
 	public Integer getUsersId() {
 		return usersId;
 	}
+	
+	@ManyToMany
+	@JoinTable(
+			name = "user_role_relation",
+			joinColumns =@JoinColumn(name="userId"),
+			inverseJoinColumns = @JoinColumn(name="roleId")
+			)
+	public Set<UserRole> getUserRole() {
+		return userRole;
+	}
+
+
+	
+	
+	public Users(String userName, String usersPassword, String mobilePhone, Integer status) {
+		this.userName = userName;
+		this.usersPassword = usersPassword;
+		this.mobilePhone = mobilePhone;
+		this.status = status;
+	}
+	
+	
+
+	public Users() {
+	}
+
+	public void setUserRole(Set<UserRole> userRole) {
+		this.userRole = userRole;
+	}
+
+
 	public void setUsersId(Integer usersId) {
 		this.usersId = usersId;
 	}
@@ -138,7 +180,16 @@ public class Users {
 	public Users() {
 	}
 
+<<<<<<< HEAD
 	
 	
+=======
+	@Override
+	public String toString() {
+		return "Users [userName=" + userName + ", usersPassword=" + usersPassword + ", mobilePhone=" + mobilePhone
+				+ ", status=" + status + "]";
+	}
+
+>>>>>>> branch 'master' of https://github.com/wangrui222/YingJiaProject.git
 
 }

@@ -137,9 +137,10 @@
 									style="color: #1fbba6; font-size: 24px; margin-left: -30px; position: absolute; z-index: 2; margin-top: 8px">&#xe61a;</span>
 							</div>
 							<div class="input-group input-group-lg">
-								<input type="text" id="mobilePhone" name="mobilePhone" value="18871061117"
+
+								<input type="text" id="mobilePhone" name="mobilePhone" value="18758030932"
 									class="form-control txt" placeholder="手机号"
-									aria-describedby="sizing-addon1"> <span
+									aria-describedby="sizing-addon1" /> <span
 									class="iconfont"
 									style="color: #1fbba6; font-size: 24px; margin-left: -30px; position: absolute; z-index: 2; margin-top: 8px">&#xe61d;</span>
 							</div>
