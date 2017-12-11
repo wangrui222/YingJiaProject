@@ -23,6 +23,7 @@ import com.demo.model.MemberTally;
 import com.demo.model.MemberTradeRecord;
 import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Members;
+import com.demo.model.Subject;
 import com.demo.service.lan.YJProjectService;
 @Controller
 @RequestMapping(value="ldd")
@@ -141,8 +142,25 @@ public class LDDController {
 	}
 	//后台会员管理-付息计划
 	@RequestMapping(value="sysmember/payment")
-	public String HYfxjh() {
-		
+	public String HYfxjh(Subject subject,Integer page,Map<String, Object> map) {
+		Map<String, Object> maps=new HashMap<>();
+		maps.put("name", subject.getSubjectName());
+		maps.put("status", subject.getStatus());
+		maps.put("type", subject.getSubjectType());
+		//当前第几页
+		if (page==null) {
+			page=1;
+		}
+		map.put("page", page);
+		Integer rowsize=1;
+		//总条数
+		Integer counts=yjprojectservice.getselectmembersubjectcount(maps);
+		System.out.println("========"+counts);
+		//总页数
+		Integer allpage=counts%rowsize==0?counts/rowsize:counts/rowsize+1;
+		map.put("allpage", allpage);
+		List<Object[]> list=yjprojectservice.selectmembersubject(maps, page, rowsize);
+		map.put("list", list);
 		return "/sysmember/fxjh";
 
 	}
