@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
+
+import oracle.sql.CLOB;
 @Entity(name="subject")
 /**
  * 
@@ -14,6 +17,9 @@ import javax.persistence.SequenceGenerator;
  *
  */
 public class Subject {
+	
+	
+	
 	private Integer subjectId;
 	/**
 	 * 流水号
@@ -95,6 +101,7 @@ public class Subject {
 	/**
 	 * 产品速览
 	 */
+	@Transient
 	private String  subjectComment;
 	/**
 	 * 文件夹Id
@@ -128,10 +135,12 @@ public class Subject {
 	/**
 	 * 项目详情
 	 */
+	@Transient
 	private String  projectDetails;
 	/**
 	 * 安全保障
 	 */
+	@Transient
 	private String   safetyControl;
 	/**
 	 * 体验金是否可以购买（0：否，1：是）

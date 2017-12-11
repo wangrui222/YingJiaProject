@@ -23,7 +23,7 @@ public class MemberWithdrawRecord {
 	private String bankName  ;//'银行名称',
 	private String  bankCard  ;//卡号',
 	private  Integer status ;//提现状态(0:待审核;1:已打款;2打款中;3:打款失败);',
-	private  Integer delFlag ;
+	private  Integer delflag ;
 	private String cardaddress  ;// '开户银行所在地',
 	private String channelName  ;// '打款通道（富友,贝付）',
 	private Date createDate ;
@@ -76,11 +76,12 @@ public class MemberWithdrawRecord {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public Integer getDelFlag() {
-		return delFlag;
+
+	public Integer getDelflag() {
+		return delflag;
 	}
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
+	public void setDelflag(Integer delflag) {
+		this.delflag = delflag;
 	}
 	public String getCardaddress() {
 		return cardaddress;
