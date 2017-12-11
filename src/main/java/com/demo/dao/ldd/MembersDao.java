@@ -13,4 +13,10 @@ public interface MembersDao {
 	public List<Object[]> selectmemberbankcards(Map<String, Object> maps,Integer page,Integer rowsize);
 	//理财师查询总数
 	public Integer getcountsbankcards(Map<String, Object> maps);
+
+
+	//两表联查，付息计划
+	public List<Object[]> selectsubject(Map<String, Object> maps,Integer page,Integer rowsize);
+	//理财师查询总数
+	public Integer getcountssubject(Map<String, Object> maps);
 }

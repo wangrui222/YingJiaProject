@@ -105,6 +105,45 @@ public class MembersRepositoryImpl implements MembersDao {
 		Integer count=Integer.parseInt(object.toString());
 		return count;
 	}
+	//两表联查，付息计划
+	@Override
+	public List<Object[]> selectsubject(Map<String, Object> maps, Integer page, Integer rowsize) {
+		String sql=" SELECT * FROM subject s where 1=1";	
+		if (maps.get("name")!=null&&!"".equals(maps.get("name"))) {
+			sql+=" and s.subject_name like'%"+maps.get("name")+"%'";
+		}
+		if (maps.get("status")!=null&&!"".equals(maps.get("status"))) {
+			sql+=" and s.status ="+maps.get("status");
+		}
+		if (maps.get("type")!=null&&!"".equals(maps.get("type"))) {
+			sql+=" and s.subject_type ="+maps.get("type");
+		}
+		sql+=" order by s.start_date desc";
+		Query query=em.createNativeQuery(sql);
+		query.setFirstResult((page-1)*rowsize);
+		query.setMaxResults(rowsize);
+		List<Object[]> list=(List<Object[]>) query.getResultList();
+		return list;
+	}
+	//付息计划查询总数
+	@Override
+	public Integer getcountssubject(Map<String, Object> maps) {
+		String sql="SELECT count(*) FROM subject s where 1=1";	
+		if (maps.get("name")!=null&&!"".equals(maps.get("name"))) {
+			sql+=" and s.subject_name like'%"+maps.get("name")+"%'";
+		}
+		if (maps.get("status")!=null&&!"".equals(maps.get("status"))) {
+			sql+=" and s.status ="+maps.get("status");
+		}
+		if (maps.get("type")!=null&&!"".equals(maps.get("type"))) {
+			sql+=" and s.subject_type ="+maps.get("type");
+		}
+		sql+=" order by s.start_date desc";
+		Query query=em.createNativeQuery(sql);		
+		Object object=query.getSingleResult();
+		Integer count=Integer.parseInt(object.toString());
+		return count;
+	}
 
 
 }
