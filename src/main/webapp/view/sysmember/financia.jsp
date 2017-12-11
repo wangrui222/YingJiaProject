@@ -55,7 +55,7 @@
 						<td style="width: 180px"><select name="status"
 							class="form-control" style="width: 130px; height: 32px"
 							id="status">
-								<option value="0">全部</option>
+								<option value="">全部</option>
 								<option value="1">待审核</option>
 								<option value="2">认证成功</option>
 								<option value="3">认证失败</option>
