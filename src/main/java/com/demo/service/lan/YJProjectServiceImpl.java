@@ -129,6 +129,17 @@ public class YJProjectServiceImpl implements YJProjectService{
 	public Integer getselectmemberbankcardsrcount(Map<String, Object> maps) {
 		return memberrepository.getcountsbankcards(maps);
 	}
+	//后台-会员管理-付息计划
+	@Override
+	public List<Object[]> selectmembersubject(Map<String, Object> maps, Integer page, Integer rowsize) {
+		return memberrepository.selectsubject(maps, page, rowsize);
+	}
+	//后台-会员管理-付息计划查询总数
+	@Override
+	public Integer getselectmembersubjectcount(Map<String, Object> maps) {
+		// TODO Auto-generated method stub
+		return memberrepository.getcountssubject(maps);
+	}
 
 
 

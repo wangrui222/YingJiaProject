@@ -37,8 +37,12 @@ public interface YJProjectService {
 
 	//后台-会员管理-理财师审核
 	public List<Object[]> selectmemberbankcards(Map<String, Object> maps,Integer page,Integer rowsize);
-
 	//后台-会员管理-理财师查询总数
 	public Integer getselectmemberbankcardsrcount(Map<String, Object> maps);
+
+	//后台-会员管理-付息计划
+	public List<Object[]> selectmembersubject(Map<String, Object> maps,Integer page,Integer rowsize);
+	//后台-会员管理-理财师查询总数
+	public Integer getselectmembersubjectcount(Map<String, Object> maps);
 
 }
