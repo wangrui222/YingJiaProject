@@ -26,9 +26,7 @@ public class MemberAccount {
 	private  Float bonusAmount ;// 红包金额
 	private  Float investAmount  ;//投资总额
 	private Integer  delflag  ;//
-	private Float  bbinAmount ;//体验金
-	
-	
+	private Float  bbinAmount ;//体验金	
 	@Id
 	@SequenceGenerator(name="seq_MemberAccount",sequenceName="seq_member_account",allocationSize=1)
 	@GeneratedValue(generator="seq_MemberAccount",strategy=GenerationType.SEQUENCE)
