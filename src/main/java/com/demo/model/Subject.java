@@ -39,7 +39,7 @@ public class Subject {
 	/**
 	 * 标的类型
 	 */
-	private String subjectType;
+	private Integer subjectType;
 	/**
 	 * 标的状态
 	 */
@@ -173,12 +173,7 @@ public class Subject {
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
 	}
-	public String getSubjectType() {
-		return subjectType;
-	}
-	public void setSubjectType(String subjectType) {
-		this.subjectType = subjectType;
-	}
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -187,6 +182,12 @@ public class Subject {
 	}
 	public Float getFloorAmount() {
 		return floorAmount;
+	}
+	public Integer getSubjectType() {
+		return subjectType;
+	}
+	public void setSubjectType(Integer subjectType) {
+		this.subjectType = subjectType;
 	}
 	public void setFloorAmount(Float floorAmount) {
 		this.floorAmount = floorAmount;
