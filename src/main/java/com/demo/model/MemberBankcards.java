@@ -13,13 +13,13 @@ import javax.persistence.Table;
  * @author admin
  *
  */
-@Entity(name="member_bankcards")
+@Entity
 public class MemberBankcards {
 	private	Integer memberBankcardsId  ;//主键
 	private String	memberBankcardsType  ;//银行卡类型
 	private	 Integer memberId  ;//用户id
 	private String cardNo  ;//卡号
-	private	 String delflag ;//是否删除（0：正常使用，2：被删除）
+	private	 Integer delflag ;//是否删除（0：正常使用，2：被删除）
 	private	 Date createDate  ;//
 	private	Date updateDate ;//
 	private  String cardaddress  ;//开户银行所在地
@@ -54,10 +54,11 @@ public class MemberBankcards {
 	public void setCardNo(String cardNo) {
 		this.cardNo = cardNo;
 	}
-	public String getDelflag() {
+	
+	public Integer getDelflag() {
 		return delflag;
 	}
-	public void setDelflag(String delflag) {
+	public void setDelflag(Integer delflag) {
 		this.delflag = delflag;
 	}
 	public Date getCreateDate() {
