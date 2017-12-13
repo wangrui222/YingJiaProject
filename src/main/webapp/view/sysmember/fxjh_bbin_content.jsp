@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
     <%
 	String path = request.getContextPath();
  	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -7,7 +9,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
-<#include '../common/base.html'>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
@@ -26,9 +27,9 @@
                       <div class="tablelist">
                         <table class="table tabletop">
                         <tr>
-                        <td style="padding-left:30px">标的名称：${(subject.name)!!} 
-                        				&nbsp; &nbsp; &nbsp; &nbsp;  标的期限：${(subject.period)!!}天
-                        				&nbsp; &nbsp; &nbsp; &nbsp;  年化收益率：${(subject.yearRate)!!}%</td>
+                        <td style="padding-left:30px">标的名称：${list[0]} 
+                        				&nbsp; &nbsp; &nbsp; &nbsp;  标的期限：${list[1]}天
+                        				&nbsp; &nbsp; &nbsp; &nbsp;  年化收益率：${list[2]}%</td>
                         </tr>     
                         </table>
                         <table class="table table-bordered tablebox">
@@ -46,35 +47,33 @@
                           <td>操作</td>
                           </tr>
                           
-                   <#list pageInfo.list as s>
+                   
                     <tr class="text-center">
-                        <td>${s_index+1}</td>
-                        <td>${s.serialNumber!!}</td>
-                        <td>${s.member.mobilePhone!!}</td>
-                        <td>${s.member.memberName!!}</td>
-                        <td>${s.member.identity!!}</td>
-                        <td><span style="color: blue;"></span>元</td>
-                        <td><span style="color: red;"></span>元 </td>
-                        <td></td>
+                        <td>${list_index+1}</td>
+                        <td>${list[3]}</td>
+                        <td>${list[4]}</td>
+                        <td>${list[5]}</td>
+                        <td>${list[6]}</td>
+                        <td>${list[7]}<span style="color: blue;"></span>元</td>
+                        <td>${list[8]}<span style="color: red;"></span>元 </td>
+                        <td>${list[9]}</td>
                         <td>
-                        	<#if s.ispayment==0>
+                        	<c:if test="${list[10]==0}">
                         	<span style="color: red;">${(s.ispaymentDesc)!!}</span>
-                        	<#else>
+                        	</c:if><c:if test="${list[10]==1}">
                         	<span style="color: blue;">${(s.ispaymentDesc)!!}</span>
-                        	</#if>
+                        	</c:if>
                         </td>
                         <td>
-                        	<#if s.ispayment==0>
+                        	<c:if test="${list[10]==0}">
                         	<a href="<%=basePath%>sysmember/paymentBbin?id=${s.id}" class="btn btn-primary btn-sm">立即还款</a>
-                        	<#else>
+                        	</c:if><c:if test="${list[10]==1}">
                         	<a href="javascript:" class="btn btn-primary btn-sm" style="background-color: #8393A1;">已还款</a>
-                        	</#if>
+                        	</c:if>
                         </td>
                     </tr>
-                </#list>
             </table>
-        <#include "paginate.html" />
-        <@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>sysmember/paymentBbinContent" urlParas="&id=${(subject.id)!!}"/>
+        
          </div>
 
          <!-- 内容结束 -->

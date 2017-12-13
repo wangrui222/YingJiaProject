@@ -76,9 +76,9 @@
 					<td>可体验金购买</td>
 					<td>操作</td>
 				</tr>
-				<c:forEach items="${list}" var="list">
+				<c:forEach items="${list}" var="list" varStatus="qq">
 					<tr class="text-center">
-						<td>${list_index+1}</td>
+						<td>${qq.index+1}</td>
 						<td>${list[2]}</td>
 						<td>${list[4]}</td>
 						<td>${list[3]}</td>
@@ -89,11 +89,11 @@
 						<td>${list[18]}%</td>
 						<td>${list[5]}</td>
 						<td>${list[29]==0?'否':'是'}</td>
-						<td><c:if test="${list[29]==0}">
+						<td><c:if test="${list[29]==1}">
 								<a
-									href="<%=basePath%>sysmember/paymentBbinContent/id=${list[0]}"
+									href="<%=basePath%>ldd/sysmember/paymentBbinContent/${list[0]}"
 									class="btn btn-primary btn-sm">体验金付息</a>
-							</c:if> <a href="<%=basePath%>sysmember/paymentContentid=${list[0]}"
+							</c:if> <a href="<%=basePath%>ldd/sysmember/paymentContent/${list[0]}"
 							class="btn btn-primary btn-sm">付息列表</a></td>
 					</tr>
 				</c:forEach>
@@ -112,12 +112,11 @@
 	</div>
 	<script type="text/javascript">
 		function pagefun(ye) {
-		
-			document.getElementById("pagess").value=ye;			
+
+			document.getElementById("pagess").value = ye;
 			document.fff.submit();
-			
+
 		}
-		
-		</script> 
+	</script>
 </body>
 </html>

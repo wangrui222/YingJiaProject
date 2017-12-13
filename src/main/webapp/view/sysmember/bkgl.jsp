@@ -40,6 +40,8 @@
 			<form action="<%=basePath%>ldd/sysmember/dahua" method="post"
 				id="form1" name="fff">
 				<input type="hidden" name="page" id="pagess">
+				<input type="hidden" name="del" id="dell">
+				<input type="hidden" name="memberId" id="mid">
 				<table class="table tabletop">
 					<tr>
 						<td style="width: 130px; padding-left: 30px">手机号：</td>
@@ -91,10 +93,11 @@
 							</c:if></td>
 						<td>${list[5]}</td>
 						<td><c:if test="${list[4]==0}">
-								<a href="<%=basePath%>sysmember/unBankCard/${list[0]}"
+						<input class="btn btn-primary btn-sm" type="submit" onclick="jb(${list[4]},${list[2]});" value="解绑银行卡">
+								<%-- <a href="<%=basePath%>sysmember/unBankCard/${list[0]}"
 									class="btn btn-primary btn-sm"
-									onclick="return confirm('你确定要解绑？')">解绑银行卡</a>
-							</c:if> <c:if test="${list[4]==1}"> 已解绑</c:if></td>
+									onclick="return confirm('你确定要解绑？')">解绑银行卡</a> --%>
+							</c:if> <c:if test="${list[4]==1}">已解绑</c:if></td>
 					</tr>
 				</c:forEach>
 				<tr>
@@ -116,7 +119,7 @@
 		</div>
 		<!-- 内容结束 -->
 	</div>
-	<!-- <script type="text/javascript">
+	<script type="text/javascript">
 		$('.time').datetimepicker({
 			format : 'yyyy-mm-dd',
 			language : 'zh-CN',
@@ -125,17 +128,18 @@
 		}).on('changeDate', function(ev) {
 			$('.time').datetimepicker('hide');
 		});
-	</script> -->
+	</script>
 	<script type="text/javascript">
-		function pagefun(ye) {
-		
-			document.getElementById("pagess").value=ye;
-			
-			document.fff.submit();
-			
+		function pagefun(ye) {	
+			document.getElementById("pagess").value=ye;		
+			document.fff.submit();			
+		}	
+		function jb(delflag,id) {	
+			alert(id);
+			document.getElementById("dell").value=delflag;
+			document.getElementById("mid").value=id;
+			document.fff.submit();		
 		}
-		
 		</script> 
-	
 </body>
 </html>

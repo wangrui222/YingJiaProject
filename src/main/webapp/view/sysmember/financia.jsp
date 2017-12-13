@@ -42,6 +42,8 @@
 			<form action="<%=basePath%>ldd/sysmember/financia" method="post"
 				id="form1" name="fff">
 				<input type="hidden" name="page" id="pagess">
+				<input type="hidden" name="ss" id="statu">
+				<input type="hidden" name="memberId" id="mid">
 				<table class="table tabletop">
 					<tr>
 						<td style="width: 110px; padding-left: 30px">手机号：</td>
@@ -82,24 +84,25 @@
 					<td>注册时间</td>
 					<td>操作</td>
 				</tr>
-				<c:forEach items="${list}" var="list">
+				<c:forEach items="${list}" var="list" varStatus="vs">
 					<tr class="text-center">
-						<td>${list[0]}</td>
+						<td>${vs.index+1}</td>
 						<td>${list[9]}</td>
 						<td>${list[2]}</td>
 						<td>${list[3]}</td>
 						<td><a href="<%=basePath%>${list[4]}" target="_black">查看</a></td>
 						<td>${list[5]}</td>
-						<td><c:if test="${list[6]==1}">
+						<td><c:if test="${list[6]==0}">
 								<span style="color: red;">待认证</span>
-							</c:if> <c:if test="${list[6]!=1}">
+							</c:if> <c:if test="${list[6]!=0}">
 								<span style="color: blue;">认证成功</span>
 							</c:if></td>
 						<td><f:formatDate value="${list[7]}" pattern="yyyy-MM-dd" /></td>
-						<td><c:if test="${list[6]==1}">
-								<a class="btn btn-primary btn-sm"
-									href="<%=basePath%>ldd/sysmember/financiaAudit/id=${list[0]}">审核</a>
-							</c:if> <c:if test="${list[6]!=1}">
+						<td><c:if test="${list[6]==0}">
+								<input class="btn btn-primary btn-sm" type="submit" onclick="sh(${list[6]},${list[0]});" value="审核">
+								<%-- <a class="btn btn-primary btn-sm"
+									href="<%=basePath%>ldd/sysmember/financiaAudit/${list[1]}">审核</a> --%>
+							</c:if> <c:if test="${list[6]!=0}">
 								<span style="color: blue;">认证成功</span>
 							</c:if></td>
 					</tr>
@@ -119,14 +122,16 @@
 
 		</div>
 		<script type="text/javascript">
-		function pagefun(ye) {
-		
-			document.getElementById("pagess").value=ye;
-			
-			document.fff.submit();
-			
+		function pagefun(ye) {		
+			document.getElementById("pagess").value=ye;			
+			document.fff.submit();			
 		}
-		
+		function sh(statu,id) {	
+			alert(id);
+			document.getElementById("statu").value=statu;
+			document.getElementById("mid").value=id;
+			document.fff.submit();		
+		}
 		</script> 
 </body>
 </html>
