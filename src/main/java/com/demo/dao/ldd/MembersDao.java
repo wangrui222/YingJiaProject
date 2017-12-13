@@ -19,4 +19,14 @@ public interface MembersDao {
 	public List<Object[]> selectsubject(Map<String, Object> maps,Integer page,Integer rowsize);
 	//理财师查询总数
 	public Integer getcountssubject(Map<String, Object> maps);
+
+	//两表联查，付息计划-体验金付息
+	public List<Object[]> selectsubjectBbinpurchaserecord(Integer id,Integer page,Integer rowsize);
+	//理财师查询总数
+	public Integer getcountssubjectBbinpurchaserecord(Integer id);
+
+	//两表联查，付息计划-付息列表
+	public List<Object[]> selectsubjectpurchaserecord(Integer id,Integer page,Integer rowsize);
+	//理财师查询总数
+	public Integer getcountssubjectpurchaserecord(Integer id);
 }

@@ -63,7 +63,7 @@ public class MembersRepositoryImpl implements MembersDao {
 	//两表联查，绑卡管理
 	@Override
 	public List<Object[]> selectmemberbankcards(Map<String, Object> maps,Integer page,Integer rowsize) {
-		String sql=" SELECT b.*,m.names,m.mobile_Phone,m.member_name,m.member_identity FROM member_bankcards b,members m WHERE b.member_id=m.member_id";
+		String sql="SELECT b.*,m.names,m.mobile_Phone,m.member_name,m.member_identity FROM member_bankcards b,members m WHERE b.member_id=m.member_id";
 		if (maps.get("iphone")!=null&&!"".equals(maps.get("iphone"))) {
 			sql+=" and m.mobile_Phone like'%"+maps.get("iphone")+"%'";
 		}
@@ -144,6 +144,55 @@ public class MembersRepositoryImpl implements MembersDao {
 		Integer count=Integer.parseInt(object.toString());
 		return count;
 	}
-
-
+	//两表联查，付息计划-体验金付息
+	@Override
+	public List<Object[]> selectsubjectBbinpurchaserecord(Integer id, Integer page, Integer rowsize) {
+		String sql=" SELECT s.subject_name,s.period,s.year_rate,pr.serial_number,m.mobile_phone,m.member_name,m.member_identity, pr.amount,pr.interest,pr.update_date,pr.ispayment FROM subject_bbin_purchase_record pr, members m,subject s WHERE pr.member_id = m.member_id and pr.subject_id=s.subject_id ";	
+		sql+=" and pr.subject_id ="+id;
+		sql+=" order BY pr.update_date desc";
+		Query query=em.createNativeQuery(sql);
+		query.setFirstResult((page-1)*rowsize);
+		query.setMaxResults(rowsize);
+		List<Object[]> list=(List<Object[]>) query.getResultList();
+		return list;
+	}
+	//付息计划-体验金付息查询总数
+	@Override
+	public Integer getcountssubjectBbinpurchaserecord(Integer id) {
+		String sql="SELECT s.subject_name,s.period,s.year_rate,pr.serial_number,m.mobile_phone,m.member_name,m.member_identity, pr.amount,pr.interest,pr.update_date,pr.ispayment FROM subject_bbin_purchase_record pr, members m,subject s WHERE pr.member_id = m.member_id and pr.subject_id=s.subject_id";	
+		sql+=" and pr.subject_id ="+id;
+		sql+=" order BY pr.update_date desc";
+		Query query=em.createNativeQuery(sql);
+		if (query.getResultList().size()==0) {
+			return null;
+		}else {
+			return Integer.parseInt(query.getSingleResult().toString());
+		}				
+	}
+	
+	//两表联查，付息计划-付息列表
+		@Override
+		public List<Object[]> selectsubjectpurchaserecord(Integer id, Integer page, Integer rowsize) {
+			String sql=" SELECT s.subject_name,s.period,s.year_rate, pr.serial_number,m.mobile_phone,m.member_name,m.member_identity, pr.amount, (pr.amount+pr.interest) money, pr.create_date, pr.update_date,pr.ispayment FROM subject_purchase_record pr, members m,subject s WHERE pr.member_id = m.member_id and pr.subject_id=s.subject_id ";	
+			sql+=" and pr.subject_id ="+id;
+			sql+=" order BY pr.create_date DESC";
+			Query query=em.createNativeQuery(sql);
+			query.setFirstResult((page-1)*rowsize);
+			query.setMaxResults(rowsize);
+			List<Object[]> list=(List<Object[]>) query.getResultList();
+			return list;
+		}
+		//付息计划-付息列表查询总数
+		@Override
+		public Integer getcountssubjectpurchaserecord(Integer id) {
+			String sql=" SELECT s.subject_name,s.period,s.year_rate, pr.serial_number,m.mobile_phone,m.member_name,m.member_identity, pr.amount, (pr.amount+pr.interest) money, pr.create_date, pr.update_date,pr.ispayment FROM subject_purchase_record pr, members m,subject s WHERE pr.member_id = m.member_id and pr.subject_id=s.subject_id order BY m.create_date DESC";	
+			sql+=" and pr.subject_id ="+id;
+			sql+=" order BY pr.create_date DESC";
+			Query query=em.createNativeQuery(sql);
+			if (query.getResultList().size()==0) {
+				return null;
+			}else {
+				return Integer.parseInt(query.getSingleResult().toString());
+			}				
+		}
 }
