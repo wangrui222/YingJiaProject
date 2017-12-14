@@ -25,6 +25,7 @@
                  /view/login.jsp=anon  
                  /wangrui/login=anon
                 /wangrui/duanxin=anon
+                 /product/**=anon
                 /view/index/**=anon
                  /resources/** = anon 
                  /wangrui/logout=logout
