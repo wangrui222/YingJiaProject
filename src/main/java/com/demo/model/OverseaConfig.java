@@ -1,4 +1,5 @@
 package com.demo.model;
+import java.sql.Clob;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,18 +12,18 @@ import javax.persistence.SequenceGenerator;
  * @author admin
  *
  */
-@Entity(name="oversea_config ")
+@Entity
 public class OverseaConfig {
 	
 private	Integer ocId ;//主键
 private  String title ;//标题',
 private  String ocContent;//   CLOB,--'内容',
-private  Integer sortColum ;//排序值',
+private  Integer sortcolum ;//排序值',
 private  String childTitle ;//子标题',
 private  String ocDescription  ;// '描述',
 private String  userType  ;//用户群体',
-private  Date updTime ;//修改时间',
-private Date  addTime ;//添加时间',
+private  Date updtime ;//修改时间',
+private Date  addtime ;//添加时间',
 private  String overseaIcon ;//图标',
 private  Date startDate  ;//开始时间',
 private Date  endDate  ;//结束时间',
@@ -45,17 +46,32 @@ public String getTitle() {
 public void setTitle(String title) {
 	this.title = title;
 }
+
+
+
 public String getOcContent() {
 	return ocContent;
 }
 public void setOcContent(String ocContent) {
 	this.ocContent = ocContent;
 }
-public Integer getSortColum() {
-	return sortColum;
+public Integer getSortcolum() {
+	return sortcolum;
 }
-public void setSortColum(Integer sortColum) {
-	this.sortColum = sortColum;
+public void setSortcolum(Integer sortcolum) {
+	this.sortcolum = sortcolum;
+}
+public Date getUpdtime() {
+	return updtime;
+}
+public void setUpdtime(Date updtime) {
+	this.updtime = updtime;
+}
+public Date getAddtime() {
+	return addtime;
+}
+public void setAddtime(Date addtime) {
+	this.addtime = addtime;
 }
 public String getChildTitle() {
 	return childTitle;
@@ -75,18 +91,7 @@ public String getUserType() {
 public void setUserType(String userType) {
 	this.userType = userType;
 }
-public Date getUpdTime() {
-	return updTime;
-}
-public void setUpdTime(Date updTime) {
-	this.updTime = updTime;
-}
-public Date getAddTime() {
-	return addTime;
-}
-public void setAddTime(Date addTime) {
-	this.addTime = addTime;
-}
+
 public String getOverseaIcon() {
 	return overseaIcon;
 }
