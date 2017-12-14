@@ -7,13 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-/*
- * 理财类基金产品
- */
 
 
-@Entity(name="finance_product_funds")
-
+@Entity
 public class FinanceProductFunds {
 	private Integer  financeProductFundsId ;//主键
 	private String financeProductFundsType ;//产品类型
@@ -23,10 +19,10 @@ public class FinanceProductFunds {
 	private Float  floorAmount;//起投金额
 	private Float yearRate  ;//年化率
 	private  Integer subscribeCount;//预约人数
-	private  String productTopic;//基金专题/关于基金(CLOB)
-	private String productFactor ;//产品要素(CLOB)
-	private String productStrategy;//产品策略(CLOB)
-	private String productManager ;//'基金经理详细(CLOB)
+	private  String productTopic;//基金专题/关于基金(String)
+	private String productFactor ;//产品要素(String)
+	private String productStrategy;//产品策略(String)
+	private String productManager ;//'基金经理详细(String)
 	private Date createDate;//添加时间
 	private Date  updateDate ; //修改时间
 	private  String productManagerName  ;//--管理人名称,
@@ -40,14 +36,12 @@ public class FinanceProductFunds {
 	private  Date startDate  ;//开始时间,
 	private  Date endDate ;//结束时间, 
 	private  String financeProductFundsRatio  ;//返佣比例,
-	private String  contract ;//私募合同(CLOB),
+	private String  contract ;//私募合同(String),
 	private  String  bankAccount;//银行账户（支行名称|银行账号|户名）,
-	
+
 	@Id
 	@SequenceGenerator(name="seq_FinanceProductFunds",sequenceName="seq_finance_product_funds",allocationSize=1)
 	@GeneratedValue(generator="seq_FinanceProductFunds",strategy=GenerationType.SEQUENCE)
-	
-	
 	public Integer getFinanceProductFundsId() {
 		return financeProductFundsId;
 	}
@@ -96,30 +90,7 @@ public class FinanceProductFunds {
 	public void setSubscribeCount(Integer subscribeCount) {
 		this.subscribeCount = subscribeCount;
 	}
-	public String getProductTopic() {
-		return productTopic;
-	}
-	public void setProductTopic(String productTopic) {
-		this.productTopic = productTopic;
-	}
-	public String getProductFactor() {
-		return productFactor;
-	}
-	public void setProductFactor(String productFactor) {
-		this.productFactor = productFactor;
-	}
-	public String getProductStrategy() {
-		return productStrategy;
-	}
-	public void setProductStrategy(String productStrategy) {
-		this.productStrategy = productStrategy;
-	}
-	public String getProductManager() {
-		return productManager;
-	}
-	public void setProductManager(String productManager) {
-		this.productManager = productManager;
-	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -198,22 +169,46 @@ public class FinanceProductFunds {
 	public void setFinanceProductFundsRatio(String financeProductFundsRatio) {
 		this.financeProductFundsRatio = financeProductFundsRatio;
 	}
-	public String getContract() {
-		return contract;
-	}
-	public void setContract(String contract) {
-		this.contract = contract;
-	}
+	
 	public String getBankAccount() {
 		return bankAccount;
 	}
 	public void setBankAccount(String bankAccount) {
 		this.bankAccount = bankAccount;
+	}
+	public String getProductTopic() {
+		return productTopic;
+	}
+	public void setProductTopic(String productTopic) {
+		this.productTopic = productTopic;
+	}
+	public String getProductFactor() {
+		return productFactor;
+	}
+	public void setProductFactor(String productFactor) {
+		this.productFactor = productFactor;
+	}
+	public String getProductStrategy() {
+		return productStrategy;
+	}
+	public void setProductStrategy(String productStrategy) {
+		this.productStrategy = productStrategy;
+	}
+	public String getProductManager() {
+		return productManager;
+	}
+	public void setProductManager(String productManager) {
+		this.productManager = productManager;
+	}
+	public String getContract() {
+		return contract;
+	}
+	public void setContract(String contract) {
+		this.contract = contract;
 	} 
-	
-	
-	
-	
+
+
+
+
 
 }  
- 
