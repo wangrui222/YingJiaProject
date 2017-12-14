@@ -13,7 +13,7 @@ import javax.persistence.SequenceGenerator;
  * @author admin
  *
  */
-@Entity(name="member_withdraw_record")
+@Entity
 
 public class MemberWithdrawRecord {
 	private Integer mwrId ;//Ö÷¼ü
