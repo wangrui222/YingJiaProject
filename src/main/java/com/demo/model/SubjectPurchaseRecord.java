@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-@Entity(name="subject_purchase_record")
+@Entity
 
 /**
  * ±êµÄ¹ºÂò
