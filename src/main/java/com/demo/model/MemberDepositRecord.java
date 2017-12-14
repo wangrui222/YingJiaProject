@@ -12,7 +12,7 @@ import javax.persistence.SequenceGenerator;
  * @author admin
  *
  */
-@Entity(name="member_deposit_record")
+@Entity
 public class MemberDepositRecord {
 	private	Integer memberDepositRecordId ;//Ö÷¼ü
 	private	 String  serialNumber ;//Á÷Ë®ºÅ
