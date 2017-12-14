@@ -1,7 +1,11 @@
 package com.demo.dao.ldd;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.demo.model.MemberTradeRecord;
 import com.demo.model.MemberWithdrawRecord;
 
 /**
@@ -10,5 +14,6 @@ import com.demo.model.MemberWithdrawRecord;
  *
  */
 public interface MemberwithdrawrecordRepository extends JpaRepository<MemberWithdrawRecord, Integer>{
-
+	@Query("select m from MemberWithdrawRecord m where m.memberId=?1")
+	public List<MemberWithdrawRecord> selectMemberWithdrawRecord(Integer id);
 }

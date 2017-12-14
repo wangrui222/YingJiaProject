@@ -1,3 +1,5 @@
+<%@page import="com.demo.model.FinanceProductFunds"%>
+<%@page import="org.springframework.data.domain.Page"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -21,6 +23,10 @@
 <script src="<%=basePath%>resources/web/echart/dist/echarts.js"></script>
 </head>
 <body>
+
+
+
+	
 
     <div class="ajaxContainer">
         <!-- 异步内容开始 -->

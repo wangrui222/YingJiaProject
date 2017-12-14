@@ -1,3 +1,4 @@
+<%@page import="com.demo.model.FinanceProductFunds"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -33,11 +34,14 @@
 </script>
 </head>
 <body>
+	<%
+		FinanceProductFunds fp = (FinanceProductFunds) session.getAttribute("simygoumaiFinanceProductFundsId");
+	%>
 	<div class="proMain">
 		<div class="conTit">
 			<span><a style="color: #9d8440;" href="<%=basePath%>finance">其他标的</a></span>
 			<h2>
-				<em>￥</em>测试私募
+				<em>￥</em><%=fp.getFinanceProductFundsName()%>
 			</h2>
 		</div>
 		<table class="conTable" width="100%" border="0" cellspacing="0"
@@ -45,15 +49,15 @@
 			<tr>
 				<td class="txtInfo">
 					<div class="txt2">
-						<h2>15%</h2>
+						<h2><%=fp.getYearRate()+"%"%></h2>
 						<p>预期收益</p>
 					</div>
 					<div class="txt1">
-						<h2>365</h2>
+						<h2><%=fp.getPeriod()%></h2>
 						<p>期限(天)</p>
 					</div>
 					<div class="txt3">
-						<h2>1000000</h2>
+						<h2><%=fp.getFloorAmount()%></h2>
 						<p>起投金额(元)</p>
 					</div>
 				</td>
@@ -91,7 +95,7 @@
 			</div>
 			<div id="conBox">
 				<div class="box" style="display: block">
-					<p>测试私募</p>
+					<p><%=fp.getProductTopic()%></p>
 				</div>
 				<div class="box">
 					<table width="70%" class="lcrInfo" border="0" cellspacing="0"
@@ -101,68 +105,61 @@
 								src="<%=basePath%>upload/news/img/20160304/20160304112636234440.png"></td>
 						</tr>
 						<tr>
-							<td><h2>张三</h2></td>
+							<td><h2><%=fp.getProductManagerName()%></h2></td>
 						</tr>
 						<tr>
-							<td><h4>经理</h4></td>
+							<td><h4><%=fp.getProductManagerTitle()%></h4></td>
 						</tr>
 						<tr>
-							<td><h3>测试私募</h3></td>
+							<td><h3><%=fp.getProductManagerDesc()%></h3></td>
 						</tr>
 						<tr>
 							<td><p>
-								<p>测试私募</p>
-								</p></td>
+								<p><%=fp.getProductManagerDesc()%></p>
+						</p>
+						</td>
 						</tr>
 					</table>
 				</div>
 				<div class="box">
-					<p>测试私募</p>
+					<p><%=fp.getProductStrategy()%></p>
 				</div>
 				<div class="box">
-					<p>测试私募</p>
+					<p><%=fp.getProductFactor()%></p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<script>
-		var _hmt = _hmt || [];
-		(function() {
-			var hm = document.createElement("script");
-			hm.src = "//hm.baidu.com/hm.js?06cf97732baac1a65bed8ae95f2384aa";
-			var s = document.getElementsByTagName("script")[0];
-			s.parentNode.insertBefore(hm, s);
-		})();
-	</script>
 	<script type="text/javascript">
-		$(function() {
+	$(function(){
 
-			$(".tbConBox .tab a").click(
-					function() {
-						if (!$(this).hasClass("select")) {
-							var num = $(this).index();
-							$(this).addClass("select").siblings().removeClass(
-									"select");
-							$("#conBox .box").eq(num).show().siblings().hide();
-						}
-					});
-
-			$(":input").focus(function() {
-				$(".li4").hide();
-			});
-
-			var exists = false;
-			var authBankCard = false;
-			$(".submit").click(function() {
-				if (exists == false) {
-					$("#checkmoney").html("请先登陆!");
-					$(".li4").show(100);
-					return false;
-				}
-			});
-
+		$(".tbConBox .tab a").click(function(){
+			if(!$(this).hasClass("select")){
+				var num=$(this).index();
+				$(this).addClass("select").siblings().removeClass("select");
+				$("#conBox .box").eq(num).show().siblings().hide();
+			}
 		});
-	</script>
+		
+		$(":input").focus(function () {
+            $(".li4").hide();
+        });
+		
+		var exists = false;
+		var authBankCard=false;
+            $(".submit").click(function () {
+                if (exists == false) {
+                    $("#checkmoney").html("请先登陆!");
+                    $(".li4").show(100);
+                    return false;
+                }
+            });
+		
+	});
+		
+        
+</script>
+	
+
 </body>
 </html>

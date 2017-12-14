@@ -55,7 +55,7 @@
 			</tr>
 			<tr>
 				<th>添加时间</th>
-				<td></td>
+				<td>${memberslist.createDate}</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
@@ -104,12 +104,12 @@
 			</tr>
 			<tr>
 				<th>添加时间</th>
-				<td></td>
+				<td>${FinancialPlannerlist.createDate}</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
 		</table>
-		<%-- <table class="table table-bordered tablebox">
+		<table class="table table-bordered tablebox">
 			<tr style="text-align: center; background: #AFABAB;">
 				<td colspan="7" style="padding: 10px;">投资记录</td>
 			</tr>
@@ -122,24 +122,25 @@
 				<th width="15%">投资收益</th>
 				<th width="15%">投资时间</th>
 			</tr>
-			<#list pageInfoPurchase.list as r>
+			<c:forEach items="${subjectpurchaserecord}" var="subjectpurchaserecord"
+				varStatus="vs">
 			<tr>
-				<td>${(r_index+1)!!}</td>
-				<td>${(r.serialNumber)!!}</td>
-				<td>${(r.amount)!!}</td>
+				<td>${vs.index+1}</td>
+				<td>${subjectpurchaserecord.serialNumber}</td>
+				<td>${subjectpurchaserecord.amount}</td>
 				<td>
 					<#if r.ispayment.ordinal()==0><font style="color: red;">${(r.ispayment.description)!!}</font>
 					<#else><font style="color: green;">${(r.ispayment.description)!!}</font>
 					</#if>
 				</td>
-				<td><font color="#a58b48">${(r.subject.name)!!}</font></td>
-				<td>${(r.interest)!!}</td>
-				<td>${r.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+				<td><font color="#a58b48">${subjectpurchaserecord.}</font></td>
+				<td>${subjectpurchaserecord.}</td>
+				<td>${subjectpurchaserecord.}</td>
 			</tr>
-		</#list>
+		</c:forEach>
 		
-		</table> --%>
-		<%-- <table class="table table-bordered tablebox">
+		</table>
+		<table class="table table-bordered tablebox">
 			<tr style="text-align: center; background: #AFABAB;">
 				<td colspan="7" style="padding: 10px;">充值记录</td>
 			</tr>
@@ -152,23 +153,23 @@
 				<th width="15%">充值渠道编号</th>
 				<th width="15%">充值时间</th>
 			</tr>
-			<#list pageInfoDeposit.list as r>
-			<tr>
-				<td>${(r_index+1)!!}</td>
-				<td>${(r.serialNumber)!!}</td>
-				<td>${(r.amount)!!}</td>
-				<td>
-					<#if r.status==0><font style="color: red;">${(r.statusDesc)!!}</font>
-					<#else><font style="color: green;">${(r.statusDesc)!!}</font>
-					</#if>
-				</td>
-				<td><font color="#a58b48">${(r.payChannelNameDesc)!!}</font></td>
-				<td>${(r.payChannelOrderNo)!!}</td>
-				<td>${r.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
-			</tr>
-		</#list>
-		
-		</table> --%>
+			<c:forEach items="${memberdepositrecord}" var="memberdepositrecord"
+				varStatus="vs">
+				<tr>
+					<td>${vs.index+1}</td>
+					<td>${memberdepositrecord.serialNumber}</td>
+					<td>${memberdepositrecord.amount}</td>
+					<td><c:if test="${memberdepositrecord.status==0}"><font style="color: red;">失败</font>
+						</c:if><c:if test="${memberdepositrecord.status !=0}"><font style="color: green;">完成</font>
+						</c:if>
+					</td>
+					<td><font color="#a58b48">${memberdepositrecord.payChannelName}</font></td>
+					<td>${memberdepositrecord.payChannelOrderNo}</td>
+					<td>${memberdepositrecord.createDate}</td>
+				</tr>
+			</c:forEach>
+
+		</table>
 		<table class="table table-bordered tablebox">
 			<tr style="text-align: center; background: #AFABAB;">
 				<td colspan="7" style="padding: 10px;">钱包记录</td>
@@ -182,17 +183,22 @@
 				<th width="15%">交易名称</th>
 				<th width="15%">交易时间</th>
 			</tr>
-			<tr>
-				<td>${memberpucchargeitem.mpciId}</td>
-				<td>${mpciId.tradeNo}</td>
-				<td>${mpciId.amount}</td>
-				<td>
-					
-				</td>
-				<td><font color="#a58b48">${mpciId.tradeTypeDesc}</font></td>
-				<td>${mpciId.tradeName}</td>
-				<td>${mpciId.createDate}</td>
-			</tr>
+			<c:forEach items="${membertraderecord}" var="membertraderecord"
+				varStatus="vs">
+				<tr>
+					<td>${vs.index+1}</td>
+					<td>${membertraderecord.tradeNo}</td>
+					<td>${membertraderecord.amount}</td>
+					<td><c:if test="${membertraderecord.tradeStatus ==0}">
+							<span style="color: blue;">完成</span>
+						</c:if> <c:if test="${membertraderecord.tradeStatus !=0}">
+							<span style="color: red;">失败</span>
+						</c:if></td>
+					<td><font color="#a58b48">${membertraderecord.tradeType}</font></td>
+					<td>${membertraderecord.tradeName}</td>
+					<td>${membertraderecord.createDate}</td>
+				</tr>
+			</c:forEach>
 		</table>
 		<table class="table table-bordered tablebox">
 			<tr style="text-align: center; background: #AFABAB;">
@@ -207,17 +213,22 @@
 				<th width="15%">提现卡号</th>
 				<th width="15%">提现时间</th>
 			</tr>
-
-			<tr>
-				<td>${memberWithdrawRecord.mwrId}</td>
-				<td>${memberWithdrawRecord.serialNumber}</td>
-				<td>${memberWithdrawRecord.amount}</td>
-				<td>${memberWithdrawRecord.status}</td>
-				<td><font color="#a58b48">${memberWithdrawRecord.bankName}</font></td>
-				<td>${memberWithdrawRecord.bankCard}</td>
-				<td>${memberWithdrawRecord.createDate}</td>
-			</tr>
-
+			<c:forEach items="${memberWithdrawRecord}" var="memberWithdrawRecord"
+				varStatus="vs">
+				<tr>
+					<td>${vs.index+1}</td>
+					<td>${memberWithdrawRecord.serialNumber}</td>
+					<td>${memberWithdrawRecord.amount}</td>
+					<td><c:if test="${memberWithdrawRecord.status !=0}">
+							<span style="color: blue;">完成</span>
+						</c:if> <c:if test="${memberWithdrawRecord.status ==0}">
+							<span style="color: red;">失败</span>
+						</c:if></td>
+					<td><font color="#a58b48">${memberWithdrawRecord.bankName}</font></td>
+					<td>${memberWithdrawRecord.bankCard}</td>
+					<td>${memberWithdrawRecord.createDate}</td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 </body>

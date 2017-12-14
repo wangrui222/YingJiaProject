@@ -24,7 +24,7 @@
 			<th width="15%">投资收益</th>
 			<th width="15%">投资时间</th>
 		</tr>
-		<#list pageInfoPurchase.list as r>
+		<%-- <#list pageInfoPurchase.list as r>
 			<tr>
 				<td>${(r_index+1)!!}</td>
 				<td>${(r.serialNumber)!!}</td>
@@ -39,7 +39,7 @@
 				<td>${r.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
 			</tr>
 		</#list>
-	</table>
+	</table> --%>
 	<#include "ajax_paginate1.html" />
 	<@paginate currentPage=(pageInfoPurchase.pageNum)!0 totalPage=(pageInfoPurchase.pages)!0 actionUrl="<%=basePath%>sysmember/ajaxPurchase" urlParas="&id=${(memberId)!!}"/>
 </div>

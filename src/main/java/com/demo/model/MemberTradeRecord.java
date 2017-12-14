@@ -15,7 +15,7 @@ import javax.persistence.SequenceGenerator;
  */
 
 
-@Entity(name=" member_trade_record ")
+@Entity
 public class MemberTradeRecord {
 	private Integer mtrId;//Ö÷¼ü
 	private Integer  memberId ;//'ÓÃ»§id',

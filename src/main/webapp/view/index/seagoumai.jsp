@@ -1,3 +1,4 @@
+<%@page import="com.demo.model.OverseaConfig"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -10,11 +11,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="<%=basePath%>resources/web/images/icon.ico" type="image/x-icon"
-	rel="shortcut icon">
+<link href="<%=basePath%>resources/web/images/icon.ico"
+	type="image/x-icon" rel="shortcut icon">
 
-<link href="<%=basePath%>resources/web/font/iconfont.css" rel="stylesheet"
-	type="text/css" />
+<link href="<%=basePath%>resources/web/font/iconfont.css"
+	rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>resources/web/css/common.css" rel="stylesheet">
 <link href="<%=basePath%>resources/web/css/jw.css" rel="stylesheet">
 
@@ -33,11 +34,14 @@
 </script>
 </head>
 <body>
+	<%
+		OverseaConfig cf = (OverseaConfig) session.getAttribute("overseaConfig");
+	%>
 	<div class="proMain">
 		<div class="conTit">
 			<span><a style="color: #9d8440;" href="<%=basePath%>oversea">其他保险</a></span>
 			<h2>
-				<em>￥</em>有缘社区
+				<em>￥</em><%=cf.getTitle() %>
 			</h2>
 		</div>
 		<table class="conTable" width="100%" border="0" cellspacing="0"
@@ -47,13 +51,13 @@
 					<ul class="conInfoList">
 						<li class="info" style="height: auto">
 							<p>
-								子标题：<font color="#00baff">有缘社区最有缘</font>
+								子标题：<font color="#00baff"><%=cf.getChildTitle()%></font>
 							</p>
 							<p>
-								用户群体：<font color="#00baff">有缘社区</font>
+								用户群体：<font color="#00baff"><%=cf.getUserType()%></font>
 							</p>
 							<p>
-								描述：<font color="#00baff">有缘社区 </font>
+								描述：<font color="#00baff"><%=cf.getOcDescription()%></font>
 							</p>
 						</li>
 					</ul>

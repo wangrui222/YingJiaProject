@@ -41,7 +41,7 @@
 	<jsp:include page="maintop.jsp"></jsp:include>
 	<iframe id="iFrame2" name="iFrame2" width="100%"
 		onload="this.height=iFrame2.document.body.scrollHeight"
-		frameborder="0" src="product.jsp" scrolling="no"></iframe>
+		frameborder="0" src="<%=basePath%>view/index/product.jsp" scrolling="no"></iframe>
 
 	<jsp:include page="mainunder.jsp"></jsp:include>
 

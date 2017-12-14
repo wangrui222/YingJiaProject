@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * @author admin
  *
  */
-@Entity(name="member_account")
+@Entity
 public class MemberAccount {
 	private	Integer memberAccountId ;//Ö÷¼ü
 	private	Members  members ;//ÓÃ»§id
