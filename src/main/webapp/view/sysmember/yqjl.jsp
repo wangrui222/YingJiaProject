@@ -4,6 +4,7 @@
 	String path = request.getContextPath();
  	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
     <head>
@@ -23,17 +24,18 @@
                         <h2><span class="glyphicon glyphicon-play" style="margin-right:5px"></span>邀请奖励</h2>
 
                       <div class="tablelist">
-                      	<form action="<%=basePath%>sysmember/inviteRewards" method="post" id="form1">
-                        <table class="table tabletop">
+                      	<form action="<%=basePath%>jian/sysmember/inviteRewards" method="post" id="form1" name="form">
+                      	<input type="hidden" id="page" name="page" > 
+                        <table class="table tabletop">      
                         <tr>
                          <td style="width:90px;padding-left:20px">姓名：</td>
-                        <td style="width:140px"><input type="text" class="form-control" name="memberName" placeholder="姓名" value="${(member.memberName)!!}"></td>
+                        <td style="width:140px"><input type="text" class="form-control" name="memberName" placeholder="姓名" value=""></td>
                         <td style="width:100px;padding-left:20px">手机号：</td>
-                        <td><input type="text"  name="mobilePhone" class="form-control" placeholder="手机号" value="${(member.mobilePhone)!!}"></td>
+                        <td><input type="text"  name="mobilePhone" class="form-control" placeholder="手机号" value=""></td>
                         <td style="width:90px;padding-left:20px">邀请码：</td>
-                        <td style="width:140px"><input type="text" class="form-control" name="invitationcode" placeholder="邀请码" value="${(member.invitationcode)!!}"></td>
+                        <td style="width:140px"><input type="text" class="form-control" name="invitationcode" placeholder="邀请码" value=""></td>
                          <td style="width:100px;padding-left:20px">被邀请码：</td>
-                        <td><input type="text"  name="invitedcode" class="form-control" placeholder="被邀请码" value="${(member.invitedcode)!!}"></td>
+                        <td><input type="text"  name="invitedcode" class="form-control" placeholder="被邀请码" value=""></td>
                          <td style="width:140px;padding-left:20px">是否已注册奖励：</td>
                         <td><select name="status" class="form-control" style="width:100px;height:32px" id="status">
                         	<option value="">全部</option>
@@ -53,6 +55,7 @@
                         </table>
                         </form>
                         <table class="table table-bordered tablebox">
+                       
                           <tr class="text-center" bgcolor="#f7f7f7">
                           <td>序号</td>
                           <td>手机号</td>
@@ -65,44 +68,37 @@
                           <td>注册时间</td>
                           <td>操作</td>
                           </tr>
-                          <#list pageInfo.list as m>
+                         <c:forEach items="${pagelist.getContent()}" var="mlist">
                           <tr class="text-center">
-                            <td>${m_index+1}</td>
-                            <td>${(m.mobilePhone)!!}</td>
-                            <td>${(m.memberName)!!}</td>
-                            <td>${(m.invitationcode)!!}</td>
-                            <td>${(m.invitedcode)!!}</td>
-                            <td>${(m.account.investAmount)!!}</td>
+                            <td>${mlist.memberAccountId}</td>
+                            <td>${mlist.members.mobilePhone}</td>
+                            <td>${mlist.members.memberName}</td>
+                            <td>${mlist.members.invitationcode}</td>
+                            <td>${mlist.members.invitedcode}</td>
+                            <td>${mlist.investAmount}</td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td>
-                            	<#if (m.invitedcode)??&&(m.invitedcode!='')>
-                            		<#if (m.status==0)>
-                            			<a class="btn btn-primary btn-sm" href="javascript:" onclick="award('${m.id}',0)">注册奖励</a>
-                            		<#else>
+                            	
+                            			<a class="btn btn-primary btn-sm" href="javascript:" onclick="award('',0)">注册奖励</a>
+                            		
                             			<span style="color: blue;">注册已奖励 |</span>
-                            		</#if>
-                            		<#if (m.account.investAmount>=minAmount)>
-	                            		<#if (m.delFlag==0)>
-	                            			<a class="btn btn-primary btn-sm" href="javascript:" onclick="award('${m.id}',1)">投资奖励 </a> 
-	                            		<#else>
+                            	
+                            		
+	                            			<a class="btn btn-primary btn-sm" href="javascript:" onclick="award('',1)">投资奖励 </a> 
+	                            		
 	                            			<span style="color: blue;">投资已奖励 |</span>
-	                            		</#if>
-	                            	<#else>
+	                            	
 	                            		<span style="color: blue;">投资金额未达到 |</span>
-	                            	</#if>
-                            	<#else>
+	                            
 									<span>不能奖励  |</span>                    	
-                            	</#if>
-                            	<a class="btn btn-primary btn-sm" href="<%=basePath%>sysmember/inviteRewardsRecord?id=${m.id}">奖励记录</a>
+                            	
+                            	<a class="btn btn-primary btn-sm" href="<%=basePath%>sysmember/inviteRewardsRecord?id">奖励记录</a>
                             </td>
                           </tr>
-                          </#list>
+                        </c:forEach>
                         </table>
-		<#include "paginate.html" />
-<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>sysmember/inviteRewards" 
-	urlParas="&name=${(member.name)!!}&mobilePhone=${(member.mobilePhone)!!}&invitedcode=${(member.invitedcode)!!}&status=${(member.status)!!}&delFlag=${(member.delFlag)!!}"/>
 
          </div>
 
@@ -110,34 +106,31 @@
 
 	</div>
 <!-- 容器结束 -->
+
+       		<div class="llpage">
+			<div class="in">
+				<nav> <span class="count">&nbsp;第&nbsp;<b>${pagelist.getNumber()+1}</b>&nbsp;页，&nbsp;共&nbsp;<b>${pagelist.getTotalPages()}</b>&nbsp;页
+				</span>
+				<ul class="pagination">
+					<li><a class="prev_page"
+						href="javascript:pageRequest(${pagelist.getNumber()>1?pagelist.getNumber():1})">上页</a></li>
+					<c:forEach begin="1" end="${pagelist.getTotalPages()}" var="v">
+						<li><a class="now" href="javascript:pageRequest(${v})">${v}</a></li>
+					</c:forEach>
+					<li><a
+						href="javascript:pageRequest(${pagelist.getNumber()<pagelist.getTotalPages()?pagelist.getNumber()+1+1:pagelist.getTotalPages()})"
+						class="next_page" rel="next">下页</a></li>
+				</ul>
+				</nav>
+			</div>
+		</div>
 </body>
-
 <script type="text/javascript">
-$(function(){
-	$("#status").val("${(member.status)!!}");
-	$("#delFlag").val("${(member.delFlag)!!}");
-	
-});
+	function pageRequest(page) {
+		document.getElementById("page").value = page;
+		document.form.submit();
 
-	 function award(tid,type){
-		if(confirm('你确定要奖励吗？')){
-			$.ajax({
-                type: "POST", // 用POST方式传输
-                dataType: "json", // 数据格式:JSON
-                url: '<%=basePath%>sysmember/awards', // 目标地址
-                data: {
-                    id: tid,
-                    type:type
-                },
-                success: function (msg) {
-                	 if (msg.code == 0) {
-                         window.location.href = "<%=basePath%>sysmember/inviteRewards";
-                     } else {
-                        alert(msg.msg);
-                     }
-                }
-            });
-		}
-	} 
+	}
 </script>
+
 </html>
