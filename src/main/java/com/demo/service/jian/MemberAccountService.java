@@ -7,7 +7,10 @@ import java.util.List;
 *ภเหตร๗
 */
 
+import org.springframework.data.domain.Page;
+
 import com.demo.model.MemberAccount;
 public interface MemberAccountService {
-   public List<MemberAccount> findMemberAccount();
+  // public List<MemberAccount> findMemberAccount();
+	Page<MemberAccount> findMemberAccount(Integer size,Integer page);
 }

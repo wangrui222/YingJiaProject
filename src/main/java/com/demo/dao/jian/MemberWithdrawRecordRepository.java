@@ -1,6 +1,7 @@
 package com.demo.dao.jian;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.demo.model.MemberWithdrawRecord;
 
@@ -9,6 +10,8 @@ import com.demo.model.MemberWithdrawRecord;
 *@version 创建时间：2017年12月7日
 *类说明
 */
-public interface MemberWithdrawRecordRepository extends JpaRepository<MemberWithdrawRecord, Integer> {
+
+public interface MemberWithdrawRecordRepository extends JpaRepository<MemberWithdrawRecord, Integer>,JpaSpecificationExecutor<MemberWithdrawRecord> {
+
 
 }
