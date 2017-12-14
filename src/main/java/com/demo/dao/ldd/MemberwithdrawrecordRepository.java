@@ -14,6 +14,6 @@ import com.demo.model.MemberWithdrawRecord;
  *
  */
 public interface MemberwithdrawrecordRepository extends JpaRepository<MemberWithdrawRecord, Integer>{
-	@Query("select m from MemberWithdrawRecord m where m.memberId=?1")
+	@Query("select m from MemberWithdrawRecord m where m.members.memberId=?1")
 	public List<MemberWithdrawRecord> selectMemberWithdrawRecord(Integer id);
 }
