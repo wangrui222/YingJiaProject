@@ -93,7 +93,7 @@
 							</c:if></td>
 						<td>${list[5]}</td>
 						<td><c:if test="${list[4]==0}">
-						<input class="btn btn-primary btn-sm" type="submit" onclick="jb(${list[4]},${list[2]});" value="解绑银行卡">
+						<input class="btn btn-primary btn-sm" type="submit" onclick="jb(${list[4]},${list[2]},${page});" value="解绑银行卡">
 								<%-- <a href="<%=basePath%>sysmember/unBankCard/${list[0]}"
 									class="btn btn-primary btn-sm"
 									onclick="return confirm('你确定要解绑？')">解绑银行卡</a> --%>
@@ -134,8 +134,9 @@
 			document.getElementById("pagess").value=ye;		
 			document.fff.submit();			
 		}	
-		function jb(delflag,id) {	
-			alert(id);
+		function jb(delflag,id,page) {	
+			alert(page);
+			document.getElementById("pagess").value=page;
 			document.getElementById("dell").value=delflag;
 			document.getElementById("mid").value=id;
 			document.fff.submit();		

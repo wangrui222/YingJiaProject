@@ -99,7 +99,7 @@
 							</c:if></td>
 						<td><f:formatDate value="${list[7]}" pattern="yyyy-MM-dd" /></td>
 						<td><c:if test="${list[6]==0}">
-								<input class="btn btn-primary btn-sm" type="submit" onclick="sh(${list[6]},${list[0]});" value="审核">
+								<input class="btn btn-primary btn-sm" type="submit" onclick="sh(${list[6]},${list[0]},${page});" value="审核">
 								<%-- <a class="btn btn-primary btn-sm"
 									href="<%=basePath%>ldd/sysmember/financiaAudit/${list[1]}">审核</a> --%>
 							</c:if> <c:if test="${list[6]!=0}">
@@ -126,8 +126,9 @@
 			document.getElementById("pagess").value=ye;			
 			document.fff.submit();			
 		}
-		function sh(statu,id) {	
+		function sh(statu,id,page) {	
 			alert(id);
+			document.getElementById("pagess").value=page;
 			document.getElementById("statu").value=statu;
 			document.getElementById("mid").value=id;
 			document.fff.submit();		
