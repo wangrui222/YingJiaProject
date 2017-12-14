@@ -8,4 +8,6 @@ import com.demo.model.Users;
 
 public interface UserLoginRepository extends JpaRepository<Users, Integer>,UserDao {
 
+
+
 }

@@ -32,5 +32,17 @@ public class UserLoginRepositoryImpl implements UserDao {
 		return new HashSet<>(query.getResultList());
 	}
 
+	@Override
+	public Object[] getUsersWithMobilePhone(String mobilePhone) {
+		String sql = "select user_name,users_password,mobile_phone,status from users u where u.MOBILE_PHONE = '"+mobilePhone+"'";
+		try {
+			Query query = entityManager.createNativeQuery(sql);
+			Object[] list = (Object[]) query.getSingleResult();
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	
 }

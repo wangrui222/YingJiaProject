@@ -6,26 +6,28 @@ import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.demo.dao.wr.FinanceProductFundsRepository;
+import com.demo.dao.ldd.MemberwithdrawrecordRepository;
 import com.demo.dao.wr.OverseaConfigRepository;
-import com.demo.dao.wr.SubjectFieldRecordRepository;
-import com.demo.model.FinanceProductFunds;
 import com.demo.model.OverseaConfig;
 
 import junit.framework.TestCase;
 
 public class WTest extends TestCase {
-	
+
+	public void test05(){
+		System.out.println("038bdaf98f2037b31f1e75b5b4c9b26e"=="038bdaf98f2037b31f1e75b5b4c9b26e");
+	}
+
 	public void test(){
 		ApplicationContext app = new ClassPathXmlApplicationContext("spring-config.xml");
-		SubjectFieldRecordRepository subjectFieldRecordRepository = (SubjectFieldRecordRepository) app.getBean("subjectFieldRecordRepository");
-		System.out.println(subjectFieldRecordRepository.getSubjectFieldRecord(1628));
+		MemberwithdrawrecordRepository memberwithdrawrecordRepository = (MemberwithdrawrecordRepository) app.getBean("memberwithdrawrecordRepository");
+		System.out.println(memberwithdrawrecordRepository.selectMemberWithdrawRecord(2));
 		//List<Object[]> object = productRepository.getGushouList();
 		//Float subjectPurchaseRecord = productRepository.getSumamount();
-	//	System.out.println(subjectPurchaseRecord);
+		//	System.out.println(subjectPurchaseRecord);
 	}
-	
-	
+
+
 	public void test04(){
 		ApplicationContext app = new ClassPathXmlApplicationContext("spring-config.xml");
 		OverseaConfigRepository fPFundsRepository = (OverseaConfigRepository) app.getBean("overseaConfigRepository");
@@ -33,8 +35,8 @@ public class WTest extends TestCase {
 		OverseaConfig object = fPFundsRepository.getOverSeaGouMai(2);
 		System.out.println(object);
 	}
-	
-	
+
+
 	public void test02(){
 		List<Object[]> list = new ArrayList<>();
 		Object[] object01 = {1,2,3,4};
@@ -45,7 +47,7 @@ public class WTest extends TestCase {
 		list.add(object01);
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i)[0]+"=="+list.get(i)[1]+"=="+list.get(i)[2]);
-			
+
 		}
 	}
 	/*String sql = "SELECT s.subject_id,s.subject_name,s.YEAR_RATE,s.floor_amount,s.period,s.bought,s.create_date,s.status,"

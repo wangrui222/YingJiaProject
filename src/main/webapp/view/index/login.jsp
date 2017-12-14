@@ -101,6 +101,8 @@
         }
 
     });
+    
+
 
 </script>
 
@@ -150,7 +152,7 @@
 	<script type="text/javascript" src="<%=basePath%>resources/web/js/login.js"></script>
 	<script type="text/javascript">
 $(function(){
-	var b = "/winplus";
+	var b = "<%=basePath%>";
 	login(b);
 });
 </script>

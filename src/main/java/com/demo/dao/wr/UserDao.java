@@ -20,5 +20,8 @@ public interface UserDao {
 	 * @return
 	 */
 	public Set<String> findRoles(String sql);
+	
+	
+	public Object[] getUsersWithMobilePhone(String mobilePhone);
 
 }

@@ -15,7 +15,9 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -108,6 +110,40 @@ public class UserLoginController {
 		System.out.println("手机号：" + phone + ", " + smsText);  
 		SendMsg_webchinese.sendMessage(phone, smsText);  
 	}  
+	
+	
+	@RequestMapping(value={"/indexLogin"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
+	@ResponseBody
+	public ResponseMsg userIndexLogin(HttpServletRequest request) {
+		String usersPassword = request.getParameter("password");
+		String mobilePhone = request.getParameter("mobilePhone");
+		
+		
+		Object[] users = userLoginRepository.getUsersWithMobilePhone(mobilePhone);
+		
+
+		Users userses=null;
+		try {
+			
+			userses = new Users(users[0].toString(), users[1].toString(), users[2].toString(),Integer.parseInt(users[3].toString()));
+			Object credentials = new SimpleHash("MD5", usersPassword, ByteSource.Util.bytes(userses.getUserName()), 1024);
+			
+			System.out.println(credentials.toString()==userses.getUsersPassword()); 
+			System.out.println(userses.getMobilePhone()==mobilePhone); 
+			System.out.println(userses.getMobilePhone().equals(mobilePhone)); 
+			if(credentials==userses.getUsersPassword()&&userses.getMobilePhone().equals(mobilePhone)){
+				return  new ResponseMsg(0, "登陆成功", null);
+				
+			}else{
+				return new ResponseMsg(1, "手机号或密码错误", null);
+			}
+		
+		} catch (UnknownAccountException uae) {
+			return new ResponseMsg(1, "手机号或密码错误", null);
+		} 
+
+
+	}
 
 
 }
