@@ -7,13 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-@Entity(name="subject")
 /**
  * 
  * @author thinkpad
  *
  */
+@Entity
 public class Subject {
+	
 	private Integer subjectId;
 	/**
 	 * 流水号
@@ -33,7 +34,7 @@ public class Subject {
 	/**
 	 * 标的类型
 	 */
-	private String subjectType;
+	private int subjectType;
 	/**
 	 * 标的状态
 	 */
@@ -78,7 +79,7 @@ public class Subject {
 	/**
 	 * 保障方式
 	 */
-	private Integer safeGuardWay;
+	private Integer safeguardWay;
 	/**
 	 * 标的开始日期
 	 */
@@ -128,11 +129,11 @@ public class Subject {
 	/**
 	 * 项目详情
 	 */
-	private String  projectDetails;
+	private String  projectdetails;
 	/**
 	 * 安全保障
 	 */
-	private String   safetyControl;
+	private String   safetycontrol;
 	/**
 	 * 体验金是否可以购买（0：否，1：是）
 	 */
@@ -164,10 +165,11 @@ public class Subject {
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
 	}
-	public String getSubjectType() {
+
+	public int getSubjectType() {
 		return subjectType;
 	}
-	public void setSubjectType(String subjectType) {
+	public void setSubjectType(int subjectType) {
 		this.subjectType = subjectType;
 	}
 	public Integer getStatus() {
@@ -230,11 +232,12 @@ public class Subject {
 	public void setRefundWay(Integer refundWay) {
 		this.refundWay = refundWay;
 	}
-	public Integer getSafeGuardWay() {
-		return safeGuardWay;
+
+	public Integer getSafeguardWay() {
+		return safeguardWay;
 	}
-	public void setSafeGuardWay(Integer safeGuardWay) {
-		this.safeGuardWay = safeGuardWay;
+	public void setSafeguardWay(Integer safeguardWay) {
+		this.safeguardWay = safeguardWay;
 	}
 	public Date getStartDate() {
 		return startDate;
@@ -302,23 +305,38 @@ public class Subject {
 	public void setBought(Integer bought) {
 		this.bought = bought;
 	}
-	public String getProjectDetails() {
-		return projectDetails;
+
+	
+	public String getProjectdetails() {
+		return projectdetails;
 	}
-	public void setProjectDetails(String projectDetails) {
-		this.projectDetails = projectDetails;
-	}
-	public String getSafetyControl() {
-		return safetyControl;
-	}
-	public void setSafetyControl(String safetyControl) {
-		this.safetyControl = safetyControl;
+	public void setProjectdetails(String projectdetails) {
+		this.projectdetails = projectdetails;
 	}
 	public Integer getExperStatus() {
 		return experStatus;
 	}
+	public String getSafetycontrol() {
+		return safetycontrol;
+	}
+	public void setSafetycontrol(String safetycontrol) {
+		this.safetycontrol = safetycontrol;
+	}
 	public void setExperStatus(Integer experStatus) {
 		this.experStatus = experStatus;
 	}
+	public Subject(int subjectType, Integer status, Integer period, Float yearRate) {
+		this.subjectType = subjectType;
+		this.status = status;
+		this.period = period;
+		this.yearRate = yearRate;
+	}
+	public Subject() {
+	}
+	
+	
+	
+	
+	
 
 }
