@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-@Entity(name="subject_purchase_record")
+@Entity
 
 /**
  * 标的购买
@@ -34,9 +34,13 @@ public class SubjectPurchaseRecord {
 	 * 标的Id
 	 */
 	private Integer  subjectId;
+	
 	private Integer memberId ;
+	
 	private Integer  delflag;
+	
 	private Date createDate ;
+	
 	private Date updateDate;
 	/**
 	 * 结算利息
