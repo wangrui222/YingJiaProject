@@ -1,7 +1,6 @@
 package com.demo.controller.wr.product;
 
 import java.net.Inet4Address;
-import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,9 +28,7 @@ import com.demo.model.MemberTradeRecord;
 import com.demo.model.Members;
 import com.demo.model.OverseaConfig;
 import com.demo.model.Subject;
-import com.demo.model.SubjectOrderRecord;
 import com.demo.model.SubjectPurchaseRecord;
-import com.demo.service.jian.MemberAccountService;
 import com.demo.service.wr.FinanceProductFundService;
 import com.demo.service.wr.MemberAmountService;
 import com.demo.service.wr.MemberTradeRecordService;

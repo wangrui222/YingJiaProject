@@ -19,14 +19,16 @@ import com.demo.model.FinancialPlanner;
 import com.demo.model.MemberAccount;
 import com.demo.model.MemberBankcards;
 import com.demo.model.MemberDepositRecord;
-import com.demo.model.MemberPucChargeItem;
-import com.demo.model.MemberTally;
 import com.demo.model.MemberTradeRecord;
 import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Members;
 import com.demo.model.Subject;
-import com.demo.model.SubjectPurchaseRecord;
 import com.demo.service.lan.YJProjectService;
+/**
+ * 后台会员管理controller
+ * @author ldd
+ *
+ */
 @Controller
 @RequestMapping(value="ldd")
 public class LDDController {

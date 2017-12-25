@@ -26,7 +26,7 @@ public class AwardRecords {
 	@Id
 	@SequenceGenerator(name="seq_AwardRecords",sequenceName="seq_award_records",allocationSize=1)
 	@GeneratedValue(generator="seq_AwardRecords",strategy=GenerationType.SEQUENCE)
-
+     
 	public Integer getAwardRecordsId() {
 		return awardRecordsId;
 	}

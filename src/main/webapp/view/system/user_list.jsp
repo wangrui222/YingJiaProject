@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%
 	String path = request.getContextPath();
  	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -30,6 +31,7 @@
 				<tr>
 					<td class="pull-right" style="padding-right: 30px"><button
 							type="button" class="btn btn-primary btn-sm add">新增</button></td>
+				
 				</tr>
 			</table>
 			<table class="table table-bordered tablebox">
@@ -41,41 +43,44 @@
 					<td>创建时间</td>
 					<td>操作</td>
 				</tr>
-				<#list pageInfo.list as user>
+				<c:forEach items="${list}" var="list" varStatus="vs">
 				<tr class="text-center">
-					<td>${user_index+1}</td>
-					<td>${(user.userName)!!}</td>
-					<td>${(user.name)!!}</td>
-					<td>${(user.mobilePhone)!!}</td>
-					<td>${user.createDate?string('yyyy/MM/dd HH:mm:ss')}</td>
-					<td><a href="<%=basePath%>sys/eidtUserView/${user.id}"
-						class="btn btn-primary btn-sm">编辑</a> <a href="javascript:;"
-						uid="${user.id}" class="btn btn-primary btn-sm delUser">删除</a></td>
+					<td>${vs.index+1}</td>
+					<td>${list[1]}</td>
+					<td>${list[2]}</td>
+					<td>${list[3]}</td>
+					<td>${list[4]}</td>
+					<td><a href="<%=basePath%>lddsystem/system/eidtUserView/${list[0]},${username}"
+						class="btn btn-primary btn-sm">编辑</a> 
+						<%-- <a href="javascript:;"
+						uid="${list[0]}" class="btn btn-primary btn-sm delUser">删除</a> --%>
+						<a href="<%=basePath%>lddsystem/system/deleteAccount/${list[0]},,${username}" class="btn btn-primary btn-sm">删除</a>
+						</td>
 				</tr>
-				</#list>
+				</c:forEach>
 			</table>
-			<#include "/common/paginate.html" /> <@paginate
+			<%-- <#include "/common/paginate.html" /> <@paginate
 			currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0
-			actionUrl="<%=basePath%>setting/feedbackList"/>
+			actionUrl="<%=basePath%>setting/feedbackList"/> --%>
 		</div>
 		<!-- 内容结束 -->
 
 	</div>
 	<!-- 容器结束 -->
 </body>
-<#if (pagelist.results)?exists && pagelist.results?size gt 0> <#list
-pagelist.results as user> </#list> </#if>
+<!-- <#if (pagelist.results)?exists && pagelist.results?size gt 0> <#list
+pagelist.results as user> </#list> </#if> -->
 
 <script type="text/javascript">
 	$(function() {
 		$(".add").click(function() {
-			window.location.href = "<%=basePath%>sys/addAccountPage";
+			window.location.href = "<%=basePath%>lddsystem/system/addAccountPage";
 		});
 
 		$(".delUser").click(function() {
 			if(confirm("你确定要删除吗？")){
 				var uid = $(this).attr("uid");
-				$.post("<%=basePath%>sys/delUser/" + uid, function(result) {
+				$.post("<%=basePath%>lddsystem/system/deleteAccount/" + uid, function(result) {
 					if (result.code == 0) {
 						location.reload();
 						;

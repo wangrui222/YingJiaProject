@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 /**
  * ³äÖµ¼ÇÂ¼±í
@@ -41,14 +43,14 @@ public class MemberDepositRecord {
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}
+	public Float getAmount() {
+		return amount;
+	}
 	public Integer getMemberId() {
 		return memberId;
 	}
 	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
-	}
-	public Float getAmount() {
-		return amount;
 	}
 	public void setAmount(Float amount) {
 		this.amount = amount;

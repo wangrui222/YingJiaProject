@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.demo.model.MemberDepositRecord;
+import com.demo.model.Members;
 import com.demo.model.SubjectOrderRecord;
 
 /**
@@ -14,9 +16,11 @@ public interface SubjectOrderRecordService {
 
 	//public List<SubjectOrderRecord> findSubjectOrderRecordService(); 
 
-	public Page<SubjectOrderRecord> pageSubjectOrderRecordService(Integer page,Integer size,final SubjectOrderRecord subjectOrderRecord);
+	public List<Object[]> selectMemberDepositRecord(Integer page,Integer size,MemberDepositRecord memberDepositRecord,Members Members);
 	
-	public SubjectOrderRecord findSubjectOrderRecordById(Integer sorId);
+	public MemberDepositRecord findSubjectOrderRecordById(Integer sorId);
+	
+	public Integer selectCount(MemberDepositRecord memberDepositRecord,Members members);
 
 }
 

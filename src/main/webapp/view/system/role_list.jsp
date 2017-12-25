@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
     <%
 	String path = request.getContextPath();
  	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -37,18 +39,19 @@
 				         <td>创建时间</td>
 				          <td>菜单配置</td>
 				      </tr>
-				      <#list pageInfo.list as role>
+				      
+				      <c:forEach items="${rolelist}" var="rolelist">
 					      <tr class="text-center">
-					         <td>${role.id}</td>
-					         <td>${role.cname!''}</td>
-					         <td>${(role.remark)!''}</td>
-					         <td>${role.createDate?string('yyyy/MM/dd HH:mm:ss')}</td>
-							 <td><a href="<%=basePath%>sys/permisssion?roleId=${role.id}" value="${role.id}" class="btn btn-primary btn-sm">菜单配置</a></td>
+					         <td>${rolelist.userRoleId}</td>
+					         <td>${rolelist.cname}</td>
+					         <td>${rolelist.remark}</td>
+					         <td>${rolelist.createDate}</td>
+							 <td><a href="<%=basePath%>lddsystem/system/permisssion/${rolelist.userRoleId}" value="${rolelist.userRoleId}" class="btn btn-primary btn-sm">菜单配置</a></td>
 					      </tr>
-					   </#list> 
+					  </c:forEach> 
 					</table>
-					<#include "/common/paginate.html" />
-<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>setting/feedbackList"/>
+<%-- 					<#include "/common/paginate.html" />
+<@paginate currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0 actionUrl="<%=basePath%>setting/feedbackList"/> --%>
          </div>
 
          <!-- 内容结束 -->
@@ -59,7 +62,7 @@
 <script type="text/javascript">
     $(function () {
         $(".add").click(function () {
-        	window.location.href="<%=basePath%>sys/addRolePage";
+        	window.location.href="<%=basePath%>lddsystem/system/addRolePage";
         });
         
         $(".delRole").click(function () {

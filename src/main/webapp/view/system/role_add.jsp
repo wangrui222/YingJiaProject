@@ -24,8 +24,8 @@
 			<span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>添加角色
 		</h2>
 
-		<form class="form-horizontal col-xs-pull-3" id="addroleForm"
-			name="addroleForm" method="post" action="<%=basePath%>sys/addRole">
+		<form class="form-horizontal col-xs-pull-3" 
+			name="addroleForm" method="post" action="<%=basePath%>lddsystem/system/addRole">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">角色名</label>
 				<div class="col-lg-5">

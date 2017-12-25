@@ -2,7 +2,11 @@ package com.demo.dao.ldd;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 账号记录Dao
+ * @author ldd
+ *
+ */
 public interface MembersDao {
 	//两表联查，理财师查询
 	public List<Object[]> selectfinancialplanner(Map<String, Object> maps,Integer page,Integer rowsize);

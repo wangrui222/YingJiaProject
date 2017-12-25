@@ -1,38 +1,77 @@
 package com.demo.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.demo.dao.jian.MemberAccountRepository;
+import com.demo.dao.jian.MemberWithdrawRecordRepository;
 import com.demo.dao.ldd.MemberwithdrawrecordRepository;
-import com.demo.dao.wr.OverseaConfigRepository;
+import com.demo.dao.wr.MemberRepository;
+import com.demo.dao.wr.SubjectRepository;
+import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.OverseaConfig;
+import com.demo.service.jian.MemberAccountService;
+import com.demo.service.wr.MemberAmountService;
+import com.demo.service.wr.MemberService;
 
 import junit.framework.TestCase;
 
 public class WTest extends TestCase {
 
 	public void test05(){
-		System.out.println("038bdaf98f2037b31f1e75b5b4c9b26e"=="038bdaf98f2037b31f1e75b5b4c9b26e");
+		Object credentials = new SimpleHash("MD5", "123456", ByteSource.Util.bytes("admin"), 1024);
+		System.out.println(credentials.toString().contentEquals("038bdaf98f2037b31f1e75b5b4c9b26e"));
 	}
 
 	public void test(){
 		ApplicationContext app = new ClassPathXmlApplicationContext("spring-config.xml");
-		MemberwithdrawrecordRepository memberwithdrawrecordRepository = (MemberwithdrawrecordRepository) app.getBean("memberwithdrawrecordRepository");
-		System.out.println(memberwithdrawrecordRepository.selectMemberWithdrawRecord(2));
+		SubjectRepository memberRepository =(SubjectRepository) app.getBean("subjectRepository");
+		System.out.println(memberRepository.getGushouGouMai(1638).length);
+		//MemberService memberService = app.getBean(MemberService.class);
+		//System.out.println(memberRepository.findMemberAll(1));
+		//memberService.addMemberYanZheng(1, "wangui", "123");
+		//System.out.println(memberwithdrawrecordRepository.selectMemberWithdrawRecord(2));
 		//List<Object[]> object = productRepository.getGushouList();
 		//Float subjectPurchaseRecord = productRepository.getSumamount();
 		//	System.out.println(subjectPurchaseRecord);
 	}
 
+	
+	public void test08(){
+		ApplicationContext app = new ClassPathXmlApplicationContext("spring-config.xml");
+		MemberAmountService memberAccountRepository =(MemberAmountService) app.getBean("memberAmountService");
+		memberAccountRepository.updateMA(1, 1);
+	}
+	
+	public void test07(){
+		Calendar  c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.add(Calendar.DATE, 15);
+		System.out.println(c.getTime());
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sim.format(c.getTime());
+		System.out.println(date);
+	}
 
 	public void test04(){
 		ApplicationContext app = new ClassPathXmlApplicationContext("spring-config.xml");
-		OverseaConfigRepository fPFundsRepository = (OverseaConfigRepository) app.getBean("overseaConfigRepository");
+		SubjectRepository fPFundsRepository = (SubjectRepository) app.getBean("subjectRepository");
 		//List<OverseaConfig> object = fPFundsRepository.getOverseaList();
-		OverseaConfig object = fPFundsRepository.getOverSeaGouMai(2);
+		List<Object[]> ojb= fPFundsRepository.findTouZiJiLu(1, 1, 5);
+		System.out.println(ojb);
+	}
+	public void test06(){
+		ApplicationContext app = new ClassPathXmlApplicationContext("spring-config.xml");
+		MemberWithdrawRecordRepository fPFundsRepository = (MemberWithdrawRecordRepository) app.getBean("memberWithdrawRecordRepository");
+		List<MemberWithdrawRecord> object = fPFundsRepository.getMemberWithdrawRecord(1, 1, 4);
 		System.out.println(object);
 	}
 
