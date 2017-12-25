@@ -48,11 +48,11 @@
 						<td style="width: 110px; padding-left: 30px">订单编号：</td>
 						<td style="width: 180px"><input type="text"
 							class="form-control" name="serialNumber" placeholder="订单编号"
-							value=""></td>
+							value="${subjectOrderRecord.serialNumber }"></td>
 						<td style="width: 110px; padding-left: 30px">手机号：</td>
 						<td style="width: 180px"><input type="text"
-							class="form-control" name="members.mobilePhone" placeholder="手机号"
-							value=""></td>
+							class="form-control" name="mobilePhone" placeholder="手机号"
+							value="${subjectOrderRecord.members.mobilePhone }"></td>
 						<td style="width: 90px">订单状态：</td>
 						<td style="width: 180px">
 						<td style="width: 140px"><select name="status"
@@ -60,7 +60,7 @@
 							id="status">
 								<option value=-1>全部</option>
 								<c:forEach items="${slist }" var="s">
-								<option value="${s.value }" >${s.name}</option>
+								<option value="${s.value }">${s.name}</option>
 								</c:forEach>
 						</select></td>
 						
@@ -68,9 +68,9 @@
 						<td style="width: 180px"><input type="text"
 							class="form-control" name="payChannelOrderNo" placeholder="富友订单"
 							value=""></td>
-							
+							<!--
 						<td style="width: 110px; padding-left: 30px">订单时间：</td>
-						<!--<td style="width: 180px"><input type="text"
+						<td style="width: 180px"><input type="text"
 							class="form-control time" name="createDate" placeholder="订单时间"
 							readonly="readonly" value=""></td>-->
 						<td class="pull-right" style="padding-right: 30px">
@@ -97,22 +97,26 @@
 					<td>订单时间</td>
 					<td>操作</td>
 				</tr>
-				<c:forEach items="${pagelist.getContent()}" var="olist">
+				<c:forEach items="${plist}" var="object" varStatus="index">
 					<tr class="text-center">
-						<td>${olist.sorId}</td>
-						<td>${olist.serialNumber}</td>
-						<td>${olist.members.mobilePhone}</td>
-						<td>${olist.amount}</td>
-						<td><c:if test="${olist.status==1}">
-								<p style="color: blue;">充值成功</p>
-							</c:if> <c:if test="${olist.status==0}">
-								<p style="color: red;">充值失败</p>
-							</c:if></td>
-						<td>富友</td>
-						<td></td>
-						<td>${olist.createDate}</td>
+						<td>${index.index+1}</td>
+						<td>${object[1] }</td>
+						<td>${object[2] }</td>
+						<td>${object[3] }</td>
+						<td>
+						<c:if test="${object[4]==1 }">
+						<p style="color: blue;">充值成功</p>
+						</c:if>
+						<c:if test="${object[4]==0 }">
+						<p style="color: red;">充值失败</p>
+						</c:if>
+							
+							</td>
+						<td>${object[5]}</td>
+						<td>${object[6]}</td>
+						<td>${object[7]}</td>
 						<td><a class="btn btn-primary btn-sm"
-							href="<%=basePath%>jian/sysmember/rechargeManage/${olist.sorId}">更新订单</a></td>
+							href="<%=basePath%>jian/sysmember/rechargeManage/${object[0]}">更新订单</a></td>
 					</tr>
 				</c:forEach>
 
@@ -120,16 +124,16 @@
 		</div>
 		<div class="llpage">
 			<div class="in">
-				<nav> <span class="count">&nbsp;第&nbsp;<b>${pagelist.getNumber()+1}</b>&nbsp;页，&nbsp;共&nbsp;<b>${pagelist.getTotalPages()}</b>&nbsp;页
+				<nav> <span class="count">&nbsp;第&nbsp;<b>${page}</b>&nbsp;页，&nbsp;共&nbsp;<b>${pages}</b>&nbsp;页
 				</span>
 				<ul class="pagination">
 					<li><a class="prev_page"
-						href="javascript:pageRequest(${pagelist.getNumber()>1?pagelist.getNumber():1})">上页</a></li>
-					<c:forEach begin="1" end="${pagelist.getTotalPages()}" var="v">
+						href="javascript:pageRequest(${page>1?page-1:1})">上页</a></li>
+					<c:forEach begin="1" end="${pages}" var="v">
 						<li><a class="now" href="javascript:pageRequest(${v})">${v}</a></li>
 					</c:forEach>
 					<li><a
-						href="javascript:pageRequest(${pagelist.getNumber()<pagelist.getTotalPages()?pagelist.getNumber()+1+1:pagelist.getTotalPages()})"
+						href="javascript:pageRequest(${page<pages?page+1:pages})"
 						class="next_page" rel="next">下页</a></li>
 				</ul>
 				</nav>

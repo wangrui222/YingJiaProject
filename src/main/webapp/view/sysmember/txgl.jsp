@@ -39,31 +39,33 @@
 		</h2>
 
 		<div class="tablelist">
-			<form action="<%=basePath%>jian/sysmember/WithdrawManage" method="post" name="form"
-				id="form1">
-				<input type="hidden" id="page" name="page"> 
+			<form action="<%=basePath%>jian/sysmember/WithdrawManage"
+				method="post" name="form" id="form1">
+				<input type="hidden" id="page" name="page">
 				<table class="table tabletop">
 					<tr>
 						<td style="width: 110px; padding-left: 30px">姓名：</td>
-						<td style="width: 180px"><input type="text" name="memberName"
-							class="form-control" placeholder="姓名" value=""></td>
-							<!--  
+						<td style="width: 180px"><input type="text"
+							name="members.memberName" class="form-control" placeholder="姓名"
+							value="${memberWithdrawRecord.members.memberName}"></td>
 						<td style="width: 110px; padding-left: 30px">手机号：</td>
 						<td style="width: 180px"><input type="text"
-							name="mobilePhone" class="form-control" placeholder="手机号"
-							value=""></td>
+							name="members.mobilePhone" class="form-control" placeholder="手机号"
+							value="${memberWithdrawRecord.members.mobilePhone }"></td>
 						<td style="width: 130px; padding-left: 30px">绑卡卡号：</td>
 						<td style="width: 180px"><input type="text"
-							class="form-control" name="bankCard" placeholder="绑卡卡号" value=""></td>
+							class="form-control" name="bankCard" placeholder="绑卡卡号"
+							value="${memberWithdrawRecord.bankCard }"></td>
 						<td style="width: 80px">状态：</td>
 						<td style="width: 180px"><select name="status"
 							class="form-control" style="width: 130px; height: 32px"
 							id="status">
-								<option value="=1">全部</option>
+								<option value="-1">全部</option>
 								<c:forEach items="${slist }" var="s">
-								<option value="${s.value }">${s.name}</option>
-							</c:forEach>
-						</select></td>-->
+									<option value="${s.value }"
+										${s.value==memberWithdrawRecord.status?"selected='selected'":"" }>${s.name}</option>
+								</c:forEach>
+						</select></td>
 						<!--  
 						<td style="width: 110px; padding-left: 30px">提现时间：</td>
 						<td style="width: 180px"><input type="text" name="createDate"
@@ -92,9 +94,10 @@
 					<td>账号详细</td>
 					<td>操作</td>
 				</tr>
-				<c:forEach items="${pagelist.getContent()}" var="mlist">
+				<c:forEach items="${pagelist.getContent()}" var="mlist"
+					varStatus="index">
 					<tr class="text-center">
-						<td>${mlist.mwrId}</td>
+						<td>${index.index+1}</td>
 						<td>${mlist.members.mobilePhone}</td>
 						<td>${mlist.members.memberName}</td>
 						<td>${mlist.members.memberIdentity}</td>
@@ -102,31 +105,46 @@
 						<td>${mlist.bankName}</td>
 						<td>${mlist.bankCard}</td>
 						<td>${mlist.cardaddress}</td>
-						<td>${mlist.status}</td>
+						<td><c:if test="${mlist.status==0}">
+								<p style="color: red">待审核</p>
+							</c:if> <c:if test="${mlist.status==1}">
+								<p style="color: green">已付款</p>
+							</c:if> <c:if test="${mlist.status==2}">
+								<p style="color: yellow">打款中</p>
+							</c:if> <c:if test="${mlist.status==3}">
+								<p style="color: red">打款失败</p>
+							</c:if> <c:if test="${mlist.status==4}">
+								<p style="color: green">已解冻</p>
+							</c:if></td>
 						<td>${mlist.createDate}</td>
 						<td><a class="btn btn-primary btn-sm"
-							href="<%=basePath%>sysmember/memberInfo?id">账号详细</a></td>
-						<td><a class="btn btn-primary btn-sm"
-							href="<%=basePath%>sysmember/withdrawAudit?serialNumber"
-							data-toggle="modal" data-target="#myModal"
-							onclick="return confirm('你确定要审核通过吗')">审核</a> <a
-							class="btn btn-primary btn-sm"
-							href="<%=basePath%>sysmember/WithdrawUnfreeze?serialNumber"
-							onclick="return confirm('你确定要解冻吗')">解冻</a> <a
-							class="btn btn-primary btn-sm" data-toggle="modal"
-							onclick="audit('')">审核</a> <a class="btn btn-primary btn-sm"
-							href="<%=basePath%>sysmember/withdrawPayment?serialNumber&channelName=BEIFU"
-							onclick="return confirm('你确定要审核通过吗')">贝付打款</a> <a
-							class="btn btn-primary btn-sm"
-							href="<%=basePath%>sysmember/WithdrawUnfreeze?serialNumber"
-							onclick="return confirm('你确定要解冻吗')">解冻</a> <!-- <a class="btn btn-primary btn-sm" href="<%=basePath%>sysmember/WithdrawPayFuIou?serialNumber=${m.serialNumber}" onclick="return confirm('你确定要审核通过吗')">富友打款</a> -->
-
-						</td>
+							href="<%=basePath%>ldd/sysmember/memberInfo/${mlist.members.memberId}">账号详细</a></td>
+						<td><c:if test="${mlist.status==0}">
+								<a class="btn btn-primary btn-sm" onclick="audit(${mlist.members.memberId})"
+									data-toggle="modal" data-target="#myModal">审核</a>
+								<a class="btn btn-primary btn-sm"
+									href="<%=basePath%>jian/sysmember/withdrawPayment/serialNumber/channelName=BEIFU"
+									onclick="return confirm('你确定要审核通过吗')">贝付打款</a>
+								<a class="btn btn-primary btn-sm"
+									href="<%=basePath%>jian/sysmember/WithdrawUnfreeze/${mlist.mwrId}"
+									onclick="return confirm('你确定要解冻吗')">解冻</a>
+							</c:if> <c:if test="${mlist.status==3}">
+								<a class="btn btn-primary btn-sm" onclick="audit(${mlist.members.memberId})"
+									data-toggle="modal" data-target="#myModal"
+									onclick="return confirm('你确定要审核通过吗')">审核</a>
+								<a class="btn btn-primary btn-sm"
+									href="<%=basePath%>jian/sysmember/WithdrawUnfreeze/${mlist.mwrId}"
+									onclick="return confirm('你确定要解冻吗')">解冻</a>
+							</c:if> <c:if test="${mlist.status==1}">
+								<p>已审核</p>
+							</c:if> <c:if test="${mlist.status==4}">
+								<p>已解冻</p>
+							</c:if></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
-       		<div class="llpage">
+		<div class="llpage">
 			<div class="in">
 				<nav> <span class="count">&nbsp;第&nbsp;<b>${pagelist.getNumber()+1}</b>&nbsp;页，&nbsp;共&nbsp;<b>${pagelist.getTotalPages()}</b>&nbsp;页
 				</span>
@@ -137,7 +155,7 @@
 						<li><a class="now" href="javascript:pageRequest(${v})">${v}</a></li>
 					</c:forEach>
 					<li><a
-						href="javascript:pageRequest(${pagelist.getNumber()<pagelist.getTotalPages()?pagelist.getNumber()+1+1:pagelist.getTotalPages()})"
+						href="javascript:pageRequest(${pagelist.getNumber()+1<pagelist.getTotalPages()?pagelist.getNumber()+1+1:pagelist.getTotalPages()})"
 						class="next_page" rel="next">下页</a></li>
 				</ul>
 				</nav>
@@ -156,11 +174,11 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">选择打款方式</h4>
 				</div>
-				<form action="<%=basePath%>sysmember/withdrawAudit" method="get">
+				<form action="<%=basePath%>jian/sysmember/withdrawAudit"
+					method="get">
 					<div class="modal-body">
-						<input type="hidden" name="serialNumber" value=""
-							id="serialNumber"> <select class="form-control"
-							name="channelName" style="width: 200px;">
+						<input type="hidden" id="memberId" name="memberId"> <select
+							class="form-control" name="channelName" style="width: 200px;">
 							<option value="FUIOU" selected="selected">富友</option>
 							<option value="BEIFU">贝付</option>
 						</select>
@@ -176,8 +194,7 @@
 			<!-- /.modal-content -->
 		</div>
 		<!-- /.modal -->
-		
-
+	</div>
 </body>
 <script type="text/javascript">
 	function pageRequest(page) {
@@ -185,5 +202,11 @@
 		document.form.submit();
 
 	}
+	function audit(memberId){
+		document.getElementById("memberId").value=memberId;
+		document.getElementById("myModal").modal();
+		
+	}
+	  
 </script>
 </html>

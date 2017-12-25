@@ -4,6 +4,7 @@
 	String path = request.getContextPath();
  	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-cn">
 <head>
@@ -24,15 +25,18 @@
 			<span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>奖励记录
 		</h2>
 		<table class="table tabletop">
+		<c:forEach items="${olist}" var="object">
 			<tr>
 				<td style="width: 300px; padding-left: 30px">邀请手机号：<span
-					style="color: red;">${(member.mobilePhone)!!}</span></td>
+					style="color: red;" ></span>${object[0] }</td>
 				<td style="width: 200px; padding-left: 30px; float: left;">邀请码：<span
-					style="color: red;">${(member.invitationcode)!!}</span></td>
+					style="color: red;">${object[1]}</span></td>
 			</tr>
+			</c:forEach>
 		</table>
 		<div class="tablelist">
 			<table class="table table-bordered tablebox">
+		
 				<tr class="text-center" bgcolor="#f7f7f7">
 					<td>序号</td>
 					<td>邀请人手机号</td>
@@ -41,21 +45,21 @@
 					<td>奖励金额</td>
 					<td>奖励时间</td>
 				</tr>
-				<#list pageInfo.list as ar>
+					<c:forEach items="${mlist}" var="object"  varStatus="index">
 				<tr class="text-center">
-					<td>${ar_index+1}</td>
-					<td>${(ar.invitingid.mobilePhone)!!}</td>
-					<td>${(ar.byinvitingid.mobilePhone)!!}</td>
-					<td>${(ar.type.desc)!!}</td>
-					<td>￥${(ar.amount)!!}</td>
-					<td></td>
+					<td>${index.index+1}</td>
+					<td>${object[1]}</td>
+					<td>${object[2]}</td>
+					<td>
+					<c:if test="${object[3]==0 }">注册奖励</c:if>
+					<c:if test="${object[3]==1 }">投资奖励</c:if>
+					</td>
+					<td>￥${object[4]}</td>
+					<td>${object[5]}</td>
 				</tr>
-				</#list>
+				 </c:forEach>
 			</table>
-			<#include "paginate.html" /> <@paginate
-			currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0
-			actionUrl="<%=basePath%>sysmember/inviteRewardsRecord" />
-
+ 
 		</div>
 
 		<!-- 内容结束 -->
