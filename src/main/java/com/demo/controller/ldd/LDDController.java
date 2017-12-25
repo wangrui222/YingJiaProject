@@ -27,6 +27,11 @@ import com.demo.model.Members;
 import com.demo.model.Subject;
 import com.demo.model.SubjectPurchaseRecord;
 import com.demo.service.lan.YJProjectService;
+/**
+ * 后台会员管理controller
+ * @author ldd
+ *
+ */
 @Controller
 @RequestMapping(value="ldd")
 public class LDDController {
