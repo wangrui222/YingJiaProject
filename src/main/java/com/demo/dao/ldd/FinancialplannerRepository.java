@@ -20,4 +20,6 @@ public interface FinancialplannerRepository extends JpaRepository<FinancialPlann
 	public void updateFinancialPlannert(Integer status,Integer id);
 	
 	
+	
+	
 }
