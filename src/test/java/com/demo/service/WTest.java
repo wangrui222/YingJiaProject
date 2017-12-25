@@ -11,16 +11,10 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.demo.dao.jian.MemberAccountRepository;
 import com.demo.dao.jian.MemberWithdrawRecordRepository;
-import com.demo.dao.ldd.MemberwithdrawrecordRepository;
-import com.demo.dao.wr.MemberRepository;
 import com.demo.dao.wr.SubjectRepository;
 import com.demo.model.MemberWithdrawRecord;
-import com.demo.model.OverseaConfig;
-import com.demo.service.jian.MemberAccountService;
 import com.demo.service.wr.MemberAmountService;
-import com.demo.service.wr.MemberService;
 
 import junit.framework.TestCase;
 
