@@ -23,20 +23,24 @@
  <div class="box-right-main">
      <h2><span class="glyphicon glyphicon-play" style="margin-right:5px"></span>修改密码</h2>
 	
-<form id="savePassword" method="post" class="form-horizontal" action="<%=basePath%>sys/savePasswd">
+<form id="savePassword" method="post" class="form-horizontal" action="<%=basePath%>lddsystem/system/savePasswd">
+
+<input type="hidden" name="userName" id="uname" value="${name}">
+
 	<div class="tablelist">
 	  <div class="row bdlist">
                <div class="col-md-5">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">原密码：</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="oldpassword" placeholder="请输入密码" type="password">
+                                        <input class="form-control" name="oldpassword" id="oldpwd" placeholder="请输入密码" type="password" onchange="out();">
+                                    	<p class="msg"></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">新密码：</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="password" placeholder="请输入密码" type="password">
+                                        <input class="form-control" name="usersPassword" placeholder="请输入密码" type="password">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -85,7 +89,7 @@ $(document).ready(function() {
                         }
                     }
                 },
-                password: {
+                usersPassword: {
                     validators: {
                         notEmpty: {
                             message: '新密码不能为空'
@@ -98,22 +102,36 @@ $(document).ready(function() {
                             message: '新密码不能为空'
                         },
                         identical: {
-                            field: 'password',
+                            field: 'usersPassword',
                             message: '新密码不一致'
                         }
                     }
                 }
             }
         })
-        .on('success.form.bv', function(e) {
-            e.preventDefault();
-            var $form = $(e.target);
-            var bv = $form.data('bootstrapValidator');
-            $.post($form.attr('action'), $form.serialize(), function(result) {
-            	alert(result.msg);
-            }, 'json');
-        });
+        
 });
+
+function out() {
+	var oldpwd=document.getElementById("oldpwd").value;	
+	var userName=document.getElementById("uname").value;
+	$.ajax({
+		type : "POST", // 用POST方式传输
+		url:'<%=basePath%>lddsystem/system/checkPasswordExsit',
+				data : {
+					"oldpassword" : oldpwd,
+					"userName" : userName
+				},
+				success : function(data) {			
+					if(data.code == '0'){
+						$(".msg").html(data.msg).show();
+					}else if(data.code == '1'){					
+						$(".msg").html(data.msg).show();
+						
+					}
+				}
+			});
+};
 </script>
 </body>
 </html>
