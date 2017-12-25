@@ -47,6 +47,7 @@ public class SubjectPurchaseRecord {
 	 * @return
 	 */
 	private Float interest;
+	
 	/**
 	 * 是否还款
 	 */
@@ -61,14 +62,34 @@ public class SubjectPurchaseRecord {
 	 * 红包金额信息（app端实际投资额度+红包额度）
 	 */
 	private String  bonusInfo;
+	
+	
 	@Id
-	@SequenceGenerator(name="subject_purchase_record",sequenceName="sql_subject_purchase_record",allocationSize=1)
+	@SequenceGenerator(name="subject_purchase_record",sequenceName="sql_subject_purchase_record",allocationSize=50)
 	@GeneratedValue(generator="subject_purchase_record",strategy=GenerationType.SEQUENCE)
 	public Integer getSprId() {
 		return sprId;
 	}
 	public void setSprId(Integer sprId) {
 		this.sprId = sprId;
+	}
+	
+	public SubjectPurchaseRecord(String serialNumber, Float amount, String dealip, Integer subjectId, Integer memberId,
+			Date createDate, Float interest, Integer ispayment, Integer lastProfitDay, String bonusInfo) {
+		this.serialNumber = serialNumber;
+		this.amount = amount;
+		this.dealip = dealip;
+		this.subjectId = subjectId;
+		this.memberId = memberId;
+		this.createDate = createDate;
+		this.interest = interest;
+		this.ispayment = ispayment;
+		this.lastProfitDay = lastProfitDay;
+		this.bonusInfo = bonusInfo;
+	}
+	
+	
+	public SubjectPurchaseRecord() {
 	}
 	public String getSerialNumber() {
 		return serialNumber;
@@ -148,5 +169,7 @@ public class SubjectPurchaseRecord {
 	public void setBonusInfo(String bonusInfo) {
 		this.bonusInfo = bonusInfo;
 	}
+	
+	
 	
 }

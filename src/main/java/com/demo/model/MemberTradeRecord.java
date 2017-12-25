@@ -33,6 +33,27 @@ public class MemberTradeRecord {
 	private Date updateDate  ;
 	
 
+	
+	public MemberTradeRecord(Integer memberId, String tradeNo, String tradeName, Float amount, String tradeType,
+			Integer fundFlow, Integer tradeStatus, String extField_1, Date createDate) {
+		this.memberId = memberId;
+		this.tradeNo = tradeNo;
+		this.tradeName = tradeName;
+		this.amount = amount;
+		this.tradeType = tradeType;
+		this.fundFlow = fundFlow;
+		this.tradeStatus = tradeStatus;
+		this.extField_1 = extField_1;
+		this.createDate = createDate;
+	}
+	
+	
+	public MemberTradeRecord() {
+	}
+
+
+
+
 	@Id
 	@SequenceGenerator(name="MemberTradeRecord_seq",sequenceName="sql_member_trade_record",allocationSize=1)
 	@GeneratedValue(generator="MemberTradeRecord_seq",strategy=GenerationType.SEQUENCE)

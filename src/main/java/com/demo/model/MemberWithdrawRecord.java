@@ -33,7 +33,7 @@ public class MemberWithdrawRecord {
 	private Date updateDate;
 
 	@Id
-	@SequenceGenerator(name = "MemberWithdrawRecord _seq", sequenceName = "sql_member_withdraw_record", allocationSize = 1)
+	@SequenceGenerator(name = "MemberWithdrawRecord _seq", sequenceName = "sql_member_withdraw_record", allocationSize = 50)
 	@GeneratedValue(generator = "MemberWithdrawRecord _seq", strategy = GenerationType.SEQUENCE)
 	public Integer getMwrId() {
 		return mwrId;
@@ -132,5 +132,24 @@ public class MemberWithdrawRecord {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
+
+	public MemberWithdrawRecord(String serialNumber, Members members, Float amount, String bankName, String bankCard,
+			Integer status, Integer delflag, String cardaddress, String channelName, Date createDate) {
+		this.serialNumber = serialNumber;
+		this.members = members;
+		this.amount = amount;
+		this.bankName = bankName;
+		this.bankCard = bankCard;
+		this.status = status;
+		this.delflag = delflag;
+		this.cardaddress = cardaddress;
+		this.channelName = channelName;
+		this.createDate = createDate;
+	}
+
+	public MemberWithdrawRecord() {
+	}
+	
+	
 
 }

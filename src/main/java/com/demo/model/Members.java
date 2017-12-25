@@ -13,7 +13,7 @@ import javax.persistence.SequenceGenerator;
  *用户基本表
  */
 
-@Entity(name="members")
+@Entity
 public class Members {
 	private	Integer memberId ;//用户id
 	private	 String memberName ;//真实姓名

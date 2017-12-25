@@ -16,7 +16,7 @@ import javax.persistence.SequenceGenerator;
  * @author thinkpad
  *
  */
-@Entity(name="subject_order_record")
+@Entity
 public class SubjectOrderRecord {
 	
 	private Integer sorId;
