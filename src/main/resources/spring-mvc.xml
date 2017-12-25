@@ -29,5 +29,6 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<!-- 静态资源访问（不拦截此目录下的东西的访问） -->
 	<mvc:resources location="/resources/" mapping="/resources/**" />
+	<mvc:resources location="/upload/" mapping="/upload/**" />
 
 </beans>
