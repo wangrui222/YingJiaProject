@@ -14,4 +14,10 @@ public interface MemberWithdrawRecordService {
 	  //public List<MemberWithdrawRecord> findMemberWithdrawRecord();  
 	  
 	  Page<MemberWithdrawRecord> findMemberWithdrawRecord(Integer page,Integer size,final MemberWithdrawRecord memberWithdrawRecord);
+	  
+	  /**
+	   * 保存提款记录
+	   * @param memberWithdrawRecord
+	   */
+	  public void addMemberWithdrawRecord(MemberWithdrawRecord memberWithdrawRecord);
 }

@@ -11,6 +11,7 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -88,5 +89,11 @@ public class MemberWithdrawRecordServiceImpl implements MemberWithdrawRecordServ
 			}
 		};
 		return memberWithdrawRecordRepository.findAll(specification,pageable);
+	}
+	@Transactional
+	@Override
+	public void addMemberWithdrawRecord(MemberWithdrawRecord memberWithdrawRecord) {
+		memberWithdrawRecordRepository.save(memberWithdrawRecord);
+		
 	}
 }
