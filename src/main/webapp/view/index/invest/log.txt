@@ -1,0 +1,71 @@
+	1.投资记录
+	
+	SELECT count(*) FROM SUBJECT s JOIN subject_purchase_record r ON s.id = r.subject_id WHERE r.member_id = ?  -(:139)
+    
+    SELECT r.id, r.serial_number, r.amount, deal_ip, subject_id, member_id, r.delflag, r.create_date, r.update_date,r.interest,r.ispayment FROM SUBJECT s JOIN subject_purchase_record r ON s.id = r.subject_id WHERE r.member_id = ? order by r.create_date desc limit ?,?  
+   
+    SELECT count(*) FROM finance_product_subscribe WHERE 1 = 1 AND member_id = ? AND status = ?  -(:139)
+   
+    select id, name,member_id, phone, addr, product_id, status, create_date, update_date,comment,amount,interest,start_date,end_date,signed_photos,risk_reveal from finance_product_subscribe where 1=1 and member_id = ? and status=? order by create_date desc limit ?,?  -(:139)
+   
+    select id, serial_number, serial_no, name, type, status, floor_amount, amount, first_id, parent_id, period, purpose, raise_start, raise_end, refund_way, safeGuard_way, start_date, end_date, year_rate, comment,folder_id, delflag, update_date, create_date,borrowername,borrowerid,bought,projectDetails,safetyControl,exper_status from subject where id = ?  -(:139)
+  
+    SELECT id, member_name, name, mobile_Phone,identity FROM `member` WHERE id = 45  -(:139)
+    
+    select id, type, name, status, period, floor_amount, year_rate, subscribe_count, create_date, update_date, product_manager_name, product_manager_pic, product_manager_title, product_manager_desc, invest_points, amount, sold_amount, buyer_count ,start_date,end_date,ratio,contract,bank_account , product_topic, product_factor, product_strategy, product_manager from finance_product_funds where id = ?  -(:139)
+  
+  
+   SUBJECT
+   subject_purchase_record
+   member
+   
+   
+   
+   2.
+select id, serial_number, type, amount, member_id, delflag, create_date, update_date, comment, purchase_id, profit_year, profit_month, profit_day from member_profit_record where member_id = ? order by id desc limit ?,?  -(:139)
+SELECT count(*) FROM member_profit_record WHERE member_id = ?  -(:139)
+ 
+ //个人收益member_account
+select id, member_id, useable_balance, imuseale_balance, total_profit, invest_amount, delflag, create_date, update_date,bonus_amount,bbin_amount from member_account where member_id = ?  -(:139)
+
+
+3.体现
+   Preparing: SELECT count(*) FROM member_withdraw_record WHERE member_id = ?  -(:139)
+   Preparing: select id, serial_number, status, amount, member_id, delflag, create_date, update_date, bank_name, bank_card,cardaddress,channel_name from member_withdraw_record where member_id = ? order by id desc limit ?,?  -(:139)
+
+
+4.
+
+SELECT ha.name,ha.amount,ha.period,ha.yearRate,
+ha.createDate,ha.yprofit,ha.interest,ha.ispayment, 
+(CASE WHEN ha.type=0 THEN DATE_ADD(ha.createDate,INTERVAL ha.period DAY) ELSE ha.end_date END) 'endDate' 
+FROM (SELECT s.`name`, pr.`amount`, s.`period`, s.`year_rate` 'yearRate', pr.`create_date` 'createDate',
+ s.`end_date`, s.`type`, pr.`interest`, pr.ispayment, (SELECT COALESCE(SUM(amount), 0) 
+ FROM `member_profit_record` WHERE member_id = ? AND purchase_id = pr.`id`) 'yprofit' 
+ FROM `subject_bbin_purchase_record` pr, `subject` s WHERE pr.`subject_id` = s.`id` AND member_id = ?) ha 
+ ORDER BY ha.createDate DESC LIMIT 0,1  -(:139)
+ 
+ 
+ 
+ 
+ 
+   select count(*) from 
+   (SELECT * FROM (SELECT m.`id`,m.`name`,m.member_name,m.`mobile_Phone`,m.`create_date`,m.`invitationCode`,m.`invitedCode`, 
+   IFNULL( (SELECT isAward FROM `award_records` WHERE m.`id` = byinvitingid AND TYPE = 0), 0 ) 'status',
+    IFNULL( (SELECT isAward FROM `award_records` WHERE m.`id` = byinvitingid AND TYPE = 1), 0 ) 'del_flag' FROM `member` m ) m 
+    where 1=1 order by m.create_date DESC,m.status,m.del_flag asc) 
+
+   SELECT * FROM (SELECT m.`id`,m.`name`,m.member_name,m.`mobile_Phone`,m.`create_date`,m.`invitationCode`,m.`invitedCode`, 
+   IFNULL( (SELECT isAward FROM `award_records` WHERE m.`id` = byinvitingid AND TYPE = 0), 0 ) 'status',
+    IFNULL( (SELECT isAward FROM `award_records` WHERE m.`id` = byinvitingid AND TYPE = 1), 0 ) 'del_flag' FROM `member` m ) m
+     where 1=1 order by m.create_date DESC,m.status,m.del_flag asc
+
+
+
+ select id, serial_number, serial_no, name, type, status, floor_amount, amount, first_id, parent_id, period, purpose, raise_start, raise_end, refund_way, safeGuard_way, start_date, end_date, year_rate, comment,folder_id, delflag, update_date, create_date,borrowername,borrowerid,bought,projectDetails,safetyControl,exper_status from subject where id = ?  -(:139)
+ SELECT COALESCE (SUM(amount),0) sumamount FROM `subject_purchase_record` WHERE subject_id=?  -(:139)
+select id, subject_id, field_id, field_value, delflag, create_date, update_date from subject_field_record where subject_id=?  -(:139)
+ select count(*) from (SELECT pr.*,m.`name` FROM `subject_purchase_record` pr,`member` m WHERE pr.`member_id`=m.`id` AND subject_id=? group by create_date desc) tmp_count  -(:139)
+ SELECT pr.*,m.`name` FROM `subject_purchase_record` pr,`member` m WHERE pr.`member_id`=m.`id` AND subject_id=? group by create_date desc 
+
+   
