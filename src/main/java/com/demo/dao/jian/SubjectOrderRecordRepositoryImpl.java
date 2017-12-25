@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import com.demo.model.MemberDepositRecord;
 import com.demo.model.Members;
 
-
 public class SubjectOrderRecordRepositoryImpl implements SubjectOrderDao{
 	@PersistenceContext
     EntityManager entityManager;
