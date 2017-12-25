@@ -7,7 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.demo.model.MemberAccount;
 import com.demo.model.MemberDepositRecord;
-
+/**
+ * 会员充值记录
+ * @author ldd
+ *
+ */
 public interface MemberdepositrecordRepository extends JpaRepository<MemberDepositRecord, Integer> {
 	@Query("select m from MemberDepositRecord m where m.memberId=?1")
 	public List<MemberDepositRecord> selectMemberDepositRecord(Integer id);
