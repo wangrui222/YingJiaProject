@@ -37,6 +37,12 @@
 <script type="text/javascript"
 	src="<%=basePath%>resources/web/layer/layer.js"></script>
 <script src="<%=basePath%>resources/web/echart/dist/echarts.js"></script>
+
+<script type="text/javascript">   
+	if (window != top)   
+	top.location.href = location.href;   
+</script>
+
 </head>
 <body>
 
@@ -56,7 +62,7 @@
 
 					<a
 						style="font-size: 18px; float: right; margin-top: 5px; color: #917739;"
-						href="<%=basePath%>web/login">登录</a> <a
+						href="<%=basePath%>view/index/login.jsp">登录</a> <a
 						style="font-size: 18px; float: right; margin-right: 15px; margin-top: 5px; color: #917739;"
 						href="<%=basePath%>web/regis">注册</a> <br>4000-999-158
 				</div>
@@ -71,7 +77,7 @@
 							首页 </a></li>
 					<li><a class="item" href="http://www.ying158.com/home/kcenter">
 							网上体验中心 </a></li>
-					<li class="item"><a class="item" href="<%=basePath%>subject">
+					<li class="item"><a class="item" href="<%=basePath%>product/main">
 							产品中心 </a></li>
 					<li><a class="item"
 						href="http://www.ying158.com/Home/NewsCenter"> 新闻中心 </a></li>
@@ -120,7 +126,7 @@
 						<div class="lLabel">手机号</div>
 						<div class="lInput">
 							<img src="<%=basePath%>resources/web/images/userIcon.png" /><input
-								type="text" placeholder="手机号" id="phone" name="phone"
+								type="text" placeholder="手机号" id="phone" name="phone" value="17683900063"
 								class="form-control phone" /><span class="errorInfo">用户名不能为空</span>
 						</div>
 					</div>
@@ -128,7 +134,7 @@
 						<div class="lLabel">登录密码</div>
 						<div class="lInput">
 							<img src="<%=basePath%>resources/web/images/passwordIcon.png" /><input
-								type="password" placeholder="密码" id="password" name="password"
+								type="password" placeholder="密码" id="password" name="password" value="123456"
 								class="form-control password" /><span class="errorInfo"></span>
 						</div>
 					</div>
