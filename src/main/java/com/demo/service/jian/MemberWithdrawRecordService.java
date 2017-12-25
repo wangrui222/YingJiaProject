@@ -1,9 +1,12 @@
 package com.demo.service.jian;
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import com.demo.model.MemberWithdrawRecord;
+
 
 /**
 *@author 作者：
@@ -11,7 +14,16 @@ import com.demo.model.MemberWithdrawRecord;
 *类说明
 */
 public interface MemberWithdrawRecordService {
-	  //public List<MemberWithdrawRecord> findMemberWithdrawRecord();  
+	  public List<MemberWithdrawRecord> findMemberWithdrawRecord( Integer memberId);  
 	  
 	  Page<MemberWithdrawRecord> findMemberWithdrawRecord(Integer page,Integer size,final MemberWithdrawRecord memberWithdrawRecord);
+	  
+	  void UpdateStatus(Integer mwrId);
+	  
+	  void UpdateJieD(Integer mwrId);
+	  
+	  Object[] findSubject(Integer memberId);
+	  
+	  Integer findMemberId(Integer mwrId);
+	  
 }

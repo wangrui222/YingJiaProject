@@ -11,6 +11,7 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.demo.dao.jian.MemberWithdrawRecordRepository;
+import com.demo.dao.jian.SubjectsRepository;
 import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Members;
 import com.demo.model.SubjectOrderRecord;
@@ -33,6 +35,8 @@ import com.demo.model.SubjectOrderRecord;
 public class MemberWithdrawRecordServiceImpl implements MemberWithdrawRecordService {
 	@Autowired
 	MemberWithdrawRecordRepository memberWithdrawRecordRepository;
+	@Autowired
+	SubjectsRepository subjectsRepository;
 	/* (non-Javadoc)
 	 * @see com.demo.service.jian.SubjectOrderRecordService#findMemberWithdrawRecord()
 	 */
@@ -64,7 +68,7 @@ public class MemberWithdrawRecordServiceImpl implements MemberWithdrawRecordServ
 					}
                      //ÊÖ»úºÅ
 			    	if(memberWithdrawRecord.getMembers()!=null&&!"".equals(memberWithdrawRecord.getMembers().getMobilePhone())){
-						Join<SubjectOrderRecord, Member> join=root.join("members");
+						Join<MemberWithdrawRecord, Member> join=root.join("members");
 						Path mobilePhonePath=join.get("mobilePhone");
 						plist.add(builder.equal(mobilePhonePath,memberWithdrawRecord.getMembers().getMobilePhone()));
 
@@ -89,4 +93,30 @@ public class MemberWithdrawRecordServiceImpl implements MemberWithdrawRecordServ
 		};
 		return memberWithdrawRecordRepository.findAll(specification,pageable);
 	}
+	@Override
+	public List<MemberWithdrawRecord> findMemberWithdrawRecord(Integer memberId) {
+		
+		return null;
+	}
+	@Transactional
+	@Override
+	public void UpdateStatus(Integer memberId) {
+      memberWithdrawRecordRepository.updateStatus(memberId);
+	}
+	@Transactional
+	@Override
+	public void UpdateJieD(Integer mwrId) {
+	memberWithdrawRecordRepository.updateJieD(mwrId);
+		
+	}
+	@Override
+	public Object[] findSubject(Integer memberId) {
+		
+		return subjectsRepository.findSubject(memberId);
+	}
+	@Override
+	public Integer findMemberId(Integer mwrId) {
+		return memberWithdrawRecordRepository.findMemberId(mwrId);
+	}
+	
 }
