@@ -7,8 +7,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import com.demo.model.Users;
-
 /**
  * µÇÂ½ÕËºÅDaoImpl
  * @author ldd
