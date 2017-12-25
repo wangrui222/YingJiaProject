@@ -7,7 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-
+/**
+ * ÕËºÅ¼ÇÂ¼DaoImpl
+ * @author ldd
+ *
+ */
 public class MembersRepositoryImpl implements MembersDao {
 
 	@PersistenceContext

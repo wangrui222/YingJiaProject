@@ -86,6 +86,8 @@ public class UserLoginController {
 		} catch (AuthenticationException ae) {
 			return new ResponseMsg(2, "账户异常", null);
 		}
+		
+		request.getSession().setAttribute("usersname", userses.getUserName());
 		return  new ResponseMsg(0, "登陆成功", null);
 
 

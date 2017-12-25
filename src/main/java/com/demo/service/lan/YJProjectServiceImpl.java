@@ -2,6 +2,7 @@ package com.demo.service.lan;
 
 import java.awt.print.Pageable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,8 @@ import com.demo.dao.ldd.MemberdepositrecordRepository;
 import com.demo.dao.ldd.MembersRepository;
 import com.demo.dao.ldd.MemberwithdrawrecordRepository;
 import com.demo.dao.ldd.SubjectpurchaserecordRepository;
+import com.demo.dao.ldd.UsersRepository;
+import com.demo.dao.ldd.UsersRoleRepository;
 import com.demo.model.FinancialPlanner;
 import com.demo.model.MemberAccount;
 import com.demo.model.MemberDepositRecord;
@@ -36,26 +39,45 @@ import com.demo.model.MemberTradeRecord;
 import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Members;
 import com.demo.model.SubjectPurchaseRecord;
+import com.demo.model.UserRole;
+import com.demo.model.Users;
 
 @Service
 public class YJProjectServiceImpl implements YJProjectService{
+	//会员账号
 	@Autowired
 	MembersRepository memberrepository;
+	//会员余额
 	@Autowired
 	MemberaccountRepository memberaccountrepository;
+	//会员充值
 	@Autowired
 	MemberdepositrecordRepository memberdepositrecordrepository;
+	//会员理财师审核
 	@Autowired
 	FinancialplannerRepository financialplannerrepository;
+	//会员提现
 	@Autowired
 	MemberwithdrawrecordRepository memeberwithdrawrecordrepository;
+	//会员钱包交易记录
 	@Autowired
 	MembertraderecordRepository membertraderecordrepository;
+	//会员付息
 	@Autowired
 	SubjectpurchaserecordRepository subjectpurchaserecordrepository;
+	//会员绑卡管理
 	@Autowired
 	MemberbankcardsRepository memberbankcarsrepository;
-
+	/**------------------------------------------------------**/
+	//账号设置
+	@Autowired
+	UsersRepository usersrepository;
+	//账号设置-角色repository
+	@Autowired
+	UsersRoleRepository userrolerepository;
+	
+	
+	/************************************************/
 	//后台-会员管理-全部用户查询
 	@Override
 	public Page<Members> selectmembers(final Members members,Integer page,Integer rowsize) {
@@ -104,7 +126,7 @@ public class YJProjectServiceImpl implements YJProjectService{
 
 		return memberaccountrepository.selectMemberAccount(mid);
 	}
-	
+
 	//后台-会员管理-一个用户理财师查询
 	@Override
 	public FinancialPlanner selectonefinancialplanner(Integer mid) {
@@ -130,9 +152,9 @@ public class YJProjectServiceImpl implements YJProjectService{
 	public List<SubjectPurchaseRecord> selectonesubjectpurchaserecord(Integer mid) {
 		return subjectpurchaserecordrepository.selectSubjectPurchaseRecord(mid);
 	}*/
-	
-	
-	
+
+
+
 
 	//后台-会员管理-理财师审核
 	@Override
@@ -151,9 +173,9 @@ public class YJProjectServiceImpl implements YJProjectService{
 	public void updatestatus(Integer status,Integer id) {
 		financialplannerrepository.updateFinancialPlannert(status, id);		
 	}
-	
-	
-	
+
+
+
 	//后台-会员管理-绑卡管理
 	@Override
 	public List<Object[]> selectmemberbankcards(Map<String, Object> maps, Integer page, Integer rowsize) {	
@@ -177,7 +199,6 @@ public class YJProjectServiceImpl implements YJProjectService{
 	//后台-会员管理-付息计划查询总数
 	@Override
 	public Integer getselectmembersubjectcount(Map<String, Object> maps) {
-		// TODO Auto-generated method stub
 		return memberrepository.getcountssubject(maps);
 	}
 
@@ -190,25 +211,118 @@ public class YJProjectServiceImpl implements YJProjectService{
 	//后台-会员管理-付息计划查询总数
 	@Override
 	public Integer getselectmemberBbinpurchaserecordcount(Integer id) {
-		// TODO Auto-generated method stub
+		
 		return memberrepository.getcountssubjectBbinpurchaserecord(id);
 	}
 	//后台-会员管理-付息计划-付息列表
 	@Override
 	public List<Object[]> selectmembersubjectpurchaserecord(Integer id, Integer page, Integer rowsize) {
-		// TODO Auto-generated method stub
+		
 		return memberrepository.selectsubjectpurchaserecord(id, page, rowsize);
 	}
 	//后台-会员管理-付息列表查询总数
 	@Override
 	public Integer getselectmemberpurchaserecordcount(Integer id) {
-		// TODO Auto-generated method stub
+		
 		return memberrepository.getcountssubjectpurchaserecord(id);
+	}
+
+	/**===========================================================**/
+
+	//后台-系统设置-账户设置-全部用户查询总数
+	@Override
+	public Integer getusercount() {
+		return usersrepository.getcounts();
+	}
+	//后台-系统设置-账户设置-全部用户查询
+	@Override
+	public List<Object[]> selectuses(Integer page, Integer rowsize) {
+		return usersrepository.selectusers(page, rowsize);
+	}
+	//后台-系统设置-账户设置-全部角色查询
+	@Override
+	public List<UserRole> selectuserrole() {
+		return userrolerepository.findAll();
+	}
+	//后台-系统设置-账户设置-添加账号
+	@Override
+	@Transactional
+	public void adduser(Users user) {
+		usersrepository.save(user);
+		
+	}
+	//后台-系统设置-账户设置-添加账号时判断账号是否存在
+	@Override
+	public List<Object[]> validateUserName(String uname) {
+		return usersrepository.selectusersrole(uname);
+	}
+	//后台-系统设置-账户设置-按id查询一个账号
+	@Override
+	public Object[] selectoneuserrole(Integer uid) {	
+		return usersrepository.selectoneusersrole(uid).get(0);
+	}
+	@Override
+	public Users findone(Integer uid) {
+		return usersrepository.findOne(uid);
+	}
+	@Override
+	public Object findpassword(String name) {
+		return usersrepository.selectpassword(name);
+	}
+	@Override
+	public Object finduserid(String name) {
+		return usersrepository.selectuserid(name);
+	}
+	
+	//后台-系统设置-账户设置-修改账号
+	@Override
+	@Transactional
+	public void updateuser(String pwd,String phone,Date update,Integer uid) {
+		usersrepository.updatuser(pwd,phone,update,uid);
+		
+	}
+	@Override
+	@Transactional
+	public void updateuserrole(Integer roleid, Integer uid) {
+		usersrepository.updaterole(roleid, uid);
+		
+	}
+	//后台-系统设置-账户设置-删除账号
+	@Override
+	@Transactional
+	public void deleteuser(Integer uid) {
+		usersrepository.delete(uid);
+		
+	}
+	//后台-系统设置-角色设置-添加账号
+	@Override
+	@Transactional
+	public void adduserrole(UserRole userrole) {
+		userrolerepository.save(userrole);
+		
+	}
+	//后台-系统设置-密码设置-修改密码
+	@Override
+	@Transactional
+	public void updateuserpwd(String pwd,Integer uid) {
+		usersrepository.updatepassword(pwd,uid);
+		
+	}
+	//后台-系统设置-密码设置-修改密码时判断密码是否存在
+	@Override
+	public List<Object[]> validateUserpwd(String pwd) {		
+		return usersrepository.selectusersonpwd(pwd);
 	}
 	
 	
 	
 	
+	
+	
+
+
+
+
 
 
 }
