@@ -32,10 +32,10 @@ public class LDDSystemController {
 	@Autowired
 	YJProjectService yjprojectservice;
 	//后台-系统设置-账户设置
-	@RequestMapping(value="system/userlist/{name}")
-	public String userlist(@PathVariable(value="name")String name,Integer page,Map<String, Object> map) {
+	@RequestMapping(value="system/userlist")
+	public String userlist(Integer page,Map<String, Object> map) {
 		System.out.println("-账户设置");
-		map.put("username", name);
+
 		//当前第几页
 		if (page==null) {
 			page=1;
@@ -77,30 +77,51 @@ public class LDDSystemController {
 		return "redirect:/lddsystem/system/userlist";
 	}
 	//后台-系统设置-账户设置-跳转到修改
-	@RequestMapping(value="system/eidtUserView/{uid},{uname}")
-	public String toedituser(@PathVariable(value="uid")Integer uid,@PathVariable(value="uname")String uname,Map<String, Object> map) {
+	@RequestMapping(value="system/eidtUserView/{uid}")
+	public String toedituser(@PathVariable(value="uid")Integer uid,Map<String, Object> map) {
 		Object[] list=yjprojectservice.selectoneuserrole(uid);
 		map.put("object", list);
 		List<UserRole> rolelist=yjprojectservice.selectuserrole();
 		map.put("rolelist", rolelist);
-		map.put("uname", uname);
+
 		return "/system/edit_account";
 	}
 	//后台-系统设置-账户设置-确认修改
 	@RequestMapping(value="system/updateAccount")
-	public String edituser(Users users,Integer roleId,String uname){
-	
-		//输入新密码生成的加密密码
-		Object credentials = new SimpleHash("MD5", users.getUsersPassword(), ByteSource.Util.bytes(users.getUserName()), 1024);
-		yjprojectservice.updateuserrole(roleId, users.getUsersId());
-		yjprojectservice.updateuser(credentials.toString(),users.getMobilePhone(), new Date(), users.getUsersId());
-		return "redirect:/lddsystem/system/userlist/"+uname;
+	public String edituser(Users users,Integer roleId,String name){
+		System.out.println(name);
+		if (name.equals(users.getUserName())) {
+			//输入新密码生成的加密密码
+			Object credentials = new SimpleHash("MD5", users.getUsersPassword(), ByteSource.Util.bytes(users.getUserName()), 1024);
+			yjprojectservice.updateuserrole(roleId, users.getUsersId());
+			yjprojectservice.updateuser(credentials.toString(),users.getMobilePhone(), new Date(), users.getUsersId());
+			return "redirect:/view/login.jsp";
+		}else if(name.equals("")){
+			return "redirect:/lddsystem/system/userlist";
+		}else{
+			//输入新密码生成的加密密码
+			Object credentials = new SimpleHash("MD5", users.getUsersPassword(), ByteSource.Util.bytes(users.getUserName()), 1024);
+			yjprojectservice.updateuserrole(roleId, users.getUsersId());
+			yjprojectservice.updateuser(credentials.toString(),users.getMobilePhone(), new Date(), users.getUsersId());
+			return "redirect:/lddsystem/system/userlist";
+		}	
 	}
+	//后台-系统设置-账户设置-判断删除是否是删除正在登陆的账户
+	@RequestMapping(value="system/deleteAccount")
+	@ResponseBody
+	public Map<String,Object> deluser(String loginuserName,Integer userId) {
+		Map<String,Object> map = new HashMap<>();
+		Users user=yjprojectservice.findone(userId);
+		if (loginuserName.equals(user.getUserName())) {
+			map.put("code",0);
+		}
+		return map;
+	}	
 	//后台-系统设置-账户设置-删除
-	@RequestMapping(value="system/deleteAccount/{uid},{uname}")
-	public String deluser(@PathVariable(value="uid")Integer uid,@PathVariable(value="uname")String uname) {
-		yjprojectservice.deleteuser(uid);
-		return "redirect:/lddsystem/system/userlist/"+uname;
+	@RequestMapping(value="system/deleteotherAccount/{id}")
+	public String deleteuser(@PathVariable("id") Integer id) {
+		yjprojectservice.deleteuser(id);
+		return "redirect:/lddsystem/system/userlist";
 	}
 	//后台-系统设置-角色设置
 	@RequestMapping(value="system/rolelist")
@@ -175,11 +196,11 @@ public class LDDSystemController {
 		Map<String,Object> map = new HashMap<>();
 		//输入的原密码生成的加密密码
 		Object oldcredentials = new SimpleHash("MD5", oldpassword, ByteSource.Util.bytes(userName), 1024);
-		List<Object[]> userslist=yjprojectservice.validateUserpwd(oldcredentials.toString());
-		if (userslist.size()==0&&oldpassword.length()>2) {
+		Object pwd=yjprojectservice.validateUserpwd(userName);
+		if (!pwd.equals(oldcredentials.toString())) {
 			map.put("msg", "原密码输入错误");
 			map.put("code",0);
-		}else if(userslist.size()!=0&&oldpassword.length()>2){
+		}else if(pwd.equals(oldcredentials.toString())){
 			map.put("msg", "原密码输入正确");
 			map.put("code",1);
 		}	
@@ -191,7 +212,7 @@ public class LDDSystemController {
 	@ResponseBody
 	public Map<String,Object> validateusers(String userName){
 		Map<String,Object> map = new HashMap<>();
-		
+
 		List<Object[]> userslist=yjprojectservice.validateUserpwd(oldcredentials.toString());
 		if (userslist.size()==0&&oldpassword.length()>2) {
 			map.put("msg", "原密码输入错误");
