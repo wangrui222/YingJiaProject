@@ -27,6 +27,7 @@ import com.demo.dao.ldd.MemberbankcardsRepository;
 import com.demo.dao.ldd.MemberdepositrecordRepository;
 import com.demo.dao.ldd.MembersRepository;
 import com.demo.dao.ldd.MemberwithdrawrecordRepository;
+
 import com.demo.dao.ldd.SubjectpurchaserecordRepository;
 import com.demo.dao.ldd.UsersRepository;
 import com.demo.dao.ldd.UsersRoleRepository;
@@ -38,6 +39,7 @@ import com.demo.model.MemberTally;
 import com.demo.model.MemberTradeRecord;
 import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Members;
+import com.demo.model.Subject;
 import com.demo.model.SubjectPurchaseRecord;
 import com.demo.model.UserRole;
 import com.demo.model.Users;
@@ -310,8 +312,13 @@ public class YJProjectServiceImpl implements YJProjectService{
 	}
 	//后台-系统设置-密码设置-修改密码时判断密码是否存在
 	@Override
-	public List<Object[]> validateUserpwd(String pwd) {		
-		return usersrepository.selectusersonpwd(pwd);
+	public Object validateUserpwd(String uname) {		
+		return usersrepository.selectpassword(uname);
+	}
+	//后台-会员管理-体验金付息按id查询三个信息
+	@Override
+	public Object selectmemberBbinpurchaserecordcount(Integer id) {		
+		return memberrepository.selectsubjectBbinpurchaserecord(id);
 	}
 	
 	
