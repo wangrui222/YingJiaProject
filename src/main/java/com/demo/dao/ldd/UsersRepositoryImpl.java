@@ -85,14 +85,7 @@ public class UsersRepositoryImpl implements UsersDao{
 		List<Object[]> list=(List<Object[]>) query.getResultList();
 		return list;
 	}
-////后台-系统设置-密码设置-按密码查询账号
-	@Override
-	public List<Object[]> selectusersonpwd(String pwd) {
-		String sql="select u.* from Users u,User_Role ur,User_Role_Relation urr where u.users_id=urr.user_id and ur.user_role_id=urr.role_id and u.users_password='"+pwd+"'";		
-		Query query=em.createNativeQuery(sql);
-		List<Object[]> list=(List<Object[]>) query.getResultList();
-		return list;
-	}
+
 
 
 
