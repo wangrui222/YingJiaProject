@@ -32,7 +32,8 @@
 		<form id="updateAccountForm" method="post" class="form-horizontal"
 			action="<%=basePath%>lddsystem/system/updateAccount" name="form">
 			<input type="hidden" name="usersId" value="${object[0]}">
-			<input type="hidden" name="uname" id="usersname" value="${uname}">		
+			<% String name=request.getSession().getAttribute("usersname").toString(); %>	
+			<input type="hidden" id="name" name="name" value="<%=name %>">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">用户名</label>
 				<div class="col-lg-5">
@@ -107,15 +108,14 @@ $(document).ready(function() {
         })       
 });
 function out() {
-	
-	var loginuserName=document.getElementById("usersname").value;
+ 	var loginuserName=document.getElementById("name").value;
 	var uname=document.getElementById("uname").value;
 	if (loginuserName==uname) {
-		var r = confirm('您正在修改当前登陆账户信息，确认修改后需重新登陆，你确定这么做吗?');
+		var r = confirm('您正在修改当前登陆账户信息，你确定这么做吗?');
 		if(r){
-			alert(123);
-			/* window.location="http://127.0.0.1:8080/YingJiaProject/view/login.jsp";	
-			return false; */	
+			alert("修改成功，需要重新登陆！");	
+		}else{
+			document.getElementById("name").value="";
 		}
 		
 	}
