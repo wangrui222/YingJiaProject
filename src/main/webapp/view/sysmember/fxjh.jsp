@@ -35,24 +35,24 @@
 					<tr>
 						<td style="width: 110px; padding-left: 30px">名称：</td>
 						<td style="width: 180px"><input type="text"
-							class="form-control" name="name" placeholder="名称"></td>
+							class="form-control" name="subjectName" placeholder="名称"></td>
 						<td style="width: 80px">状态：</td>
 						<td style="width: 180px"><select name="status"
 							class="form-control" style="width: 130px; height: 32px"
 							id="status">
 								<option value="">全部</option>
-								<option value="1">未发布</option>
-								<option value="2">募集中</option>
-								<option value="3">回款中</option>
-								<option value="4">还款完成</option>
+								<option value="2">未发布</option>
+								<option value="1">募集中</option>
+								<option value="3">已结束</option>
+								<option value="4">回款中</option>
 						</select></td>
 						<td style="width: 80px">类型：</td>
-						<td style="width: 180px"><select name="type"
+						<td style="width: 180px"><select name="subjectType"
 							class="form-control" style="width: 130px; height: 32px" id="type">
 								<option value="">全部</option>
-								<option value="1">固收类</option>
-								<option value="2">P2P车贷</option>
-								<option value="3">P2P房贷</option>
+								<option value="0">固收类</option>
+								<option value="1">P2P车贷</option>
+								<option value="2">P2P房贷</option>
 						</select></td>
 						<td class="pull-right" style="padding-right: 30px"><input
 							type="submit" class="btn btn-primary btn-sm" value="查询"></td>
@@ -80,14 +80,26 @@
 					<tr class="text-center">
 						<td>${qq.index+1}</td>
 						<td>${list[2]}</td>
-						<td>${list[4]}</td>
+						<td>
+						<c:if test="${list[4]==0}">固收类</c:if>
+						<c:if test="${list[4]==1}">P2P车贷</c:if>
+						<c:if test="${list[4]==2}">P2P房贷</c:if>
+						</td>
 						<td>${list[3]}</td>
 						<td>${list[7]}</td>
-						<td>${list[6]}元</td>
-						<td>1人</td>
+						<td><c:if test="${list[31]==null}">0元</c:if>
+						<c:if test="${list[31]!=null}">${list[31]}元</c:if>
+						</td>
+						<td><c:if test="${list[30]==null}">0人</c:if>
+						<c:if test="${list[30]!=null}">${list[30]}人</c:if></td>
 						<td>${list[10]}天</td>
 						<td>${list[18]}%</td>
-						<td>${list[5]}</td>
+						<td>				
+						<c:if test="${list[5]==1}">募集中</c:if>
+						<c:if test="${list[5]==2}">未发布</c:if>
+						<c:if test="${list[5]==3}">已结束</c:if>
+						<c:if test="${list[5]==4}">回款中</c:if>
+						</td>
 						<td>${list[29]==0?'否':'是'}</td>
 						<td><c:if test="${list[29]==1}">
 								<a
@@ -99,7 +111,7 @@
 				</c:forEach>
 				<tr>
 
-					<td colspan="8">
+					<td colspan="12">
 						第${page}页，共${allpage}页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="javascript:pagefun(1);">首页</a>&nbsp; <a
 						href="javascript:pagefun(${page>1?page-1:page});">上一页</a>&nbsp; <a
@@ -112,10 +124,8 @@
 	</div>
 	<script type="text/javascript">
 		function pagefun(ye) {
-
 			document.getElementById("pagess").value = ye;
 			document.fff.submit();
-
 		}
 	</script>
 </body>

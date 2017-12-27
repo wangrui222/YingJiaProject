@@ -110,17 +110,12 @@
 	</div>
 
 	<script type="text/javascript">
-		function pagefun(ye) {
-			alert(11);
-			document.getElementById("pagess").value=ye;
-			alert(11);
-			document.fff.submit();
-			alert(11);
+		function pagefun(ye) {			
+			document.getElementById("pagess").value=ye;			
+			document.fff.submit();			
 		}		
 		</script>
 	<script type="text/javascript">
-    
-  
     $('.time').datetimepicker({
         format: 'yyyy-mm-dd',
         language: 'zh-CN',

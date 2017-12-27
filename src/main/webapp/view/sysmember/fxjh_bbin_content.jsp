@@ -27,9 +27,9 @@
                       <div class="tablelist">
                         <table class="table tabletop">
                         <tr>
-                        <td style="padding-left:30px">标的名称：${list[0]} 
-                        				&nbsp; &nbsp; &nbsp; &nbsp;  标的期限：${list[1]}天
-                        				&nbsp; &nbsp; &nbsp; &nbsp;  年化收益率：${list[2]}%</td>
+                        <td style="padding-left:30px">标的名称：${subject[0]} 
+                        				&nbsp; &nbsp; &nbsp; &nbsp;  标的期限：${subject[1]}天
+                        				&nbsp; &nbsp; &nbsp; &nbsp;  年化收益率：${subject[2]}%</td>
                         </tr>     
                         </table>
                         <table class="table table-bordered tablebox">
@@ -46,32 +46,32 @@
                           <td>还款状态</td>
                           <td>操作</td>
                           </tr>
-                          
-                   
+             		<c:forEach items="${list}" var="list" varStatus="vs">
                     <tr class="text-center">
-                        <td>${list_index+1}</td>
-                        <td>${list[3]}</td>
+                        <td>${vs_index+1}</td>
                         <td>${list[4]}</td>
                         <td>${list[5]}</td>
                         <td>${list[6]}</td>
-                        <td>${list[7]}<span style="color: blue;"></span>元</td>
-                        <td>${list[8]}<span style="color: red;"></span>元 </td>
-                        <td>${list[9]}</td>
+                        <td>${list[7]}</td>
+                        <td>${list[8]}<span style="color: blue;"></span>元</td>
+                        <td>${list[9]}<span style="color: red;"></span>元 </td>
+                        <td>${list[10]}</td>
                         <td>
-                        	<c:if test="${list[10]==0}">
-                        	<span style="color: red;">${(s.ispaymentDesc)!!}</span>
-                        	</c:if><c:if test="${list[10]==1}">
-                        	<span style="color: blue;">${(s.ispaymentDesc)!!}</span>
+                        	<c:if test="${list[11]==0}">
+                        	<span style="color: red;">已还款</span>
+                        	</c:if><c:if test="${list[11]==1}">
+                        	<span style="color: blue;">未还款</span>
                         	</c:if>
                         </td>
                         <td>
-                        	<c:if test="${list[10]==0}">
-                        	<a href="<%=basePath%>sysmember/paymentBbin?id=${s.id}" class="btn btn-primary btn-sm">立即还款</a>
-                        	</c:if><c:if test="${list[10]==1}">
+                        	<c:if test="${list[11]==1}">
+                        	<a href="<%=basePath%>ldd/sysmember/paymentBbin/${list[0]}" class="btn btn-primary btn-sm">立即还款</a>
+                        	</c:if><c:if test="${list[11]==0}">
                         	<a href="javascript:" class="btn btn-primary btn-sm" style="background-color: #8393A1;">已还款</a>
                         	</c:if>
                         </td>
                     </tr>
+                    </c:forEach>
             </table>
         
          </div>

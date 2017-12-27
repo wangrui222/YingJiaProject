@@ -102,7 +102,7 @@
 				</c:forEach>
 				<tr>
 
-					<td colspan="8">
+					<td colspan="10">
 						第${page}页，共${allpage}页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="javascript:pagefun(1);">首页</a>&nbsp; <a
 						href="javascript:pagefun(${page>1?page-1:page});">上一页</a>&nbsp; <a

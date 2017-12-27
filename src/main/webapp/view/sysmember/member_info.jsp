@@ -35,32 +35,32 @@
 			<tr style="text-align: center; background: #AFABAB;">
 				<td colspan="4" style="padding: 10px;">账号信息</td>
 			</tr>
-			<c:forEach items="${memberWithdrawRecord }" var="memberWithdrawRecord">
+			
 			<tr>
 				<th width="10%">用户名</th>
-				<td width="30%">${memberWithdrawRecord.members.names}</td>
+				<td width="30%">${memberslist.names}</td>
 				<th width="10%">手机号</th>
-				<td width="30%">${memberWithdrawRecord.members.mobilePhone}</td>
+				<td width="30%">${memberslist.mobilePhone}</td>
 			</tr>
 			<tr>
 				<th>真实姓名</th>
-				<td>${memberWithdrawRecord.members.memberName}</td>
+				<td>${memberslist.memberName}</td>
 				<th>身份证</th>
-				<td>${memberWithdrawRecord.members.memberIdentity}</td>
+				<td>${memberslist.memberIdentity}</td>
 			</tr>
 			<tr>
 				<th>邀请码</th>
-				<td>${memberWithdrawRecord.members.invitationcode}</td>
+				<td>${memberslist.invitationcode}</td>
 				<th>被邀请码</th>
-				<td>${memberWithdrawRecord.members.invitedcode}</td>
+				<td>${memberslist.invitedcode}</td>
 			</tr>
 			<tr>
 				<th>添加时间</th>
-				<td>${memberWithdrawRecord.members.createDate}</td>
+				<td>${memberslist.createDate}</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
-			</c:forEach>
+			
 		</table>
 
 

@@ -41,9 +41,9 @@
 		<div class="tablelist">
 			<form action="<%=basePath%>ldd/sysmember/financia" method="post"
 				id="form1" name="fff">
-				<input type="hidden" name="page" id="pagess">
-				<input type="hidden" name="ss" id="statu">
-				<input type="hidden" name="memberId" id="mid">
+				<input type="hidden" name="page" id="pagess"> <input
+					type="hidden" name="ss" id="statu"> <input type="hidden"
+					name="memberId" id="mid">
 				<table class="table tabletop">
 					<tr>
 						<td style="width: 110px; padding-left: 30px">手机号：</td>
@@ -90,7 +90,7 @@
 						<td>${list[9]}</td>
 						<td>${list[2]}</td>
 						<td>${list[3]}</td>
-						<td><a href="<%=basePath%>${list[4]}" target="_black">查看</a></td>
+						<td><a href="<%=basePath%>upload/${list[4]}" target="_black">查看</a></td>
 						<td>${list[5]}</td>
 						<td><c:if test="${list[6]==0}">
 								<span style="color: red;">待认证</span>
@@ -99,7 +99,8 @@
 							</c:if></td>
 						<td><f:formatDate value="${list[7]}" pattern="yyyy-MM-dd" /></td>
 						<td><c:if test="${list[6]==0}">
-								<input class="btn btn-primary btn-sm" type="submit" onclick="sh(${list[6]},${list[0]},${page});" value="审核">
+								<input class="btn btn-primary btn-sm" type="submit"
+									onclick="sh(${list[6]},${list[0]},${page});" value="审核">
 								<%-- <a class="btn btn-primary btn-sm"
 									href="<%=basePath%>ldd/sysmember/financiaAudit/${list[1]}">审核</a> --%>
 							</c:if> <c:if test="${list[6]!=0}">
@@ -110,29 +111,45 @@
 				</c:forEach>
 				<tr>
 
-					<td colspan="8">
+					<td colspan="9">
 						第${page}页，共${allpage}页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="javascript:pagefun(1);">首页</a>&nbsp; <a
-						href="javascript:pagefun(${page>1?page-1:page});">上一页</a>&nbsp;
-						<a href="javascript:pagefun(${page<allpage?page+1:allpage});">下一页</a>&nbsp;
+						href="javascript:pagefun(${page>1?page-1:page});">上一页</a>&nbsp; <a
+						href="javascript:pagefun(${page<allpage?page+1:allpage});">下一页</a>&nbsp;
 						<a href="javascript:pagefun(${allpage});">尾页</a>
 					</td>
 				</tr>
 			</table>
-
 		</div>
-		<script type="text/javascript">
-		function pagefun(ye) {		
-			document.getElementById("pagess").value=ye;			
-			document.fff.submit();			
+	</div>
+</body>
+<script type="text/javascript">
+		function pagefun(ye) {
+			document.getElementById("pagess").value = ye;
+			document.fff.submit();
 		}
-		function sh(statu,id,page) {	
-			alert(id);
+	</script>
+<script type="text/javascript">
+		function sh(statu,id,page) {
 			document.getElementById("pagess").value=page;
 			document.getElementById("statu").value=statu;
 			document.getElementById("mid").value=id;
-			document.fff.submit();		
+			document.fff.submit();
 		}
-		</script> 
-</body>
+	</script>
+	<script type="text/javascript">
+    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        autoclose: false
+    }).on('changeDate', function (ev) {
+        $('.time').datetimepicker('hide');
+    });
+</script>
 </html>
