@@ -21,5 +21,14 @@ public interface MemberAccountService {
 	
 	List<Object[]> findRecords(Integer memberId);
 	
-	void upateTotal (float total,Integer memberId);
+	Object selectMembers(Integer memberId);
+	//是否奖励
+	void updateIs(Integer memberId);
+	
+	void updateUser(Integer memberId);
+	
+	Members findMembers(Integer memberId);
+	
+	//添加纪录到奖励标
+	void addjiang(AwardRecords awardRecords);
 }
