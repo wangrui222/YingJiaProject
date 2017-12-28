@@ -25,7 +25,9 @@ public interface UsersDao {
 	public Object selectuserid(String name);
 	//后台-系统设置-账号设置-修改角色
 	public void updaterole(Integer roleid,Integer uid);
-	//后台-系统设置-账号设置-按名字查询一个账号
+	//后台-系统设置-账号设置-按名字查询一个账号,判断是否存在
 	public List<Object[]> selectusersrole(String uname);
+	//后台-系统设置-账号设置-按角色名字查询一个账号，判断是否存在
+	public List<Object[]> selectusersroleexit(String cname);
 	
 }

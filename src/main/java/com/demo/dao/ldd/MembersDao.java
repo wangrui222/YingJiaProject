@@ -10,6 +10,8 @@ import com.demo.model.Subject;
  *
  */
 public interface MembersDao {
+	//账号详情，投资记录
+	public List<Object[]> selectTouzi(Integer id);
 	//两表联查，理财师查询
 	public List<Object[]> selectfinancialplanner(Map<String, Object> maps,Integer page,Integer rowsize);
 	//理财师查询总数

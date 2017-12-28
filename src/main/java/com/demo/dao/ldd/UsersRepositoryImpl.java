@@ -19,7 +19,7 @@ public class UsersRepositoryImpl implements UsersDao{
 	@Override
 	public List<Object[]> selectusers(Integer page, Integer rowsize) {
 		String sql="select u.users_id,u.user_name,ur.cname,u.mobile_phone,u.create_date from Users u,User_Role ur,User_Role_Relation urr where u.users_id=urr.user_id and ur.user_role_id=urr.role_id";		
-		
+
 		Query query=em.createNativeQuery(sql);
 		query.setFirstResult((page-1)*rowsize);
 		query.setMaxResults(rowsize);
@@ -30,13 +30,13 @@ public class UsersRepositoryImpl implements UsersDao{
 	@Override
 	public Integer getcounts() {
 		String sql="SELECT count(*) from Users u,User_Role ur,User_Role_Relation urr where u.users_id=urr.user_id and ur.user_role_id=urr.role_id";
-		
+
 		Query query=em.createNativeQuery(sql);		
 		Object object=query.getSingleResult();
 		Integer count=Integer.parseInt(object.toString());
 		return count;
 	}
-////后台-系统设置-密码设置-按ID查询账号
+	////后台-系统设置-密码设置-按ID查询账号
 	@Override
 	public List<Object[]> selectoneusersrole(Integer uid) {
 		String sql="select u.users_id,u.user_name,ur.user_role_id,u.mobile_phone,u.create_date,u.users_password from Users u,User_Role ur,User_Role_Relation urr where u.users_id=urr.user_id and ur.user_role_id=urr.role_id and u.users_id="+uid;		
@@ -52,7 +52,7 @@ public class UsersRepositoryImpl implements UsersDao{
 		Object object=query.getSingleResult();	
 		return object;
 	}
-	
+
 	//后台-系统设置-密码设置-按name查询密码
 	@Override
 	public Object selectpassword(String name) {
@@ -77,10 +77,19 @@ public class UsersRepositoryImpl implements UsersDao{
 		Query query=em.createNativeQuery(sql);
 		query.executeUpdate();			
 	}
-	////后台-系统设置-密码设置-按名字查询账号
+	//后台-系统设置-密码设置-按名字查询账号,判断是否存在
 	@Override
 	public List<Object[]> selectusersrole(String uname) {
 		String sql="select u.* from Users u,User_Role ur,User_Role_Relation urr where u.users_id=urr.user_id and ur.user_role_id=urr.role_id and u.user_name='"+uname+"'";		
+		Query query=em.createNativeQuery(sql);
+		List<Object[]> list=(List<Object[]>) query.getResultList();
+		return list;
+	}
+
+	//后台-系统设置-密码设置-按角色名字查询账号,判断是否存在
+	@Override
+	public List<Object[]> selectusersroleexit(String cname) {
+		String sql="select * from USER_ROLE t where t.cname='"+cname+"'";		
 		Query query=em.createNativeQuery(sql);
 		List<Object[]> list=(List<Object[]>) query.getResultList();
 		return list;
