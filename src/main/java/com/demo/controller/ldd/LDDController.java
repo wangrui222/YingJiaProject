@@ -41,9 +41,8 @@ public class LDDController {
 		if (page==null) {
 			page=1;
 		}
-		Integer rowsize=10;
+		Integer rowsize=3;
 		Page<Members> memberslist=yjprojectservice.selectmembers(members, page, rowsize);
-
 		//当前第几页
 		map.put("pages", memberslist.getNumber()+1);
 		System.out.println(memberslist.getNumber());
@@ -53,10 +52,7 @@ public class LDDController {
 		//当前结果集
 		map.put("lists", memberslist.getContent());
 		System.out.println(memberslist.getContent());
-
-
 		map.put("members", members);
-
 		return "/sysmember/zhgl";
 
 	}
@@ -84,10 +80,9 @@ public class LDDController {
 		//充值记录
 		List<MemberDepositRecord> memberdepositrecord=yjprojectservice.selectonememberdepositrecord(zid);
 		map.put("memberdepositrecord", memberdepositrecord);
-		System.out.println(memberdepositrecord);
-		/*//投资记录
-		List<SubjectPurchaseRecord> subjectpurchaserecord=yjprojectservice.selectonesubjectpurchaserecord(zid);
-		map.put("subjectpurchaserecord", subjectpurchaserecord);*/
+		//投资记录
+		List<Object[]> subjectpurchaserecord=yjprojectservice.selecttouzi(zid);
+		map.put("subjectpurchaserecord", subjectpurchaserecord);
 
 
 		return "/sysmember/member_info";
@@ -190,11 +185,7 @@ public class LDDController {
 		map.put("allpage", allpage);
 		List<Object[]> list=yjprojectservice.selectmembersubject(maps, page, rowsize);
 		map.put("list", list);
-		for (Object[] objects : list) {
-			System.out.println("111111111111111111"+objects[4]);
-			System.out.println("222222222222222222"+objects[5]);
-
-		}
+		
 		return "/sysmember/fxjh";
 
 	}
@@ -219,7 +210,7 @@ public class LDDController {
 		//总页数
 		Integer allpage=counts%rowsize==0?counts/rowsize:counts/rowsize+1;
 		map.put("allpage", allpage);
-		List<Object[]> list=yjprojectservice.selectmembersubjectBbinpurchaserecord(id, allpage, rowsize);
+		List<Object[]> list=yjprojectservice.selectmembersubjectBbinpurchaserecord(id, page, rowsize);
 		System.out.println(list);
 		map.put("list", list);
 		return "/sysmember/fxjh_bbin_content";
@@ -245,22 +236,11 @@ public class LDDController {
 		//总页数
 		Integer allpage=counts%rowsize==0?counts/rowsize:counts/rowsize+1;
 		map.put("allpage", allpage);
-		List<Object[]> list=yjprojectservice.selectmembersubjectpurchaserecord(id, allpage, rowsize);
+		List<Object[]> list=yjprojectservice.selectmembersubjectpurchaserecord(id, page, rowsize);
 		map.put("list", list);		
 		return "/sysmember/fxjh_content";
 	}
-	//后台会员管理-付息计划-体验金付息-立即还款
-	@RequestMapping(value="sysmember/paymentBbin/{id}")
-	public String HYfxjhtyj(@PathVariable(value="id")Integer id,Map<String, Object> map) {	
-		System.out.println("-----------------------"+id);
-		return "redirect:/ldd/sysmember/paymentBbinContent/"+id;
-	}
-	//后台会员管理-付息计划-付息列表-立即还款
-	@RequestMapping(value="sysmember/paymentPurchase/{id}")
-	public String HYfxjhfxlb(@PathVariable(value="id")Integer id,Map<String, Object> map) {	
-		System.out.println("-----------------------"+id);
-		return "redirect:/ldd/sysmember/paymentContent/"+id;
-	}
+
 	@InitBinder    
 	public void initBinder(WebDataBinder binder) {    
 		binder.registerCustomEditor(Date.class, 

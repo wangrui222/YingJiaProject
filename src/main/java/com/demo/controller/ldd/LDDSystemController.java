@@ -188,6 +188,21 @@ public class LDDSystemController {
 		}	
 		return map;		
 	}
+	//添加账户验证角色名是否已存在	
+	@RequestMapping("system/checkUserRole")
+	@ResponseBody
+	public Map<String,Object> validateUserRoleName(String cname){
+		Map<String,Object> map = new HashMap<>();
+		List<Object[]> userslist=yjprojectservice.validateUserRoleName(cname);
+		if (userslist.size()==0) {
+			map.put("msg", "角色名有效");
+			map.put("code",0);
+		}else if(userslist.size()!=0){
+			map.put("msg", "角色名无效，已存在！");
+			map.put("code",1);
+		}	
+		return map;		
+	}
 
 	//修改密码验证输入密码是否与原密码一样	
 	@RequestMapping("system/checkPasswordExsit")
@@ -207,20 +222,5 @@ public class LDDSystemController {
 		return map;		
 	}
 
-	/*//修改账户信息时验证当账户是不是正在登陆的账户	
-	@RequestMapping("system/checkusersExsit")
-	@ResponseBody
-	public Map<String,Object> validateusers(String userName){
-		Map<String,Object> map = new HashMap<>();
 
-		List<Object[]> userslist=yjprojectservice.validateUserpwd(oldcredentials.toString());
-		if (userslist.size()==0&&oldpassword.length()>2) {
-			map.put("msg", "原密码输入错误");
-			map.put("code",0);
-		}else if(userslist.size()!=0&&oldpassword.length()>2){
-			map.put("msg", "原密码输入正确");
-			map.put("code",1);
-		}	
-		return map;		
-	}*/
 }
