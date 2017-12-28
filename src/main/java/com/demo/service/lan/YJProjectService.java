@@ -36,9 +36,9 @@ public interface YJProjectService {
 	public List<MemberTradeRecord> selectoneonemembertraderecord(Integer mid);
 	//后台-会员管理-一个用户所有充值记录查询
 	public List<MemberDepositRecord> selectonememberdepositrecord(Integer mid);
-	/*//后台-会员管理-一个用户所有投资记录查询
-	public List<SubjectPurchaseRecord> selectonesubjectpurchaserecord(Integer mid);
-	 */
+	//后台-会员管理-一个用户所有投资记录查询
+	public List<Object[]> selecttouzi(Integer mid);
+	
 
 
 
@@ -106,6 +106,8 @@ public interface YJProjectService {
 	public void updateuserpwd(String pwd,Integer uid);
 	//后台-系统设置-账户设置-修改账号时判断密码是否纯在
 	public Object validateUserpwd(String uname);
+	//后台-系统设置-账户设置-添加账号时判断角色名是否存在
+	public List<Object[]> validateUserRoleName(String cname);
 
 
 
