@@ -1,10 +1,12 @@
 package com.demo.controller.jian;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.aspectj.lang.reflect.MemberSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Members;
 import com.demo.model.SelectProject;
 import com.demo.model.SubjectOrderRecord;
+import com.demo.model.SubjectPurchaseRecord;
 import com.demo.service.SelectProjectService;
 import com.demo.service.jian.MemberAccountService;
 import com.demo.service.jian.MemberWithdrawRecordService;
@@ -55,22 +58,23 @@ public class SubjectOrderRecordHandler {
 		map.put("page", page);
 		map.put("plist", plist);
 		map.put("memberDepositRecord", memberDepositRecord);
+		map.put("members", members);
 		return "/sysmember/czgl";
 	}
 	//提现管理
 	@RequestMapping("sysmember/WithdrawManage")
-	public String toWithdrawManage(Map<String, Object> map,Integer page,MemberWithdrawRecord memberWithdrawRecord){
+	public String toWithdrawManage(Map<String, Object> map,Integer page,SubjectPurchaseRecord subjectPurchaseRecord){
 		if(page==null){
 			page=1;
 		}
 		Integer size=10;
-		System.err.println(memberWithdrawRecord);
-		Page pagelist=memberWithdrawRecordService.findMemberWithdrawRecord(page, size,memberWithdrawRecord);
+		System.err.println(subjectPurchaseRecord);
+		Page pagelist=memberWithdrawRecordService.findSubjectPurchaseRecord(page, size, subjectPurchaseRecord);
 		pagelist.getContent();
 		List<SelectProject> slist=selectProjectService.findSelectProjectService("cardStatus");
 		map.put("slist", slist);
 		map.put("pagelist", pagelist);
-		map.put("memberWithdrawRecord", memberWithdrawRecord);
+		map.put("subjectPurchaseRecord", subjectPurchaseRecord);
 		return "/sysmember/txgl";
 	}
 	//邀请奖励
@@ -86,6 +90,9 @@ public class SubjectOrderRecordHandler {
 		map.put("pages", pages);
 		map.put("page", page);
 		map.put("pagelist", pagelist);
+		map.put("memberAccount", memberAccount);
+		map.put("members", members);
+		map.put("awardRecords", awardRecords);
 		return "/sysmember/yqjl";
 	}
 	//更新订单
@@ -96,37 +103,13 @@ public class SubjectOrderRecordHandler {
 		map.put("memberDepositRecord", memberDepositRecord);
 		return "redirect:jian/sysmember/rechargeManage";
 	}
-	//审核
+	//审核、解冻、贝付打款
 	@RequestMapping("sysmember/withdrawAudit")
 	public String withdrawAudit(@PathVariable Integer memberId,String channelName){
-		
-		//修改状态
-		memberWithdrawRecordService.UpdateStatus(memberId);
-		Object[]o= memberWithdrawRecordService.findSubject(memberId);
-		//标的周期
-		Integer period=(Integer) o[0];
-		//年花率
-		float yearRate=(float) o[1]/100;
-		//可用余额
-		float userAble=(float) o[2];
-		//收益
-		float total=period*yearRate*userAble;
-		//累计收益修改
-        memberAccountService.upateTotal(total, memberId);
-		//打款方式
+	
   
 		return "redirect:/jian/sysmember/WithdrawManage";
 	}
-	//解冻
-	@RequestMapping("sysmember/WithdrawUnfreeze/{mwrId}")
-	public String WithdrawUnfreeze(@PathVariable Integer mwrId){
-		memberWithdrawRecordService.UpdateJieD(mwrId);
-
-
-		return "redirect:/jian/sysmember/WithdrawManage";
-	}
-	//贝付打款
-
 
 	//奖励详情
 	@RequestMapping("sysmember/inviteRewardsRecord/{memberId}")
@@ -137,7 +120,27 @@ public class SubjectOrderRecordHandler {
 		map.put("olist", olist);
 		return "/sysmember/yqjl_record";
 	}
-
-
+  //注册奖励
+	@RequestMapping("sysmember/zhucejiangli/{memberId}")
+	public String zhucejiangli(@PathVariable Integer memberId){
+		System.out.println(memberId);
+		//修改状态 
+		memberAccountService.updateIs(memberId);
+		//奖励加到余额上
+		memberAccountService.updateUser(memberId);
+		
+		
+		//奖励记录标 
+      Members members= memberAccountService.findMembers(memberId);
+      AwardRecords awardRecords=new AwardRecords();
+      awardRecords.setInvitingid(members.getMemberId());
+      awardRecords.setByinvitingid(null);
+      awardRecords.setAwardRecordsType(members.getStatus());
+      awardRecords.setIsAward(null);
+      awardRecords.setAmount(5f);
+      awardRecords.setAddTime(new Date());
+        memberAccountService.addjiang(awardRecords);
+		return "redirect:/jian/sysmember/inviteRewards";
+	}
 }
 
