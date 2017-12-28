@@ -10,7 +10,8 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:/spring-config.xml,
-			classpath:/spring-shiro.xml
+			classpath:/spring-shiro.xml,
+			classpath:/spring-task.xml
 		</param-value>
 		<!-- 
 			采用的是通配符方式，查找WEB-INF/spring目录下xml文件。如有多个xml文件，以“,”分隔。 -->
