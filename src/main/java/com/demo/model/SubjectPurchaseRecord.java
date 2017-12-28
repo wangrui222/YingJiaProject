@@ -57,6 +57,13 @@ public class SubjectPurchaseRecord {
 	 * 最后计息日
 	 */
 	private Integer lastProfitDay;
+	private String status;
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	/**
 	 * 红包金额信息（app端实际投资额度+红包额度）
 	 */

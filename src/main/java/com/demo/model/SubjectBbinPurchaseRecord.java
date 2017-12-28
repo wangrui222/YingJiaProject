@@ -46,7 +46,7 @@ public class SubjectBbinPurchaseRecord {
 	  * 是否还款
 	  */
 	  private Integer ispayment;
-	 private Integer  payInterestTimes ;
+	 private Integer  payInterestTimes ; 
 	 /**
 	  * 最后计息日
 	  */

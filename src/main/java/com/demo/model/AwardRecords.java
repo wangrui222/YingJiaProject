@@ -17,12 +17,12 @@ import javax.persistence.SequenceGenerator;
 public class AwardRecords {
 	
 	private  Integer  awardRecordsId;//主键
-	private Integer  invitingid  ;//邀请人id
+	private Integer  invitingid  ;//邀请人id //注册手机号   *
 	private Integer  byinvitingid;//被邀请人id
-	private Integer awardRecordsType;//奖励类型
-	private Float  amount;//'奖励金额',
-	private Integer  isAward ;//0:未奖励  1：已奖励'
-	private Date addTime;//'添加时间'
+	private String awardRecordsType;//奖励类型    *
+	private Float  amount;//'奖励金额', *
+	private Integer  isAward ;//0:未奖励  1：已奖励' 
+	private Date addTime;//'添加时间'   *
 	@Id
 	@SequenceGenerator(name="seq_AwardRecords",sequenceName="seq_award_records",allocationSize=1)
 	@GeneratedValue(generator="seq_AwardRecords",strategy=GenerationType.SEQUENCE)
@@ -33,6 +33,10 @@ public class AwardRecords {
 	public void setAwardRecordsId(Integer awardRecordsId) {
 		this.awardRecordsId = awardRecordsId;
 	}
+	
+	
+
+	
 	public Integer getInvitingid() {
 		return invitingid;
 	}
@@ -45,10 +49,11 @@ public class AwardRecords {
 	public void setByinvitingid(Integer byinvitingid) {
 		this.byinvitingid = byinvitingid;
 	}
-	public Integer getAwardRecordsType() {
+	
+	public String getAwardRecordsType() {
 		return awardRecordsType;
 	}
-	public void setAwardRecordsType(Integer awardRecordsType) {
+	public void setAwardRecordsType(String awardRecordsType) {
 		this.awardRecordsType = awardRecordsType;
 	}
 	public Float getAmount() {

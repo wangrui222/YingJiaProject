@@ -27,6 +27,14 @@ public class MemberProfitRecord {
 	private	  Integer profitMonth  ;//计息月
 	private  Integer profitDay ;//计息日
 	
+	@Override
+	public String toString() {
+		return "MemberProfitRecord [mprId=" + mprId + ", serialNumber=" + serialNumber + ", mprType=" + mprType
+				+ ", amount=" + amount + ", memberId=" + memberId + ", delflag=" + delflag + ", createDate="
+				+ createDate + ", updateDate=" + updateDate + ", mprComment=" + mprComment + ", purchaseId="
+				+ purchaseId + ", profitYear=" + profitYear + ", profitMonth=" + profitMonth + ", profitDay="
+				+ profitDay + "]";
+	}
 	@Id
 	@SequenceGenerator(name="seq_MemberProfitRecord",sequenceName="sql_member_profit_record",allocationSize=1)
 	@GeneratedValue(generator="seq_MemberProfitRecord",strategy=GenerationType.SEQUENCE)
