@@ -24,7 +24,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.demo.dao.jian.MemberAccountRepository;
+import com.demo.dao.wr.MemberRepository;
 import com.demo.dao.wr.UserLoginRepository;
+import com.demo.model.MemberAccount;
+import com.demo.model.Members;
 import com.demo.model.Users;
 import com.demo.until.ResponseMsg;
 import com.demo.until.SendMsg_webchinese;
@@ -36,6 +40,11 @@ public class UserLoginController {
 
 	@Autowired
 	UserLoginRepository userLoginRepository;
+	@Autowired
+	MemberRepository memberRepository;
+	
+	@Autowired
+	MemberAccountRepository memberAccountRepository;
 
 	@RequestMapping(value={"/login"}, method={org.springframework.web.bind.annotation.RequestMethod.GET})
 	public String login()
@@ -55,7 +64,7 @@ public class UserLoginController {
 		}
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getUsersPassword());
 		Subject subject = SecurityUtils.getSubject();
-		
+
 		//短信验证
 		/*
 		HttpSession session = request.getSession();  
@@ -112,39 +121,35 @@ public class UserLoginController {
 		System.out.println("手机号：" + phone + ", " + smsText);  
 		SendMsg_webchinese.sendMessage(phone, smsText);  
 	}  
-	
-	
+
+
 	@RequestMapping(value={"/indexLogin"}, method={org.springframework.web.bind.annotation.RequestMethod.POST})
 	@ResponseBody
 	public ResponseMsg userIndexLogin(HttpServletRequest request) {
 		String usersPassword = request.getParameter("password");
 		String mobilePhone = request.getParameter("mobilePhone");
-		
-		
-		Object[] users = userLoginRepository.getUsersWithMobilePhone(mobilePhone);
-		
-
-		Users userses=null;
+		Members members  = memberRepository.findMember(mobilePhone);
 		try {
-			
-			userses = new Users(users[0].toString(), users[1].toString(), users[2].toString(),Integer.parseInt(users[3].toString()));
-			Object credentials = new SimpleHash("MD5", usersPassword, ByteSource.Util.bytes(userses.getUserName()), 1024);
-			
-			System.out.println(credentials.toString()==userses.getUsersPassword()); 
-			System.out.println(userses.getMobilePhone()==mobilePhone); 
-			System.out.println(userses.getMobilePhone().equals(mobilePhone)); 
-			if(credentials==userses.getUsersPassword()&&userses.getMobilePhone().equals(mobilePhone)){
+			Object credentials = new SimpleHash("MD5", usersPassword, ByteSource.Util.bytes(mobilePhone), 1024);
+	 
+			if(members!=null&&members.getMobilePhone()!=null&&credentials.toString().contains(members.getPasswords())){
+				request.getSession().setAttribute("members",members);
+				 MemberAccount memberAccount = memberAccountRepository.getMemberbbinAmount(members.getMemberId());
+				 request.getSession().setAttribute("memberAccount", memberAccount);
 				return  new ResponseMsg(0, "登陆成功", null);
-				
 			}else{
 				return new ResponseMsg(1, "手机号或密码错误", null);
 			}
-		
 		} catch (UnknownAccountException uae) {
 			return new ResponseMsg(1, "手机号或密码错误", null);
 		} 
 
 
+	}
+	
+	public static void main(String[] args) {
+		Object credentials = new SimpleHash("MD5", "123456", ByteSource.Util.bytes("17683900063"), 1024);
+		System.out.println(credentials);
 	}
 
 

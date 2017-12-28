@@ -1,10 +1,13 @@
 package com.demo.service.jian;
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.Query;
 
 import com.demo.model.MemberProfitRecord;
+import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Subject;
 import com.demo.model.SubjectPurchaseRecord;
 
@@ -15,6 +18,7 @@ import com.demo.model.SubjectPurchaseRecord;
  *类说明
  */
 public interface MemberWithdrawRecordService {
+
 
 
 	Page<SubjectPurchaseRecord> findSubjectPurchaseRecord(Integer page, Integer size,final SubjectPurchaseRecord subjectPurchaseRecord);
@@ -40,15 +44,36 @@ public interface MemberWithdrawRecordService {
 
 	void  updateTotal(Float total,Integer memberId);
 	//审核修改状态
-	
-		public void UpdateShen(Integer sprId);
-		//解冻修改状态
-	
-		public void Updatejd(Integer sprId);
-		//打款修改状态
-	
-		public void Updatedk(Integer sprId);
-		
-		void insertIn(MemberProfitRecord memberProfitRecord);
+
+	public void UpdateShen(Integer sprId);
+	//解冻修改状态
+
+	public void Updatejd(Integer sprId);
+	//打款修改状态
+
+	public void Updatedk(Integer sprId);
+
+	void insertIn(MemberProfitRecord memberProfitRecord);
+
+
+	public List<MemberWithdrawRecord> findMemberWithdrawRecord( Integer memberId);  
+
+	Page<MemberWithdrawRecord> findMemberWithdrawRecord(Integer page,Integer size,final MemberWithdrawRecord memberWithdrawRecord);
+
+
+	/**
+	 * 保存提款记录
+	 * @param memberWithdrawRecord
+	 */
+	public void addMemberWithdrawRecord(MemberWithdrawRecord memberWithdrawRecord);
+
+	void UpdateStatus(Integer mwrId);
+
+	void UpdateJieD(Integer mwrId);
+
+	Object[] findSubjects(Integer memberId);
+
+	Integer findMemberId(Integer mwrId);
+
 
 }

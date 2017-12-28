@@ -31,8 +31,6 @@ public class MemberDepositRecord {
 	@Id
 	@SequenceGenerator(name="seq_MemberDepositRecord",sequenceName="seq_member_deposit_record",allocationSize=1)
 	@GeneratedValue(generator="seq_MemberDepositRecord",strategy=GenerationType.SEQUENCE)
-
-	
 	public Integer getMemberDepositRecordId() {
 		return memberDepositRecordId;
 	}
@@ -93,7 +91,16 @@ public class MemberDepositRecord {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
+	public MemberDepositRecord() {
+	}
 	
-	
+	public MemberDepositRecord(String serialNumber, Integer memberId, Float amount, Integer status,
+			String payChannelName) {
+		this.serialNumber = serialNumber;
+		this.memberId = memberId;
+		this.amount = amount;
+		this.status = status;
+		this.payChannelName = payChannelName;
+	}
 	
 }

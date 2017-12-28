@@ -58,8 +58,7 @@
 		<ul>
 			<!--subjectType/yearRate/period/status-->
 			<li class="first">标的类型：</li>
-			<li><a
-				href="<%=basePath%>product/gushou/10/${yearRate}/${period}/${status}"
+			<li><a href="<%=basePath%>product/gushou/10/${yearRate}/${period}/${status}"
 				id="11">全部</a></li>
 			<li><a
 				href="<%=basePath%>product/gushou/0/${yearRate}/${period}/${status}"
@@ -126,68 +125,93 @@
 				id="44">已完成</a></li>
 		</ul>
 	</div>
-	<!-- SELECT s.subject_id,s.subject_name,s.YEAR_RATE,s.floor_amount,s.period,s.bought,s.create_date,s.status,
-  (COALESCE(SUM(r.amount),0)+ (SELECT COALESCE(SUM(sb.amount),0) FROM subject_bbin_purchase_record sb WHERE s.subject_id=sb.subject_id)) as "hasSold", 
-  (COUNT(r.spr_id)+s.bought+(SELECT COUNT(sb.sbpr_id) FROM subject_bbin_purchase_record sb WHERE s.subject_id=sb.subject_id) )  as "hasBought"
-  FROM SUBJECT s LEFT JOIN subject_purchase_record r ON s.subject_id = r.subject_id where s.status!=0 GROUP BY  s.subject_id,s.subject_name
-  ,s.YEAR_RATE,s.floor_amount,s.period,s.bought,s.create_date,s.status
-  order by s.create_date desc,s.status  -->
+	<!-- 
+	s.subject_id,s.subject_name,s.YEAR_RATE,s.floor_amount,s.period,s.bought,s.create_date,s.status,
+ 	"hasSold", 
+ 	"hasBought"
+  -->
 
 	<div class="ajaxContainer">
 		<!-- 异步内容开始 -->
-		<%
+	<%-- 	<%
 			Page<Subject> pagesubject = (Page<Subject>) session.getAttribute("pagesubject");
 			List<Subject> lists = pagesubject.getContent();
 			for (int i = 0; i < lists.size(); i++) {
-		%>
+		%> --%>
+		<c:forEach items="${pagesubject}" var="pagesubject">
 		<ul class="tbList">
 			<li class="first"><span class="ico zq"></span>
-				<h2><%=lists.get(i).getSubjectName()%>
+				<h2>${pagesubject[1]}
 					<em>投</em>
 				</h2> <i></i></li>
 			<li class="second">
+				<c:if test="${pagesubject[9]!=1}">
+					<div class="txt1">
+						<h2>
+							${pagesubject[2]-1}<span style="font-size: 18px;">+1.0%</span>
+						</h2>
+						<p>年化收益</p>
+					</div>
+				</c:if>
+				<c:if test="${pagesubject[9]==1}">
+					<div class="txt1">
+						<h2>${pagesubject[8]}</h2>
+						<p>标的总额(万)</p>
+					</div>
+				</c:if>
 
-				<div class="txt1">
-					<h2>
-						<%=lists.get(i).getYearRate()-1%><span style="font-size: 18px;">+1.0%</span>
-					</h2>
-					<p>年化收益</p>
-				</div>
+				<c:if test="${pagesubject[9]!=1}">
+					<div class="txt2">
+						<h2>${pagesubject[3]}</h2>
+						<p>起购金额(元)</p>
+					</div>
+				</c:if>
+				
+				
+				<c:if test="${pagesubject[9]==1}">
+					<div class="txt2">
+						<h2>${pagesubject[2]-1}<span style="font-size:18px;">+1.0%</span></h2>
+						<p>年化收益</p>
+					</div>
+				</c:if>
 
 				<div class="txt2">
-					<h2><%=lists.get(i).getFloorAmount()%></h2>
-					<p>起购金额(元)</p>
-				</div>
-
-				<div class="txt2">
-					<h2><%=lists.get(i).getPeriod()%>天
+					<h2>${pagesubject[4]}天
 					</h2>
 					<p>投资期限</p>
 				</div>
 			</li>
 			<li class="three"><a href="#1">企业担保</a><span>中国人保财险承保</span>
 				<p>
-					计息日期：当天投资，立即计息<br>已购人数：<%=lists.get(i).getBought()%>人
+					计息日期：当天投资，立即计息<br>已购人数：${pagesubject[11]==null?0:pagesubject[11]}人
 				</p></li>
-			<li class="four">
-				<div data-num="0" class="yuan"></div>
-			</li>
+				
+				
+				<c:if test="${pagesubject[9]==1}">
+					<li class="four">
+						<div data-num="0" class="yuan"></div>
+					</li>
+				</c:if>
+				<c:if test="${pagesubject[9]!=1}">
+					<li class="four">
+						
+					</li>
+				</c:if>
 			<li class="five"><a class="abtn"
-				href="<%=basePath%>product/gushougoumai/<%=lists.get(i).getSubjectId()%>"
+				href="<%=basePath%>product/gushougoumai/${pagesubject[0]}"
 				target="iFrame2">购买</a></li>
 		</ul>
-		<%
-			}
-		%>
+		</c:forEach>
+		
+		
+	
 		<!-- 异步内容结束 -->
 		<div class="llpage">
 			<div class="in">
 				<a class="prev_page"
-					href="javascript:fun(<%=pagesubject.getNumber() + 1 > 1 ? (pagesubject.getNumber()) : pagesubject.getNumber() + 1%>)"><%=pagesubject.getNumber() + 1==1?"首页":"上页" %></a>
-				<a class="now"><%=pagesubject.getNumber() + 1%></a> <a class="next_page"
-					href="javascript:fun(<%=pagesubject.getNumber() + 1 < pagesubject.getTotalPages()
-					? (pagesubject.getNumber() + 2)
-					: pagesubject.getTotalPages()%>)"><%=pagesubject.getNumber() + 1 == pagesubject.getTotalPages()?"尾页":"下页"%></a>
+					href="javascript:fun(${page>1?page-1:page})">${page==1?"首页":"上页"}</a>
+				<a class="now">${page}</a><a class="next_page"
+					href="javascript:fun(${page<pages?page+1:pages})">${page==pages?"尾页":"下页"}</a>
 			</div>
 		</div>
 	</div>

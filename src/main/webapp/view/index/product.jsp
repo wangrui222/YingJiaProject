@@ -39,7 +39,7 @@
 			</ul>
 		</div>
 		
-		<iframe id="iFrame1" name="iFrame1" width="100%" height="600"
+		<iframe id="iFrame1" name="iFrame1" width="100%"  
 			onload="this.height=iFrame1.document.body.scrollHeight"
 			frameborder="0" src="product_gushou.jsp" scrolling="no"></iframe>
 	</div>

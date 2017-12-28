@@ -79,5 +79,18 @@ public class MemberBankcards {
 	public void setCardaddress(String cardaddress) {
 		this.cardaddress = cardaddress;
 	}
+	public MemberBankcards(String memberBankcardsType, Integer memberId, String cardNo, Integer delflag,
+			Date createDate, String cardaddress) {
+		this.memberBankcardsType = memberBankcardsType;
+		this.memberId = memberId;
+		this.cardNo = cardNo;
+		this.delflag = delflag;
+		this.createDate = createDate;
+		this.cardaddress = cardaddress;
+	}
+	public MemberBankcards() {
+	}
+	
+	
 	
 }

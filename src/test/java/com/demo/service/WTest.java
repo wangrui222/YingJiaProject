@@ -1,39 +1,38 @@
 package com.demo.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
-import org.aspectj.lang.reflect.MemberSignature;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.demo.dao.jian.MemberAccountRepository;
 import com.demo.dao.jian.MemberWithdrawRecordRepository;
-
 import com.demo.dao.jian.SubjectOrderRecordRepository;
-import com.demo.dao.ldd.MemberaccountRepository;
-import com.demo.dao.ldd.MemberwithdrawrecordRepository;
-import com.demo.dao.wr.OverseaConfigRepository;
-import com.demo.model.AwardRecords;
-import com.demo.model.MemberDepositRecord;
+import com.demo.dao.wr.SubjectRepository;
+import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Members;
-import com.demo.model.OverseaConfig;
 import com.demo.service.jian.MemberAccountService;
 import com.demo.service.jian.MemberWithdrawRecordService;
+import com.demo.service.wr.MemberAmountService;
 
 import junit.framework.TestCase;
 
 public class WTest extends TestCase {
 
 	public void test05(){
-		System.out.println("038bdaf98f2037b31f1e75b5b4c9b26e"=="038bdaf98f2037b31f1e75b5b4c9b26e");
+		Object credentials = new SimpleHash("MD5", "123456", ByteSource.Util.bytes("admin"), 1024);
+		System.out.println(credentials.toString().contentEquals("038bdaf98f2037b31f1e75b5b4c9b26e"));
 	}
 
 	public void test(){
 		ApplicationContext app = new ClassPathXmlApplicationContext("spring-config.xml");
+
 		SubjectOrderRecordRepository subjectOrderRecordRepository = (SubjectOrderRecordRepository) app.getBean(SubjectOrderRecordRepository.class);
 
 		System.out.println(subjectOrderRecordRepository.selectMemberDepositRecord(1, 10, null, null));
@@ -51,18 +50,44 @@ public class WTest extends TestCase {
 //        awardRecords.setAddTime(new Date());
 		Members members = memberAccountService.findMembers(1);
 		System.out.println(members);
+
+		SubjectRepository memberRepository =(SubjectRepository) app.getBean("subjectRepository");
+		System.out.println(memberRepository.getGushouGouMai(1638).length);
+		//MemberService memberService = app.getBean(MemberService.class);
+		//System.out.println(memberRepository.findMemberAll(1));
+		//memberService.addMemberYanZheng(1, "wangui", "123");
+		//System.out.println(memberwithdrawrecordRepository.selectMemberWithdrawRecord(2));
 		//List<Object[]> object = productRepository.getGushouList();
 		//Float subjectPurchaseRecord = productRepository.getSumamount();
 		//	System.out.println(subjectPurchaseRecord);
 	}
 
+	
+	public void test08(){
+		ApplicationContext app = new ClassPathXmlApplicationContext("spring-config.xml");
+		MemberAmountService memberAccountRepository =(MemberAmountService) app.getBean("memberAmountService");
+		memberAccountRepository.updateMA(1, 1);
+	}
+	
+	public void test07(){
+		Calendar  c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.add(Calendar.DATE, 15);
+		System.out.println(c.getTime());
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sim.format(c.getTime());
+		System.out.println(date);
+	}
 
 	public void test04(){
 		ApplicationContext app = new ClassPathXmlApplicationContext("spring-config.xml");
-		OverseaConfigRepository fPFundsRepository = (OverseaConfigRepository) app.getBean("overseaConfigRepository");
+		SubjectRepository fPFundsRepository = (SubjectRepository) app.getBean("subjectRepository");
 		//List<OverseaConfig> object = fPFundsRepository.getOverseaList();
-		OverseaConfig object = fPFundsRepository.getOverSeaGouMai(2);
-		System.out.println(object);
+		List<Object[]> ojb= fPFundsRepository.findTouZiJiLu(1, 1, 5);
+		System.out.println(ojb);
+	}
+	public void test06(){
+		
 	}
 	public void test8(){
 		ApplicationContext app = new ClassPathXmlApplicationContext("spring-config.xml");

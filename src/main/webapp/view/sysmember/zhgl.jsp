@@ -56,14 +56,14 @@
 						<td style="width: 110px; padding-left: 30px">邀请码：</td>
 						<td style="width: 180px"><input type="text"
 							name="invitationcode" class="form-control" placeholder="邀请码""></td>
-						<td style="width: 110px; padding-left: 30px">注册时间：</td>
+						<!-- <td style="width: 110px; padding-left: 30px">注册时间：</td> -->
 
-						<td style="width: 180px"><input type="text" class="form-control time" name="createDate"
-							class="form-control time" placeholder="注册时间" value=""></td>
+						<!-- <td style="width: 180px"><input type="text" class="form-control time" name="createDate"
+							class="form-control time" placeholder="注册时间" value=""></td>-->
 						<td class="pull-right" style="padding-right: 10px"><input
 							type="submit" class="btn btn-primary btn-sm" value="查询"></td>
 						<td><button type="button" class="btn btn-primary btn-sm"
-								onclick="$('#form1').find(':input').not(':button, :submit, :reset').val('').removeAttr('checked').removeAttr('selected');">重置</button></td>
+								onclick="$('#form1').find(':input').not(':button, :submit, :reset').val('').removeAttr('checked').removeAttr('selected');">重置</button></td> 
 
 
 					</tr>
@@ -80,9 +80,9 @@
 					<td>注册时间</td>
 					<td>操作</td>
 				</tr>
-				<c:forEach items="${lists}" var="memberslist">
+				<c:forEach items="${lists}" var="memberslist" varStatus="vs">
 					<tr class="text-center">
-						<td>${memberslist.memberId}</td>
+						<td>${vs.index+1}</td>
 						<td>${memberslist.mobilePhone}</td>
 						<td>${memberslist.names}</td>
 						<td>${memberslist.memberName}</td>
@@ -94,7 +94,7 @@
 							href="<%=basePath%>ldd/sysmember/memberInfo/${memberslist.memberId}">账号详情</a></td>
 					</tr>
 				</c:forEach>
-				<tr>
+				<%-- <tr>
 
 					<td colspan="8">
 						第${pages}页，共${counts}页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
@@ -103,24 +103,36 @@
 						<a href="javascript:pagefun(${pages<counts?pages+1:counts});">下一页</a>&nbsp;
 						<a href="javascript:pagefun(${counts});">尾页</a>
 					</td>
-				</tr>
+				</tr> --%>
 			</table>
 		</div>
 		<!-- 内容结束 -->
+		<div class="llpage">
+			<div class="in">
+				<nav> <span class="count">&nbsp;第&nbsp;<b>${pages}</b>&nbsp;页，&nbsp;共&nbsp;<b>${counts}</b>&nbsp;页
+				</span>
+				<ul class="pagination">
+					<li><a class="prev_page"
+						href="javascript:pagefun(${pages>1?pages-1:pages});">上页</a></li>
+					<c:forEach begin="1" end="${counts}" var="v">
+						<li><a class="now" href="javascript:pagefun(${v})">${v}</a></li>
+					</c:forEach>
+					<li><a
+						href="javascript:pagefun(${pages<counts?pages+1:counts});"
+						class="next_page" rel="next">下页</a></li>
+				</ul>
+				</nav>
+			</div>
+		</div>
 	</div>
 
 	<script type="text/javascript">
-		function pagefun(ye) {
-			alert(11);
-			document.getElementById("pagess").value=ye;
-			alert(11);
-			document.fff.submit();
-			alert(11);
+		function pagefun(ye) {			
+			document.getElementById("pagess").value=ye;			
+			document.fff.submit();			
 		}		
 		</script>
-	<script type="text/javascript">
-    
-  
+	<!-- <script type="text/javascript">
     $('.time').datetimepicker({
         format: 'yyyy-mm-dd',
         language: 'zh-CN',
@@ -135,6 +147,6 @@
         $('.time').datetimepicker('hide');
     });
 
-</script>
+</script> -->
 </body>
 </html>

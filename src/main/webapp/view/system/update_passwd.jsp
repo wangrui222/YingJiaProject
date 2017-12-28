@@ -24,8 +24,11 @@
      <h2><span class="glyphicon glyphicon-play" style="margin-right:5px"></span>修改密码</h2>
 	
 <form id="savePassword" method="post" class="form-horizontal" action="<%=basePath%>lddsystem/system/savePasswd">
+		<%
+			String name = request.getSession().getAttribute("usersname").toString();
+		%>
+		<input type="hidden" id="uname" name="userName" value="<%=name%>">
 
-<input type="hidden" name="userName" id="uname" value="${name}">
 
 	<div class="tablelist">
 	  <div class="row bdlist">
@@ -33,7 +36,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">原密码：</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="oldpassword" id="oldpwd" placeholder="请输入密码" type="password" onchange="out();">
+                                        <input class="form-control" name="oldpassword" id="oldpwd" placeholder="请输入密码" type="password" onchange="out();" clientidmode="Static">
                                     	<p class="msg"></p>
                                     </div>
                                 </div>
@@ -123,11 +126,11 @@ function out() {
 					"userName" : userName
 				},
 				success : function(data) {			
-					if(data.code == '0'){
+					if(data.code==0){
+						document.getElementById("oldpwd").value="";
 						$(".msg").html(data.msg).show();
-					}else if(data.code == '1'){					
-						$(".msg").html(data.msg).show();
-						
+					}else if(data.code==1){					
+						$(".msg").html(data.msg).show();						
 					}
 				}
 			});

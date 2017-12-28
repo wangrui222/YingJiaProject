@@ -22,8 +22,15 @@
          <property name="filterChainDefinitions">  
               <value>  
                   <!-- anon表示此地址不需要任何权限即可访问 -->
-                 /view/login.jsp=anon  
+                  /notify_url.jsp=anon
+                  /return_url.jsp=anon
+                  /upload/**=anon
+                 /view/login.jsp=anon
+                 /alipay/alipay.jsp=anon  
                  /product/**=anon
+                 /member/**=anon
+                 /view/index/invest/**=anon
+                  /view/index/zhanghu/**=anon
                 /view/index/**=anon
                  /resources/** = anon 
                  /wangrui/logout=logout
@@ -57,8 +64,8 @@
      <!-- 会话管理器 -->  
      <bean id="sessionManager"  
          class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">  
-         <!-- 全局会话超时时间（单位毫秒），默认  分钟 -->  
-         <property name="globalSessionTimeout" value="1800000" />  
+         <!-- 全局会话超时时间（单位毫秒），默认  分钟1800000 -->  
+         <property name="globalSessionTimeout" value="18000000" />  
          <property name="deleteInvalidSessions" value="true" />  
          <property name="sessionValidationSchedulerEnabled" value="true" />  
          <property name="sessionValidationScheduler" ref="sessionValidationScheduler" />  

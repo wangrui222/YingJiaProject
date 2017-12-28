@@ -40,9 +40,9 @@
 				          <td>菜单配置</td>
 				      </tr>
 				      
-				      <c:forEach items="${rolelist}" var="rolelist">
+				      <c:forEach items="${rolelist}" var="rolelist" varStatus="vs">
 					      <tr class="text-center">
-					         <td>${rolelist.userRoleId}</td>
+					         <td>${vs.index+1}</td>
 					         <td>${rolelist.cname}</td>
 					         <td>${rolelist.remark}</td>
 					         <td>${rolelist.createDate}</td>

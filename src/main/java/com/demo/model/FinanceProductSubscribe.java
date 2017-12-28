@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-@Entity(name="finance_product_subscribe")
+@Entity
 /**
  * 理财类基金产品预约记录表
  * @author admin

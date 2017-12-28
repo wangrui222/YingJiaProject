@@ -23,9 +23,11 @@ import com.demo.dao.jian.MemberAccountRepository;
 import com.demo.dao.jian.MemberProfitRecordRepository;
 import com.demo.dao.jian.MemberWithdrawRecordRepository;
 import com.demo.dao.ldd.SubjectpurchaserecordRepository;
+import com.demo.dao.wr.SubjectPurchaseRecordRepository;
 import com.demo.dao.wr.SubjectRepository;
 import com.demo.model.MemberAccount;
 import com.demo.model.MemberProfitRecord;
+import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Subject;
 import com.demo.model.SubjectPurchaseRecord;
 
@@ -44,6 +46,8 @@ public class MemberWithdrawRecordServiceImpl implements MemberWithdrawRecordServ
 	MemberAccountRepository memberAccountRepository;
 	@Autowired
 	MemberProfitRecordRepository memberProfitRecordRepository;
+	@Autowired
+	SubjectPurchaseRecordRepository subjectPurchaseRecordRepository;
 	/* (non-Javadoc)
 	 * @see com.demo.service.jian.SubjectOrderRecordService#findMemberWithdrawRecord()
 	 */
@@ -81,11 +85,19 @@ public class MemberWithdrawRecordServiceImpl implements MemberWithdrawRecordServ
 		};
 
 		Pageable pageable=new PageRequest(page-1, size);
-		return memberWithdrawRecordRepository.findAll(specification,pageable);
+		return subjectPurchaseRecordRepository.findAll(specification,pageable);
 	}
+
+	@Transactional
+	@Override
+	public void addMemberWithdrawRecord(MemberWithdrawRecord memberWithdrawRecord) {
+		memberWithdrawRecordRepository.save(memberWithdrawRecord);
+		
+	}
+
 	@Override
 	public SubjectPurchaseRecord findSubjectPurchaseRecordById(Integer sprId) {
-		return memberWithdrawRecordRepository.findSubjectPurchaseRecordBysprId(sprId);
+		return subjectPurchaseRecordRepository.findSubjectPurchaseRecordBysprId(sprId);
 	}
 	@Override
 	public Subject findSubject(Integer subjectId) {
@@ -163,6 +175,47 @@ public class MemberWithdrawRecordServiceImpl implements MemberWithdrawRecordServ
 	public void insertIn(MemberProfitRecord memberProfitRecord) {
 	  memberProfitRecordRepository.save(memberProfitRecord);
 	}
+
+	@Override
+	public List<MemberWithdrawRecord> findMemberWithdrawRecord(Integer memberId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<MemberWithdrawRecord> findMemberWithdrawRecord(Integer page, Integer size,
+			MemberWithdrawRecord memberWithdrawRecord) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
+	@Override
+	public void UpdateStatus(Integer mwrId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void UpdateJieD(Integer mwrId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object[] findSubjects(Integer memberId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer findMemberId(Integer mwrId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 
 }

@@ -34,7 +34,7 @@ public class Subject {
 	/**
 	 * 标的类型
 	 */
-	private int subjectType;
+	private Integer subjectType;
 	/**
 	 * 标的状态
 	 */
@@ -44,7 +44,7 @@ public class Subject {
 	 */
 	private Float floorAmount ;
 	/**
-	 * 标的金额
+	 * 标的总金额(gus)
 	 */
 	private Float   amount;
 	/**
@@ -166,10 +166,12 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 
-	public int getSubjectType() {
+
+
+	public Integer getSubjectType() {
 		return subjectType;
 	}
-	public void setSubjectType(int subjectType) {
+	public void setSubjectType(Integer subjectType) {
 		this.subjectType = subjectType;
 	}
 	public Integer getStatus() {
@@ -325,7 +327,7 @@ public class Subject {
 	public void setExperStatus(Integer experStatus) {
 		this.experStatus = experStatus;
 	}
-	public Subject(int subjectType, Integer status, Integer period, Float yearRate) {
+	public Subject(Integer subjectType, Integer status, Integer period, Float yearRate) {
 		this.subjectType = subjectType;
 		this.status = status;
 		this.period = period;

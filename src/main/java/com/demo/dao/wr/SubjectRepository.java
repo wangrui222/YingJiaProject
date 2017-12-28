@@ -13,8 +13,9 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer>,Subje
 	public List<Subject> getGushouList();*/
 	
 	@Query("FROM Subject s WHERE s.subjectId = ?")
-	public Subject getGushouGouMai(Integer subjectId);
+	public Subject getSubject(Integer subjectId);
 	
+
 
 	
 	

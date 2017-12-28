@@ -24,18 +24,20 @@
 			<span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>添加角色
 		</h2>
 
-		<form class="form-horizontal col-xs-pull-3" 
+		<form id="addroleForm" class="form-horizontal col-xs-pull-3" 
 			name="addroleForm" method="post" action="<%=basePath%>lddsystem/system/addRole">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">角色名</label>
 				<div class="col-lg-5">
-					<input type="text" class="form-control" name="cname" />
+					<input type="text" class="form-control" name="cname" id="cname" onchange="change();" clientidmode="Static"/>
+					<p class="msg"></p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">英文名</label>
 				<div class="col-lg-5">
 					<input type="text" class="form-control" name="ename" id="ename" />
+					
 				</div>
 			</div>
 			<div class="form-group">
@@ -77,25 +79,32 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: '权限不能为空'
-                        },
-                        remote: {
-                            url: '<%=basePath%>sys/checkRoleExsit'+$("#ename").val(),
-                            message: '权限名称已被占用'
                         }
                     }
                 }
             }
         })
-        .on('success.form.bv', function(e) {
-            e.preventDefault();
-            var $form = $(e.target);
-            var bv = $form.data('bootstrapValidator');
-            $.post($form.attr('action'), $form.serialize(), function(result) {
-            	alert(result.msg);
-            	window.location.href="<%=basePath%>sys/rolelist";
-            }, 'json');
-        });
+        
 });
+function change() {
+	var cname=document.getElementById("cname").value;	
+	$.ajax({
+		type : "POST", // 用POST方式传输
+		url:'<%=basePath%>lddsystem/system/checkUserRole',
+				data : {
+					"cname" : cname,
+				},
+				success : function(data) {			
+					if(data.code ==0){					
+						$(".msg").html(data.msg).show();					
+					}else if(data.code ==1){
+						document.getElementById("cname").value="";
+						$(".msg").html(data.msg).show();
+					}
+				}
+			});
+		}
+	</script>
 </script>
 </body>
 </html>

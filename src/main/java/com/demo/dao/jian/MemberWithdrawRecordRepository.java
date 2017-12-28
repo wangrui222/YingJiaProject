@@ -2,14 +2,12 @@ package com.demo.dao.jian;
 
 import java.util.List;
 
-import javax.persistence.NamedNativeQuery;
-import javax.transaction.Transactional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import com.demo.dao.wr.MemberWithdrawRecordDao;
 import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.SubjectPurchaseRecord;
 
@@ -20,10 +18,18 @@ import com.demo.model.SubjectPurchaseRecord;
 *ÀàËµÃ÷
 */
 
-public interface MemberWithdrawRecordRepository extends JpaRepository<SubjectPurchaseRecord, Integer>,JpaSpecificationExecutor<SubjectPurchaseRecord>{
+
+/*public interface MemberWithdrawRecordRepository extends JpaRepository<SubjectPurchaseRecord, Integer>,JpaSpecificationExecutor<SubjectPurchaseRecord>{
 
 	
 	public SubjectPurchaseRecord findSubjectPurchaseRecordBysprId(Integer sprId);
+
+*/
+
+public interface MemberWithdrawRecordRepository extends JpaRepository<MemberWithdrawRecord, Integer>,JpaSpecificationExecutor<MemberWithdrawRecord>,MemberWithdrawRecordDao {
+	
+	@Query("from MemberWithdrawRecord m where m.members.memberId=?1")
+    public List<MemberWithdrawRecord> selectMemberWithdrawRecord(Integer memberId);
 	@Modifying
 	@Query(value="update SubjectPurchaseRecord s set s.interest=?1 where s.sprId=?2")
 	public  void  UpdateInterestById(Float interest,Integer sprId);
@@ -48,4 +54,9 @@ public interface MemberWithdrawRecordRepository extends JpaRepository<SubjectPur
 	@Query(value="update SubjectPurchaseRecord s set s.status=4 where s.sprId=?1")
 	public void Updatedk(Integer sprId); 
 	
+	@Query(value="Update MemberWithdrawRecord m set m.status=4 where m.mwrId=?1")
+	public void updateJieD(Integer mwrId);
+	@Query(value="select m.members.memberId from MemberWithdrawRecord m where m.mwrId=?1")
+	public Integer findMemberId(Integer mwrId);
+
 }

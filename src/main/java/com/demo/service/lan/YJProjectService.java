@@ -14,6 +14,7 @@ import com.demo.model.MemberTally;
 import com.demo.model.MemberTradeRecord;
 import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Members;
+import com.demo.model.Subject;
 import com.demo.model.SubjectPurchaseRecord;
 import com.demo.model.UserRole;
 import com.demo.model.Users;
@@ -35,9 +36,9 @@ public interface YJProjectService {
 	public List<MemberTradeRecord> selectoneonemembertraderecord(Integer mid);
 	//后台-会员管理-一个用户所有充值记录查询
 	public List<MemberDepositRecord> selectonememberdepositrecord(Integer mid);
-	/*//后台-会员管理-一个用户所有投资记录查询
-	public List<SubjectPurchaseRecord> selectonesubjectpurchaserecord(Integer mid);
-	 */
+	//后台-会员管理-一个用户所有投资记录查询
+	public List<Object[]> selecttouzi(Integer mid);
+	
 
 
 
@@ -66,6 +67,8 @@ public interface YJProjectService {
 	public List<Object[]> selectmembersubjectBbinpurchaserecord(Integer id,Integer page,Integer rowsize);
 	//后台-会员管理-体验金付息查询总数
 	public Integer getselectmemberBbinpurchaserecordcount(Integer id);
+	//后台-会员管理-体验金付息按id查询三个信息
+	public Object selectmemberBbinpurchaserecordcount(Integer id);
 	//后台-会员管理-付息计划-体验金付息
 	public List<Object[]> selectmembersubjectpurchaserecord(Integer id,Integer page,Integer rowsize);
 	//后台-会员管理-体验金付息查询总数
@@ -102,7 +105,9 @@ public interface YJProjectService {
 	//后台-系统设置-密码设置-修改密码
 	public void updateuserpwd(String pwd,Integer uid);
 	//后台-系统设置-账户设置-修改账号时判断密码是否纯在
-	public List<Object[]> validateUserpwd(String pwd);
+	public Object validateUserpwd(String uname);
+	//后台-系统设置-账户设置-添加账号时判断角色名是否存在
+	public List<Object[]> validateUserRoleName(String cname);
 
 
 

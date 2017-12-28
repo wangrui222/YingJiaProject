@@ -7,11 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 /**
- * 
+ * 收益记录表
  * @author admin
  *
  */
-@Entity(name="member_profit_record ")
+@Entity
 public class MemberProfitRecord {
 	private Integer	mprId ;//主键
 	private	  String serialNumber ;//流水号
@@ -38,9 +38,6 @@ public class MemberProfitRecord {
 	@Id
 	@SequenceGenerator(name="seq_MemberProfitRecord",sequenceName="sql_member_profit_record",allocationSize=1)
 	@GeneratedValue(generator="seq_MemberProfitRecord",strategy=GenerationType.SEQUENCE)
-	
-	
-	
 	public Integer getMprId() {
 		return mprId;
 	}

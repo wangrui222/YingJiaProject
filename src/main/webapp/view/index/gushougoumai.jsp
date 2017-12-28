@@ -6,7 +6,8 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,7 +32,9 @@
 	src="<%=basePath%>resources/web/fancybox/jquery.fancybox-1.3.4.js"></script>
 
 <script>
-        $(function () {
+
+	$(function() {
+		
             $(".picList a").fancybox({
                 'transitionIn': 'none',
                 'transitionOut': 'none',
@@ -56,18 +59,22 @@
             })
         })
 
+</script>
 
-    </script>
+
+
 </head>
 <body>
-<% Subject subject = (Subject) session.getAttribute("gushougoumailist");
-   Float sums = (Float)session.getAttribute("sumamount");
-%>
+
+<input type="hidden" id="memberss" value="${ members }" />
+<input type="hidden" id="subjectid" value="${gushougoumailist[0]}" />
+
+
 	<div class="proMain">
 		<div class="conTit">
 			<span><a style="color: #9d8440;" href="<%=basePath%>subject">其他标的</a></span>
 			<h2>
-				<em>￥</em><%=subject.getSubjectName()%>
+				<em>￥</em>${gushougoumailist[1]}
 			</h2>
 		</div>
 		<table class="conTable" width="100%" border="0" cellspacing="0"
@@ -75,46 +82,59 @@
 			<tr>
 				<td class="txtInfo">
 					<div class="txt1">
-						<h2><%=subject.getBought()%></h2>
+						<h2>${gushougoumailist[13]}</h2>
 						<p>已购人数(人)</p>
 					</div>
 					<div class="txt2">
-						<h2><%=subject.getYearRate()+"%"%></h2>
+						<h2>${gushougoumailist[2]}%</h2>
 						<p>年化收益</p>
 					</div>
 					<div class="txt1">
-						<h2><%=subject.getPeriod()%></h2>
+						<h2>${gushougoumailist[4]}</h2>
 						<p>投资期限(天)</p>
 					</div>
 				</td>
 				<td width="360" rowspan="2" align="center" ; valign="middle"
 					height="320">
 					<div class="tbBox">
-						<input type="hidden" id="account" value="">
-						<h2><%=sums%></h2>
+						<h2>${gushougoumailist[12]}</h2>
 						<p>已投金额(元)</p>
-						<!-- <div class="li4" style="">
+						<div class="li4" style="">
 							<span id="checkmoney" style="color: red;"></span>
-						</div> -->
-						<div class="tit">
-							<span class="fr"> <a style="color: #2695d5"
-								class="unlogin" href="<%=basePath%>web/login">登录</a>后可见
-							</span>
-							<h2>账户余额</h2>
-							<!-- <div id="count">
-								预期所得收益<i data-num="0.001151" id="num">0</i>元
-							</div> -->
 						</div>
-						<input id="mytext" class="txt" name="totalFee" type="text"
-							placeholder="起投金额<%=subject.getFloorAmount()%>元以上"> <span
+						<div class="tit">
+						
+							<c:if test="${members==null}">
+								<span class="fr"> <a style="color: #2695d5"
+									class="unlogin" href="<%=basePath%>view/index/login.jsp">登录</a>后可见
+								</span>
+							</c:if>
+							<c:if test="${members!=null}">
+							 
+								<h2>账户余额:${memberAccount.useableBalance}
+								<input type="hidden" id="memberAccount" value="${memberAccount.useableBalance}"/>
+								</h2>
+								<div id="count">
+									预期所得收益<i data-num="0.001151" id="num">0</i>元
+								</div>
+							</c:if>
+						</div>
+						<input id="mytext" type="hidden" value="${gushougoumailist[3]}"/>
+						<input id="mytext2" class="txt" name="totalFee" type="text"
+							placeholder="起投金额${gushougoumailist[3]}元以上" /> <span
 							style="float: right; margin-top: -40px; position: relative; line-height: 40px; padding: 0 10px; color: #f00;"
 							id="addMoney"></span>
 						<p class="preBox">
 							<input type="checkbox" id="registerRule" class="registerRule"
 								checked="checked"><span class="fl">同意<a
 								href="<%=basePath%>web/syxy" target="_black">《产品协议》</a></span>
+								<%-- <c:if test="${members!=null}">
+									<button id="redPacket">使用红包</button>
+		                            <button id="bbinAll">体验金全投</button>
+	                            </c:if> --%>
+								
 						</p>
-						<button class="submit">确认抢购</button>
+						<button class="submit" id="submit2">确认抢购</button>
 					</div>
 				</td>
 			</tr>
@@ -123,26 +143,20 @@
 					<ul class="conInfoList">
 						<li class="info">
 							<p>
-								计息日期：<font color="#00baff"><%=subject.getCreateDate()%>
-							<%-- 	<fmt:formatDate value="<%=subject.getCreateDate()%>" pattern="yyyy-MM-dd"/> --%>
-								</font>
+								计息日期：<font color="#00baff"> ${date} </font>
 							</p>
 							<p>
-								还款方式：<font color="#00baff"><%=subject.getRefundWay()%>
-								<%-- <fmt:formatDate value="<%=subject.getRefundWay()%>" pattern="yyyy-MM-dd"/> --%>
-								</font>
+								还款方式：<font color="#00baff"> ${gushougoumailist[10]} 当前投资
+									立即计息 </font>
 							</p>
 							<p>
-								资金到账日：<font color="#00baff"><%=subject.getStartDate()%>
-							<%-- 	<fmt:formatDate value="<%=subject.getStartDate()%>" pattern="yyyy-MM-dd"/> --%>
-									至<%=subject.getEndDate()%>
-							<%-- 	<fmt:formatDate value="<%=subject.getEndDate()%>" pattern="yyyy-MM-dd"/> --%>
-								</font>
+								资金到账日：<font color="#00baff" id="font">
+									${beforedate}至${afterdate} </font>
 							</p>
 						</li>
 						<li class="info">
 							<p>
-								保障方式：<font color="#00baff"><%=subject.getSafetycontrol()%></font>
+								保障方式：<font color="#00baff"> ${gushougoumailist[11]}</font>
 							</p>
 							<p>
 								资金安全：<font color="#00baff">中国人保财险承保</font>
@@ -207,51 +221,151 @@
 		</div>
 
 	</div>
-	<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?06cf97732baac1a65bed8ae95f2384aa";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
 </body>
-<script type="text/javascript">
 
-    $(function () {
-        $(".tbConBox .tab a").click(function () {
-            if (!$(this).hasClass("select")) {
-                var num = $(this).index();
-                $(this).addClass("select").siblings().removeClass("select");
-                $("#conBox .box").eq(num).show().siblings().hide();
+<script type="text/javascript">
+$(function () {
+    $(".tbConBox .tab a").click(function () {
+        if (!$(this).hasClass("select")) {
+            var num = $(this).index();
+            $(this).addClass("select").siblings().removeClass("select");
+            $("#conBox .box").eq(num).show().siblings().hide();
+        }
+    });
+
+    $(":input[name=totalFee]").focus(function () {
+        $(".li4").hide();
+    });
+
+    var redPacket = $("#redPacket");
+    var bbinAll = $("#bbinAll");
+    var addMoney = $("#addMoney");
+    var mytext = $("#mytext").val();//最低金额
+    var mytext2 =  $("#mytext2");//投资金额
+    var exists = $("#memberss").val();//判断是否登陆
+    var balance = $("#memberAccount");//账户余额
+    var subjectid=$("#subjectid");
+    var authBankCard=false;
+    
+    
+    
+    
+        $(".submit").click(function () {
+            if (exists =='') {
+                $("#checkmoney").html("请先登陆!");
+                $(".li4").show(100);
+                return false;
+            }
+          	if (parseFloat(mytext)>parseFloat(mytext2.val())) {
+          		 $("#checkmoney").html("不满足投资的最低金额!");
+                 $(".li4").show(100);
+                 return false;
+          	}
+          	if (parseFloat(balance.val())<parseFloat(mytext2.val())) {
+          		 $("#checkmoney").html("投资金额不足!");
+                 $(".li4").show(100);
+                 return false;
+          	}
+        
+	         if($("input[type='checkbox']").is(':checked')==false){
+	        	 $("#checkmoney").html("必须同意产品协议!");
+	             $(".li4").show(100);
+	             return false;
+	         }
+         
+          	$.ajax({
+				type : "POST", // 用POST方式传输
+				url:'<%=basePath%>product/Yuding',
+				data:{
+					"mytext2":mytext2.val(),
+					"subjectid":subjectid.val()
+				},
+				success:function(data){
+					if(data.code == '0'){
+						window.location.href="<%=basePath%>view/index/yugou.jsp";
+					}else{
+						 $("#checkmoney").html(data.msg);
+						 $(".li4").show(100);
+					}
+				}
+			});
+         
+        });
+
+        
+        
+        exists = true;
+        //使用红包
+        $("#redPacket").click(function () {
+            if (redPacket.hasClass("active")) {//选中
+                redPacket.removeClass("active");
+                addMoney.html("");
+                bbinAll.removeAttr("disabled");
+            } else {//未选中
+                redPacket.addClass("active");
+                addMoney.html("+" +0);
+                bbinAll.attr("disabled", "disabled");
+            }
+        });
+        //使用体验金
+        $("#bbinAll").click(function () {
+            if (bbinAll.hasClass("active")) {//选中
+                bbinAll.removeClass("active");
+                mytext.val("");
+                mytext.removeAttr("readonly");
+                redPacket.removeAttr("disabled");
+            } else {//未选中
+                bbinAll.addClass("active");
+                mytext.val(8888);
+                mytext.attr("readonly", "readonly");
+                redPacket.attr("disabled", "disabled");
             }
         });
 
-        $(":input[name=totalFee]").focus(function () {
-            $(".li4").hide();
-        });
+      
+            var bonusFee = 0;
+            var bbinStatus = 0;
+            if (!(bbinAll.hasClass("active"))) {//未选中体验金
+                var acountval = $("#account").val();
+                if (acountval != -1) {
+                    if ((acountval - value) < 0) {
+                        $("#checkmoney").html("账号余额不足，请充值");
+                        $(".li4").show(100);
+                        return false;
+                    }
+                }
+                if (redPacket.hasClass("active")) {//选中红包
+                    bonusFee =0;
+                }
+            } else {
+                bbinStatus = 1;
+            }
 
-        var redPacket = $("#redPacket");
-        var bbinAll = $("#bbinAll");
-        var addMoney = $("#addMoney");
-        var mytext = $("#mytext");
-        var exists = false;
-        var authBankCard=false;
-        
-            $(".submit").click(function () {
-
-                if (exists == false) {
-                    $("#checkmoney").html("请先登陆!");
-                    $(".li4").show(100);
-                    return false;
+            $.ajax({
+                type: "POST", // 用POST方式传输
+                dataType: "json", // 数据格式:JSON
+                async: true,
+                url: '/subjectPur/order', // 目标地址
+                data: {
+                    subjectId:1612,
+                    totalFee: value,
+                    bonusFee: bonusFee,
+                    bbinStatus: bbinStatus
+                },
+                success: function (msg) {
+                    if (msg.code == 0) {
+                        window.location.href = "/subjectPur/orderView?tradeNo=" + msg.msg + "&bbinStatus=" + bbinStatus;
+                    } else {
+                        $("#checkmoney").html(msg.msg);
+                        $(".li4").show(100);
+                    }
                 }
             });
 
+});
 
-    });
 
 </script>
 
-</body>
+
 </html>

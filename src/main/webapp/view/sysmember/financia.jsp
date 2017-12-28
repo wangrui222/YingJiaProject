@@ -41,9 +41,9 @@
 		<div class="tablelist">
 			<form action="<%=basePath%>ldd/sysmember/financia" method="post"
 				id="form1" name="fff">
-				<input type="hidden" name="page" id="pagess">
-				<input type="hidden" name="ss" id="statu">
-				<input type="hidden" name="memberId" id="mid">
+				<input type="hidden" name="page" id="pagess"> <input
+					type="hidden" name="ss" id="statu"> <input type="hidden"
+					name="memberId" id="mid">
 				<table class="table tabletop">
 					<tr>
 						<td style="width: 110px; padding-left: 30px">手机号：</td>
@@ -62,9 +62,9 @@
 								<option value="2">认证成功</option>
 								<option value="3">认证失败</option>
 						</select></td>
-						<td style="width: 110px; padding-left: 30px">注册时间：</td>
-						<td style="width: 180px"><input type="text" name="createDate"
-							class="form-control time" placeholder="注册时间" value=""></td>
+						<!-- <td style="width: 110px; padding-left: 30px">注册时间：</td> -->
+						<!-- <td style="width: 180px"><input type="text" name="createDate"
+							class="form-control time" placeholder="注册时间" value=""></td> -->
 						<td class="pull-right" style="padding-right: 10px"><input
 							type="submit" class="btn btn-primary btn-sm" value="查询"></td>
 						<td><button type="button" class="btn btn-primary btn-sm"
@@ -90,7 +90,7 @@
 						<td>${list[9]}</td>
 						<td>${list[2]}</td>
 						<td>${list[3]}</td>
-						<td><a href="<%=basePath%>${list[4]}" target="_black">查看</a></td>
+						<td><a href="<%=basePath%>upload/${list[4]}" target="_black">查看</a></td>
 						<td>${list[5]}</td>
 						<td><c:if test="${list[6]==0}">
 								<span style="color: red;">待认证</span>
@@ -108,31 +108,55 @@
 					</tr>
 
 				</c:forEach>
-				<tr>
-
-					<td colspan="8">
-						第${page}页，共${allpage}页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="javascript:pagefun(1);">首页</a>&nbsp; <a
-						href="javascript:pagefun(${page>1?page-1:page});">上一页</a>&nbsp;
-						<a href="javascript:pagefun(${page<allpage?page+1:allpage});">下一页</a>&nbsp;
-						<a href="javascript:pagefun(${allpage});">尾页</a>
-					</td>
-				</tr>
+			
 			</table>
-
 		</div>
-		<script type="text/javascript">
-		function pagefun(ye) {		
-			document.getElementById("pagess").value=ye;			
-			document.fff.submit();			
+		<div class="llpage">
+			<div class="in">
+				<nav> <span class="count">&nbsp;第&nbsp;<b>${page}</b>&nbsp;页，&nbsp;共&nbsp;<b>${allpage}</b>&nbsp;页
+				</span>
+				<ul class="pagination">
+					<li><a class="prev_page"
+						href="javascript:pagefun(${page>1?page-1:page});">上页</a></li>
+					<c:forEach begin="1" end="${allpage}" var="v">
+						<li><a class="now" href="javascript:pagefun(${v})">${v}</a></li>
+					</c:forEach>
+					<li><a
+						href="javascript:pagefun(${page<allpage?page+1:allpage});"
+						class="next_page" rel="next">下页</a></li>
+				</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+		function pagefun(ye) {
+			document.getElementById("pagess").value = ye;
+			document.fff.submit();
 		}
-		function sh(statu,id,page) {	
-			alert(id);
+	</script>
+<script type="text/javascript">
+		function sh(statu,id,page) {
 			document.getElementById("pagess").value=page;
 			document.getElementById("statu").value=statu;
 			document.getElementById("mid").value=id;
-			document.fff.submit();		
+			document.fff.submit();
 		}
-		</script> 
-</body>
+	</script>
+	<!-- <script type="text/javascript">
+    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        autoclose: false
+    }).on('changeDate', function (ev) {
+        $('.time').datetimepicker('hide');
+    });
+</script> -->
 </html>

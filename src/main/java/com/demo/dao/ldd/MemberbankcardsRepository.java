@@ -14,4 +14,12 @@ public interface MemberbankcardsRepository extends JpaRepository<MemberBankcards
 	@Modifying
 	@Query("update MemberBankcards m set m.delflag=?1 where m.memberId=?2")
 	public void updateMemberbankcards(Integer delflag,Integer id);
+	/**
+	 * °ó¿¨ÈÏÖ¤²éÑ¯
+	 * @param memberId
+	 * @return
+	 */
+	@Query("From MemberBankcards m where m.memberId = ?")
+	public MemberBankcards findMemberBankcards(Integer memberId);
+
 }

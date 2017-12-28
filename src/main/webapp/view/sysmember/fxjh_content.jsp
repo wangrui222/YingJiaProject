@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 	String path = request.getContextPath();
  	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -24,15 +26,15 @@
 
 	<div class="box-right-main">
 		<h2>
-			<span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>付息计划
+			<span class="glyphicon glyphicon-play" style="margin-right: 5px"></span>付息列表
 		</h2>
 
 		<div class="tablelist">
 			<table class="table tabletop">
 				<tr>
-					<td style="padding-left: 30px">标的名称：${(subject.name)!!} &nbsp;
-						&nbsp; &nbsp; &nbsp; 标的期限：${(subject.period)!!}天 &nbsp; &nbsp;
-						&nbsp; &nbsp; 年化收益率：${(subject.yearRate)!!}%</td>
+					<td style="padding-left: 30px">标的名称：${subject[0]} &nbsp;
+						&nbsp; &nbsp; &nbsp; 标的期限：${subject[1]}天 &nbsp; &nbsp;
+						&nbsp; &nbsp; 年化收益率：${subject[2]}%</td>
 				</tr>
 			</table>
 			<table class="table table-bordered tablebox">
@@ -48,53 +50,58 @@
 					<td>投资时间</td>
 					<td>还款时间</td>
 					<td>还款状态</td>
-					<td>操作</td>
+					<!-- <td>操作</td> -->
 				</tr>
 
-				<#list pageInfo.list as s>
+				<c:forEach items="${list}" var="list" varStatus="vs">
 				<tr class="text-center">
-					<td>${s_index+1}</td>
-					<td>${s.serialNumber!!}</td>
-					<td>${s.member.mobilePhone!!}</td>
-					<td>${s.member.memberName!!}</td>
-					<td>${s.member.identity!!}</td>
-					<td>元</td>
-					<td><span style="color: red;">${(s.interest)!!}</span>+ <span
-						style="color: red;">${(s.amount)!!}</span>= <span
-						style="color: blue;"></span>元</td>
-					<td>
-						<%-- ${(s.updateDate?string('yyyy-MM-dd HH:mm'))!!} --%>
-					</td>
-					<td>
-						<%-- 	<#if (subject.type=='GU_SHOU')>                        	
-                        		${(s.createDate?string('yyyy-MM-dd HH:mm'))!!}
-                        	<#else>
-                        		${(subject.endDate?string('yyyy-MM-dd HH:mm'))!!}
-                        	</#if> --%>
-					</td>
-					<td><#if s.ispayment.description='未付款'> <span
-						style="color: red;">${(s.ispayment.description)!!}</span> <#else>
-						<span style="color: blue;">${(s.ispayment.description)!!}</span>
-						</#if>
-					</td>
-					<td><#if s.ispayment='ISPAYMENT'> <a
-						href="<%=basePath%>sysmember/paymentPurchase?id=${s.id}"
-						class="btn btn-primary btn-sm">立即还款</a> <#else> <a
-						href="javascript:" class="btn btn-primary btn-sm"
-						style="background-color: #8393A1;">已还款</a> </#if>
-					</td>
+					<td>${vs.index+1}</td>
+					<td>${list[1]}</td>
+					<td>${list[9]}</td>
+					<td>${list[8]}</td>
+					<td>${list[10]}</td>
+					<td>${list[3]}元</td>
+					<td><span style="color: red;">${list[3]}</span>+ <span
+						style="color: red;">${list[4]}</span>= <span
+						style="color: blue;">${list[3]+list[4]}</span>元</td>
+					<td>${list[5]}</td>
+					<td>${list[6]}</td>
+					<td><c:if test="${list[7]==0}"> <span
+						style="color: red;">已付款</span> </c:if><c:if test="${list[7]==1}">
+						<span style="color: blue;">未付款</span>
+						</c:if>
+					</td>				
 				</tr>
-				</#list>
-			</table>
-			<#include "paginate.html" /> <@paginate
-			currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0
-			actionUrl="<%=basePath%>sysmember/paymentContent"
-			urlParas="&id=${(subject.id)!!}"/>
+				</c:forEach>
+			</table>			
 		</div>
-
+<div class="llpage">
+			<div class="in">
+				<nav> <span class="count">&nbsp;第&nbsp;<b>${page}</b>&nbsp;页，&nbsp;共&nbsp;<b>${allpage}</b>&nbsp;页
+				</span>
+				<ul class="pagination">
+					<li><a class="prev_page"
+						href="javascript:pagefun(${page>1?page-1:page});">上页</a></li>
+					<c:forEach begin="1" end="${allpage}" var="v">
+						<li><a class="now" href="javascript:pagefun(${v})">${v}</a></li>
+					</c:forEach>
+					<li><a
+						href="javascript:pagefun(${page<allpage?page+1:allpage});"
+						class="next_page" rel="next">下页</a></li>
+				</ul>
+				</nav>
+			</div>
+		</div>
 		<!-- 内容结束 -->
-
+		<form action="<%=basePath%>ldd/sysmember/paymentContent/${subject[3]}" name="fff">
+		<input type="hidden" name="page" id="pagess">
+		</form>
 	</div>
-	<!-- 容器结束 -->
+	<script type="text/javascript">
+		function pagefun(ye) {
+			document.getElementById("pagess").value=ye;
+			document.fff.submit();
+		}
+	</script>
 </body>
 </html>

@@ -27,6 +27,7 @@ import com.demo.dao.ldd.MemberbankcardsRepository;
 import com.demo.dao.ldd.MemberdepositrecordRepository;
 import com.demo.dao.ldd.MembersRepository;
 import com.demo.dao.ldd.MemberwithdrawrecordRepository;
+
 import com.demo.dao.ldd.SubjectpurchaserecordRepository;
 import com.demo.dao.ldd.UsersRepository;
 import com.demo.dao.ldd.UsersRoleRepository;
@@ -38,6 +39,7 @@ import com.demo.model.MemberTally;
 import com.demo.model.MemberTradeRecord;
 import com.demo.model.MemberWithdrawRecord;
 import com.demo.model.Members;
+import com.demo.model.Subject;
 import com.demo.model.SubjectPurchaseRecord;
 import com.demo.model.UserRole;
 import com.demo.model.Users;
@@ -75,8 +77,8 @@ public class YJProjectServiceImpl implements YJProjectService{
 	//账号设置-角色repository
 	@Autowired
 	UsersRoleRepository userrolerepository;
-	
-	
+
+
 	/************************************************/
 	//后台-会员管理-全部用户查询
 	@Override
@@ -105,10 +107,7 @@ public class YJProjectServiceImpl implements YJProjectService{
 						Path path = paramRoot.get("invitationcode");
 						plist.add(paramCriteriaBuilder.like(path, "%"+members.getInvitationcode()+"%"));
 					}
-					if(members.getCreateDate()!=null&&!"".equals(members.getCreateDate())){
-						Path path = paramRoot.get("createDate");
-						plist.add(paramCriteriaBuilder.equal(path,members.getCreateDate()));
-					}
+
 				}
 				return paramCriteriaBuilder.and(plist.toArray(new Predicate[plist.size()]));
 			}
@@ -147,11 +146,11 @@ public class YJProjectServiceImpl implements YJProjectService{
 	public List<MemberDepositRecord> selectonememberdepositrecord(Integer mid) {
 		return memberdepositrecordrepository.selectMemberDepositRecord(mid);
 	}
-	/*//后台-会员管理-一个用户投资记录查询
+	//后台-会员管理-一个用户投资记录查询
 	@Override
-	public List<SubjectPurchaseRecord> selectonesubjectpurchaserecord(Integer mid) {
-		return subjectpurchaserecordrepository.selectSubjectPurchaseRecord(mid);
-	}*/
+	public List<Object[]> selecttouzi(Integer mid){
+		return memberrepository.selectTouzi(mid);
+	}
 
 
 
@@ -211,19 +210,19 @@ public class YJProjectServiceImpl implements YJProjectService{
 	//后台-会员管理-付息计划查询总数
 	@Override
 	public Integer getselectmemberBbinpurchaserecordcount(Integer id) {
-		
+
 		return memberrepository.getcountssubjectBbinpurchaserecord(id);
 	}
 	//后台-会员管理-付息计划-付息列表
 	@Override
 	public List<Object[]> selectmembersubjectpurchaserecord(Integer id, Integer page, Integer rowsize) {
-		
+
 		return memberrepository.selectsubjectpurchaserecord(id, page, rowsize);
 	}
 	//后台-会员管理-付息列表查询总数
 	@Override
 	public Integer getselectmemberpurchaserecordcount(Integer id) {
-		
+
 		return memberrepository.getcountssubjectpurchaserecord(id);
 	}
 
@@ -249,12 +248,17 @@ public class YJProjectServiceImpl implements YJProjectService{
 	@Transactional
 	public void adduser(Users user) {
 		usersrepository.save(user);
-		
+
 	}
 	//后台-系统设置-账户设置-添加账号时判断账号是否存在
 	@Override
 	public List<Object[]> validateUserName(String uname) {
 		return usersrepository.selectusersrole(uname);
+	}
+	//后台-系统设置-账户设置-添加账号时判断角色名是否存在
+	@Override
+	public List<Object[]> validateUserRoleName(String cname) {
+		return usersrepository.selectusersroleexit(cname);
 	}
 	//后台-系统设置-账户设置-按id查询一个账号
 	@Override
@@ -273,52 +277,57 @@ public class YJProjectServiceImpl implements YJProjectService{
 	public Object finduserid(String name) {
 		return usersrepository.selectuserid(name);
 	}
-	
+
 	//后台-系统设置-账户设置-修改账号
 	@Override
 	@Transactional
 	public void updateuser(String pwd,String phone,Date update,Integer uid) {
 		usersrepository.updatuser(pwd,phone,update,uid);
-		
+
 	}
 	@Override
 	@Transactional
 	public void updateuserrole(Integer roleid, Integer uid) {
 		usersrepository.updaterole(roleid, uid);
-		
+
 	}
 	//后台-系统设置-账户设置-删除账号
 	@Override
 	@Transactional
 	public void deleteuser(Integer uid) {
 		usersrepository.delete(uid);
-		
+
 	}
 	//后台-系统设置-角色设置-添加账号
 	@Override
 	@Transactional
 	public void adduserrole(UserRole userrole) {
 		userrolerepository.save(userrole);
-		
+
 	}
 	//后台-系统设置-密码设置-修改密码
 	@Override
 	@Transactional
 	public void updateuserpwd(String pwd,Integer uid) {
 		usersrepository.updatepassword(pwd,uid);
-		
+
 	}
 	//后台-系统设置-密码设置-修改密码时判断密码是否存在
 	@Override
-	public List<Object[]> validateUserpwd(String pwd) {		
-		return usersrepository.selectusersonpwd(pwd);
+	public Object validateUserpwd(String uname) {		
+		return usersrepository.selectpassword(uname);
 	}
-	
-	
-	
-	
-	
-	
+	//后台-会员管理-体验金付息按id查询三个信息
+	@Override
+	public Object selectmemberBbinpurchaserecordcount(Integer id) {		
+		return memberrepository.selectsubjectBbinpurchaserecord(id);
+	}
+
+
+
+
+
+
 
 
 
