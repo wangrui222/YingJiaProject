@@ -128,16 +128,15 @@
 				varStatus="vs">
 			<tr>
 				<td>${vs.index+1}</td>
-				<td>${subjectpurchaserecord.serialNumber}</td>
-				<td>${subjectpurchaserecord.amount}</td>
+				<td>${subjectpurchaserecord[2]}</td>
+				<td>${subjectpurchaserecord[4]}</td>
 				<td>
-					<#if r.ispayment.ordinal()==0><font style="color: red;">${(r.ispayment.description)!!}</font>
-					<#else><font style="color: green;">${(r.ispayment.description)!!}</font>
-					</#if>
+				<c:if test="${subjectpurchaserecord[8]==1}"><font style="color: red;">已还款</font></c:if>
+				<c:if test="${subjectpurchaserecord[8]==0}"><font style="color: green;">未还款</font></c:if>
 				</td>
-				<td><font color="#a58b48">${subjectpurchaserecord.}</font></td>
-				<td>${subjectpurchaserecord.}</td>
-				<td>${subjectpurchaserecord.}</td>
+				<td><font color="#a58b48">${subjectpurchaserecord[0]}</font></td>
+				<td>${subjectpurchaserecord[5]}</td>
+				<td>${subjectpurchaserecord[6]}</td>
 			</tr>
 		</c:forEach>
 		

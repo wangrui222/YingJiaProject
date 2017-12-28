@@ -109,17 +109,24 @@
 							class="btn btn-primary btn-sm">付息列表</a></td>
 					</tr>
 				</c:forEach>
-				<tr>
-
-					<td colspan="12">
-						第${page}页，共${allpage}页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="javascript:pagefun(1);">首页</a>&nbsp; <a
-						href="javascript:pagefun(${page>1?page-1:page});">上一页</a>&nbsp; <a
-						href="javascript:pagefun(${page<allpage?page+1:allpage});">下一页</a>&nbsp;
-						<a href="javascript:pagefun(${allpage});">尾页</a>
-					</td>
-				</tr>
 			</table>
+		</div>
+		<div class="llpage">
+			<div class="in">
+				<nav> <span class="count">&nbsp;第&nbsp;<b>${page}</b>&nbsp;页，&nbsp;共&nbsp;<b>${allpage}</b>&nbsp;页
+				</span>
+				<ul class="pagination">
+					<li><a class="prev_page"
+						href="javascript:pagefun(${page>1?page-1:page});">上页</a></li>
+					<c:forEach begin="1" end="${allpage}" var="v">
+						<li><a class="now" href="javascript:pagefun(${v})">${v}</a></li>
+					</c:forEach>
+					<li><a
+						href="javascript:pagefun(${page<allpage?page+1:allpage});"
+						class="next_page" rel="next">下页</a></li>
+				</ul>
+				</nav>
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript">

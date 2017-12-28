@@ -53,9 +53,9 @@
 						<td style="width: 130px; padding-left: 30px">绑卡卡号：</td>
 						<td style="width: 180px"><input type="text"
 							class="form-control" name="cardNo" placeholder="绑卡卡号"}"></td>
-						<td style="width: 110px; padding-left: 30px">注册时间：</td>
+						<!-- <td style="width: 110px; padding-left: 30px">注册时间：</td>
 						<td style="width: 180px"><input type="text" name="createDate"
-							class="form-control time" placeholder="注册时间" value=""></td>
+							class="form-control time" placeholder="注册时间" value=""></td> -->
 						<td class="pull-right" style="padding-right: 30px">
 							<button type="submit" class="btn btn-primary btn-sm">查询</button>
 						</td>
@@ -77,9 +77,9 @@
 					<td>添加时间</td>
 					<td>操作</td>
 				</tr>
-				<c:forEach items="${list}" var="list">
+				<c:forEach items="${list}" var="list" varStatus="vs">
 					<tr class="text-center">
-						<td>${list[0]}</td>
+						<td>${vs.index+1}</td>
 						<td>${list[9]}</td>
 						<td>${list[10]}</td>
 						<td>${list[11]}</td>
@@ -100,26 +100,29 @@
 							</c:if> <c:if test="${list[4]==1}">已解绑</c:if></td>
 					</tr>
 				</c:forEach>
-				<tr>
-
-					<td colspan="10">
-						第${page}页，共${allpage}页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="javascript:pagefun(1);">首页</a>&nbsp; <a
-						href="javascript:pagefun(${page>1?page-1:page});">上一页</a>&nbsp; <a
-						href="javascript:pagefun(${page<allpage?page+1:allpage});">下一页</a>&nbsp;
-						<a href="javascript:pagefun(${allpage});">尾页</a>
-					</td>
-				</tr>
+				
 			</table>
-			<%-- 	<#include "paginate.html" /> <@paginate
-			currentPage=(pageInfo.pageNum)!0 totalPage=(pageInfo.pages)!0
-			actionUrl="<%=basePath%>sysmember/dahua"
-			url Paras="&mobilePhone=${(bankcards.mobilePhone)!!}&memberName=${(bankcards.memberName)!!}&cardNo=${(bankcards.cardNo)!!}&createDate=${(bankcards.createDate?string('yyyy-MM-dd'))!!}"/>
---%>
 		</div>
 		<!-- 内容结束 -->
+		<div class="llpage">
+			<div class="in">
+				<nav> <span class="count">&nbsp;第&nbsp;<b>${page}</b>&nbsp;页，&nbsp;共&nbsp;<b>${allpage}</b>&nbsp;页
+				</span>
+				<ul class="pagination">
+					<li><a class="prev_page"
+						href="javascript:pagefun(${page>1?page-1:page});">上页</a></li>
+					<c:forEach begin="1" end="${allpage}" var="v">
+						<li><a class="now" href="javascript:pagefun(${v})">${v}</a></li>
+					</c:forEach>
+					<li><a
+						href="javascript:pagefun(${page<allpage?page+1:allpage});"
+						class="next_page" rel="next">下页</a></li>
+				</ul>
+				</nav>
+			</div>
+		</div>
 	</div>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$('.time').datetimepicker({
 			format : 'yyyy-mm-dd',
 			language : 'zh-CN',
@@ -128,14 +131,13 @@
 		}).on('changeDate', function(ev) {
 			$('.time').datetimepicker('hide');
 		});
-	</script>
+	</script> -->
 	<script type="text/javascript">
 		function pagefun(ye) {	
 			document.getElementById("pagess").value=ye;		
 			document.fff.submit();			
 		}	
 		function jb(delflag,id,page) {	
-			alert(page);
 			document.getElementById("pagess").value=page;
 			document.getElementById("dell").value=delflag;
 			document.getElementById("mid").value=id;
