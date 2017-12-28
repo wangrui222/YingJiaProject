@@ -99,9 +99,7 @@ pagelist.results as user> </#list> </#if> -->
 								if (data.code==0) {
 									alert("此账户正在登陆状态，不能删除");								
 								}else{
-									alert("可以删除");	
 									window.location="<%=basePath%>lddsystem/system/deleteotherAccount/"+uid;
-									alert("删除成功");	
 								}
 							}
 						});

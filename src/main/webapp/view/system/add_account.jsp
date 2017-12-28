@@ -35,7 +35,7 @@
 				<label class="col-sm-3 control-label">用户名</label>
 				<div class="col-lg-5">
 					<input type="text" class="form-control" id="uname" name="userName"
-						onchange="change();" />
+						onchange="change();" clientidmode="Static"/>
 						<p class="msg"></p>
 				</div>
 				
@@ -149,9 +149,10 @@ function change() {
 					"userName" : uname,
 				},
 				success : function(data) {			
-					if(data.code == '0'){
+					if(data.code==0){
 						$(".msg").html(data.msg).show();
-					}else if(data.code == '1'){					
+					}else if(data.code==1){
+						document.getElementById("uname").value="";
 						$(".msg").html(data.msg).show();
 						
 					}

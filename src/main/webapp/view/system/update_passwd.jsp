@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">原密码：</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" name="oldpassword" id="oldpwd" placeholder="请输入密码" type="password" onchange="out();">
+                                        <input class="form-control" name="oldpassword" id="oldpwd" placeholder="请输入密码" type="password" onchange="out();" clientidmode="Static">
                                     	<p class="msg"></p>
                                     </div>
                                 </div>
@@ -127,10 +127,10 @@ function out() {
 				},
 				success : function(data) {			
 					if(data.code==0){
+						document.getElementById("oldpwd").value="";
 						$(".msg").html(data.msg).show();
 					}else if(data.code==1){					
-						$(".msg").html(data.msg).show();
-						
+						$(".msg").html(data.msg).show();						
 					}
 				}
 			});
