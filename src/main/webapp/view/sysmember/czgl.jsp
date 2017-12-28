@@ -48,11 +48,11 @@
 						<td style="width: 110px; padding-left: 30px">订单编号：</td>
 						<td style="width: 180px"><input type="text"
 							class="form-control" name="serialNumber" placeholder="订单编号"
-							value="${subjectOrderRecord.serialNumber }"></td>
+							value="${memberDepositRecord.serialNumber}"></td>
 						<td style="width: 110px; padding-left: 30px">手机号：</td>
 						<td style="width: 180px"><input type="text"
 							class="form-control" name="mobilePhone" placeholder="手机号"
-							value="${subjectOrderRecord.members.mobilePhone }"></td>
+							value="${members.mobilePhone}"></td>
 						<td style="width: 90px">订单状态：</td>
 						<td style="width: 180px">
 						<td style="width: 140px"><select name="status"
@@ -60,19 +60,14 @@
 							id="status">
 								<option value=-1>全部</option>
 								<c:forEach items="${slist }" var="s">
-								<option value="${s.value }">${s.name}</option>
+								<option value="${s.value}" ${s.value==memberDepositRecord.status?"selected='selected'":""} >${s.name}</option>
 								</c:forEach>
 						</select></td>
 						
 						<td style="width: 110px; padding-left: 30px">富友订单：</td>
 						<td style="width: 180px"><input type="text"
 							class="form-control" name="payChannelOrderNo" placeholder="富友订单"
-							value=""></td>
-							<!--
-						<td style="width: 110px; padding-left: 30px">订单时间：</td>
-						<td style="width: 180px"><input type="text"
-							class="form-control time" name="createDate" placeholder="订单时间"
-							readonly="readonly" value=""></td>-->
+							value="${memberDepositRecord.payChannelOrderNo}"></td>
 						<td class="pull-right" style="padding-right: 30px">
 							<button type="submit" class="btn btn-primary btn-sm">查询</button>
 						</td>
@@ -95,7 +90,6 @@
 					<td>充值渠道</td>
 					<td>富友手机充值订单</td>
 					<td>订单时间</td>
-					<td>操作</td>
 				</tr>
 				<c:forEach items="${plist}" var="object" varStatus="index">
 					<tr class="text-center">
@@ -115,8 +109,6 @@
 						<td>${object[5]}</td>
 						<td>${object[6]}</td>
 						<td>${object[7]}</td>
-						<td><a class="btn btn-primary btn-sm"
-							href="<%=basePath%>jian/sysmember/rechargeManage/${object[0]}">更新订单</a></td>
 					</tr>
 				</c:forEach>
 

@@ -40,7 +40,6 @@
 				<tr class="text-center" bgcolor="#f7f7f7">
 					<td>序号</td>
 					<td>邀请人手机号</td>
-					<td>被邀请人手机号</td>
 					<td>奖励类型</td>
 					<td>奖励金额</td>
 					<td>奖励时间</td>
@@ -48,14 +47,13 @@
 					<c:forEach items="${mlist}" var="object"  varStatus="index">
 				<tr class="text-center">
 					<td>${index.index+1}</td>
-					<td>${object[1]}</td>
-					<td>${object[2]}</td>
+					<td>${object[0]}</td>
 					<td>
-					<c:if test="${object[3]==0 }">注册奖励</c:if>
-					<c:if test="${object[3]==1 }">投资奖励</c:if>
+					<c:if test="${object[1]==0 }">注册奖励</c:if>
+					<c:if test="${object[1]==1 }">投资奖励</c:if>
 					</td>
-					<td>￥${object[4]}</td>
-					<td>${object[5]}</td>
+					<td>￥${object[2]}</td>
+					<td>${object[3]}</td>
 				</tr>
 				 </c:forEach>
 			</table>

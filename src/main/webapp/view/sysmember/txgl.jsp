@@ -44,33 +44,22 @@
 				<input type="hidden" id="page" name="page">
 				<table class="table tabletop">
 					<tr>
-						<td style="width: 110px; padding-left: 30px">姓名：</td>
+					<td>
+					    <td style="width: 110px; padding-left: 30px">流水号：</td>
 						<td style="width: 180px"><input type="text"
-							name="members.memberName" class="form-control" placeholder="姓名"
-							value="${memberWithdrawRecord.members.memberName}"></td>
-						<td style="width: 110px; padding-left: 30px">手机号：</td>
-						<td style="width: 180px"><input type="text"
-							name="members.mobilePhone" class="form-control" placeholder="手机号"
-							value="${memberWithdrawRecord.members.mobilePhone }"></td>
-						<td style="width: 130px; padding-left: 30px">绑卡卡号：</td>
-						<td style="width: 180px"><input type="text"
-							class="form-control" name="bankCard" placeholder="绑卡卡号"
-							value="${memberWithdrawRecord.bankCard }"></td>
-						<td style="width: 80px">状态：</td>
-						<td style="width: 180px"><select name="status"
+							class="form-control" name="serialNumber" placeholder="流水号"
+							value="${subjectPurchaseRecord.serialNumber }"></td>
+							 <td style="width: 110px; padding-left: 30px">状态：</td>
+						<td>
+						<select name="status"
 							class="form-control" style="width: 130px; height: 32px"
 							id="status">
 								<option value="-1">全部</option>
-								<c:forEach items="${slist }" var="s">
+								<c:forEach items="${slist}" var="s">
 									<option value="${s.value }"
-										${s.value==memberWithdrawRecord.status?"selected='selected'":"" }>${s.name}</option>
+										${s.value==subjectPurchaseRecord.status?"selected='selected'":"" }>${s.name}</option>
 								</c:forEach>
 						</select></td>
-						<!--  
-						<td style="width: 110px; padding-left: 30px">提现时间：</td>
-						<td style="width: 180px"><input type="text" name="createDate"
-							class="form-control time" placeholder="提现时间" readonly="readonly"
-							value=""></td>-->
 						<td class="pull-right" style="padding-right: 30px">
 							<button type="submit" class="btn btn-primary btn-sm">查询</button>
 						</td>
@@ -82,63 +71,54 @@
 			<table class="table table-bordered tablebox">
 				<tr class="text-center" bgcolor="#f7f7f7">
 					<td>序号</td>
-					<td>手机号</td>
-					<td>姓名</td>
-					<td>身份证</td>
-					<td>提现金额</td>
-					<td>提现银行</td>
-					<td>提现卡号</td>
-					<td>提现开户行地址</td>
-					<td>提现状态</td>
-					<td>提现时间</td>
-					<td>账号详细</td>
+					<td>流水号</td>
+					<td>购买金额</td>
+					<td>创建时间</td>
+					<td>修改时间</td>
+					<td>结算利息</td>
+					<td>最后记息日</td>
+					<td>状态</td>
 					<td>操作</td>
 				</tr>
 				<c:forEach items="${pagelist.getContent()}" var="mlist"
 					varStatus="index">
 					<tr class="text-center">
 						<td>${index.index+1}</td>
-						<td>${mlist.members.mobilePhone}</td>
-						<td>${mlist.members.memberName}</td>
-						<td>${mlist.members.memberIdentity}</td>
+						<td>${mlist.serialNumber}</td>
 						<td>${mlist.amount}</td>
-						<td>${mlist.bankName}</td>
-						<td>${mlist.bankCard}</td>
-						<td>${mlist.cardaddress}</td>
-						<td><c:if test="${mlist.status==0}">
-								<p style="color: red">待审核</p>
-							</c:if> <c:if test="${mlist.status==1}">
-								<p style="color: green">已付款</p>
-							</c:if> <c:if test="${mlist.status==2}">
-								<p style="color: yellow">打款中</p>
-							</c:if> <c:if test="${mlist.status==3}">
-								<p style="color: red">打款失败</p>
-							</c:if> <c:if test="${mlist.status==4}">
-								<p style="color: green">已解冻</p>
-							</c:if></td>
 						<td>${mlist.createDate}</td>
-						<td><a class="btn btn-primary btn-sm"
-							href="<%=basePath%>ldd/sysmember/memberInfo/${mlist.members.memberId}">账号详细</a></td>
-						<td><c:if test="${mlist.status==0}">
-								<a class="btn btn-primary btn-sm" onclick="audit(${mlist.members.memberId})"
-									data-toggle="modal" data-target="#myModal">审核</a>
-								<a class="btn btn-primary btn-sm"
-									href="<%=basePath%>jian/sysmember/withdrawPayment/serialNumber/channelName=BEIFU"
-									onclick="return confirm('你确定要审核通过吗')">贝付打款</a>
-								<a class="btn btn-primary btn-sm"
-									href="<%=basePath%>jian/sysmember/WithdrawUnfreeze/${mlist.mwrId}"
-									onclick="return confirm('你确定要解冻吗')">解冻</a>
+						<td>${mlist.updateDate}</td>
+						<td>${mlist.interest}</td>
+						<td>${mlist.lastProfitDay}</td>
+						<td>
+						<c:if test="${mlist.status==0}">
+								<p style="color: red">未到期</p>
+							</c:if>
+						<c:if test="${mlist.status==1}">
+								<p style="color: pink">待审核</p>
+							</c:if> <c:if test="${mlist.status==2}">
+								<p style="color: red">未解冻</p>
 							</c:if> <c:if test="${mlist.status==3}">
-								<a class="btn btn-primary btn-sm" onclick="audit(${mlist.members.memberId})"
-									data-toggle="modal" data-target="#myModal"
-									onclick="return confirm('你确定要审核通过吗')">审核</a>
-								<a class="btn btn-primary btn-sm"
-									href="<%=basePath%>jian/sysmember/WithdrawUnfreeze/${mlist.mwrId}"
-									onclick="return confirm('你确定要解冻吗')">解冻</a>
-							</c:if> <c:if test="${mlist.status==1}">
-								<p>已审核</p>
+								<p style="color: yellow">未打款</p>
 							</c:if> <c:if test="${mlist.status==4}">
-								<p>已解冻</p>
+								<p style="color: green">已打款</p>
+							</c:if></td>
+						<td>
+						<c:if test="${mlist.status==0}">
+								<p>未到期</p>
+							</c:if>
+						
+						<c:if test="${mlist.status==1}">
+								<a class="btn btn-primary btn-sm"  
+									onclick="javascript:tx(${mlist.sprId},'shenhe')">审核</a>
+							</c:if> <c:if test="${mlist.status==2}">
+								<a class="btn btn-primary btn-sm"
+									onclick="tx(${mlist.sprId},'jiedong')">解冻</a>
+							</c:if> <c:if test="${mlist.status==3}">
+								<a class="btn btn-primary btn-sm"		
+									onclick="tx(${mlist.sprId},'dakuan')">贝付打款</a>
+							</c:if> <c:if test="${mlist.status==4}">
+								<p>已打款</p>
 							</c:if></td>
 					</tr>
 				</c:forEach>
@@ -164,37 +144,7 @@
 		<!-- 内容结束 -->
 
 	</div>
-	<!-- 模态框（Modal） -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">选择打款方式</h4>
-				</div>
-				<form action="<%=basePath%>jian/sysmember/withdrawAudit"
-					method="get">
-					<div class="modal-body">
-						<input type="hidden" id="memberId" name="memberId"> <select
-							class="form-control" name="channelName" style="width: 200px;">
-							<option value="FUIOU" selected="selected">富友</option>
-							<option value="BEIFU">贝付</option>
-						</select>
 
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary btn-sm"
-							data-dismiss="modal">关闭</button>
-						<button type="submit" class="btn btn-primary">提交</button>
-					</div>
-				</form>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
-	</div>
 </body>
 <script type="text/javascript">
 	function pageRequest(page) {
@@ -202,9 +152,15 @@
 		document.form.submit();
 
 	}
-	function audit(memberId){
-		document.getElementById("memberId").value=memberId;
-		document.getElementById("myModal").modal();
+	function tx(sprId,flag){
+		
+		$.get('http://localhost:8080/YingJiaProject/jian/sysmember/withdrawAudit/'+sprId+'/'+flag,function(data){
+			if(data.code=="success"){
+				alert("操作成功");
+				location.reload(); 
+			}
+			
+		})
 		
 	}
 	  

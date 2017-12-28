@@ -38,30 +38,23 @@
 						<td style="width: 90px; padding-left: 20px">姓名：</td>
 						<td style="width: 140px"><input type="text"
 							class="form-control" name="memberName" placeholder="姓名"
-							value=""></td>
+							value="${members.memberName }"></td>
 						<td style="width: 100px; padding-left: 20px">手机号：</td>
 						<td><input type="text" name="mobilePhone"
-							class="form-control" placeholder="手机号" value=""></td>
+							class="form-control" placeholder="手机号" value="${members.mobilePhone }"></td>
 						<td style="width: 90px; padding-left: 20px">邀请码：</td>
 						<td style="width: 140px"><input type="text"
 							class="form-control" name="invitationcode"
-							placeholder="邀请码" value=""></td>
+							placeholder="邀请码" value="${members.invitationcode }"></td>
 						<td style="width: 100px; padding-left: 20px">被邀请码：</td>
 						<td><input type="text" name="invitedcode"
-							class="form-control" placeholder="被邀请码" value=""></td>
+							class="form-control" placeholder="被邀请码" value="${members.invitedcode }"></td>
 						<td style="width: 140px; padding-left: 20px">是否已注册奖励：</td>
-						<td><select name="status" class="form-control"
+						<td><select name="awardRecordsType" class="form-control"
 							style="width: 100px; height: 32px" id="status">
 								<option value="">全部</option>
-								<option value="0">否</option>
-								<option value="1">是</option>
-						</select></td>
-						<td style="width: 140px; padding-left: 20px">是否已投资奖励：</td>
-						<td><select name="delFlag" class="form-control"
-							style="width: 100px; height: 32px" id="delFlag">
-								<option value="">全部</option>
-								<option value="0">否</option>
-								<option value="1">是</option>
+								<option value="0" ${awardRecords.awardRecordsType==0?"selected='selected'":"" }>否</option>
+								<option value="1" ${awardRecords.awardRecordsType==1?"selected='selected'":"" }>是</option>
 						</select></td>
 						<td class="pull-right" style="padding-right: 20px">
 							<button type="submit" class="btn btn-primary btn-sm">查询</button>
@@ -81,9 +74,8 @@
 					<td>被邀请码</td>
 					<td>投资金额</td>
 					<td>是否已注册奖励</td>
-					<td>是否已投资奖励</td>
 					<td>注册时间</td>
-					<td>操作</td>
+					<td  colspan="2">操作</td>
 				</tr>
 				<c:forEach items="${pagelist}" var="object" varStatus="index">
 					<tr class="text-center">
@@ -93,26 +85,32 @@
 						<td>${object[2]}</td>
 						<td>${object[3]}</td>
 						<td>${object[4]}</td>
-						<td><c:if test="${object[5]==0}">
-								<p style="color: red">否</p>
+						<td><c:if test="${object[5]==1}">
+						        <p style="color: blue;">是</p>
+								
 							</c:if>
-							 <c:if test="${object[5]==1}">
-								<p style="color: blue">是</p>
-							</c:if></td>
+							<c:if test="${object[5]==0}">
+						         <p style="color: red;">否</p>
+							</c:if>
 						
-						<td><c:if test="${object[6]==0}">
-								<p style="color: red">否</p>
-							</c:if> <c:if test="${object[6]==1}">
-								<p style="color: blue">是</p>
-							</c:if></td>
+						
 						<td>${object[7]}</td>
-						<td><a class="btn btn-primary btn-sm" href="javascript:"
-							onclick="award('',0)">注册奖励</a> <span style="color: blue;">注册已奖励
-								|</span> <a class="btn btn-primary btn-sm" href="javascript:"
-							onclick="award('',1)">投资奖励 </a> <span style="color: blue;">投资已奖励
-								|</span> <span style="color: blue;">投资金额未达到 |</span> <span>不能奖励
-								|</span> <a class="btn btn-primary btn-sm"
+						
+						
+						
+						<td>
+						<c:if test="${object[5]==1}">
+						   <span style="color: blue;">注册已奖励</span>
+							</c:if>
+							<c:if test="${object[5]==0}">
+							 <a class="btn btn-primary btn-sm" href="<%=basePath%>jian/sysmember/zhucejiangli/${object[8]}">注册奖励</a>
+							</c:if>	
+					
+						
+					</td>
+					<td> <a class="btn btn-primary btn-sm"
 							href="<%=basePath%>jian/sysmember/inviteRewardsRecord/${object[8]}">奖励记录</a></td>
+						
 					</tr>
 				</c:forEach>
 			</table>
